@@ -18,7 +18,7 @@ void TestState::Init()
 void TestState::Update()
 {
 	Renderer::SetViewProj(followCamera->GetParameter());
-
+	enemy_Bee->Update();
 }
 
 void TestState::Draw()

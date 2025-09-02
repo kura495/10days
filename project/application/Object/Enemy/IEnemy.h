@@ -14,10 +14,12 @@ public:
 
 	};
 	virtual void Update() { 
-
-		ImGui::Begin();
+#pragma region
+		ImGui::Begin("Enemy");
 		ImGui::DragFloat3("TexPos",&mainTex_TF.transform.translate.x);
 		ImGui::End();
+#pragma endregion
+		
 		mainTex_TF.Update();
 
 	};
