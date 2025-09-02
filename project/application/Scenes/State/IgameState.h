@@ -5,6 +5,7 @@ enum GameStateNo {
 	PLAY,
 	CLEAR,
 	GAMEOVER,
+	TEST,
 	GameStateMax
 };
 

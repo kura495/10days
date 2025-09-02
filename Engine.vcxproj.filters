@@ -17,9 +17,6 @@
     <Filter Include="project\application\Object">
       <UniqueIdentifier>{5c7dd7d1-54cd-40ef-a87f-48b554a85336}</UniqueIdentifier>
     </Filter>
-    <Filter Include="project\application\Object\Box">
-      <UniqueIdentifier>{fd0a3a77-9537-4e3a-ab2e-d2f780cdba14}</UniqueIdentifier>
-    </Filter>
     <Filter Include="project\application\Object\Camera">
       <UniqueIdentifier>{fcc43b17-2f9d-4176-a5df-eb746053bd7c}</UniqueIdentifier>
     </Filter>
@@ -38,20 +35,8 @@
     <Filter Include="project\application\Object\Enemy\Boss\Ball">
       <UniqueIdentifier>{031599da-f3ee-4545-8a5d-2dd1afef5843}</UniqueIdentifier>
     </Filter>
-    <Filter Include="project\application\Object\FloorManager">
-      <UniqueIdentifier>{557106ac-c0cc-4ca1-b221-043c2bd87bb6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="project\application\Object\Plane">
-      <UniqueIdentifier>{e3899f20-83f8-467a-b376-d199e5e80aba}</UniqueIdentifier>
-    </Filter>
     <Filter Include="project\application\Object\Player">
       <UniqueIdentifier>{df916220-3659-4652-a8db-ad3d37e4272d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="project\application\Object\SkyBox">
-      <UniqueIdentifier>{ad96e47c-9728-4a42-8293-b8672b24ed87}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="project\application\Object\SkyDome">
-      <UniqueIdentifier>{bb58a100-7bf6-4fa6-ac91-49b9e4b537c1}</UniqueIdentifier>
     </Filter>
     <Filter Include="project\application\Object\Transition">
       <UniqueIdentifier>{298cb718-2539-488c-b4d6-7eacb0cd99b2}</UniqueIdentifier>
@@ -403,9 +388,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="project\application\Object\Box\BoxObject.cpp">
-      <Filter>project\application\Object\Box</Filter>
-    </ClCompile>
     <ClCompile Include="project\application\Object\Camera\FollowCamera.cpp">
       <Filter>project\application\Object\Camera</Filter>
     </ClCompile>
@@ -603,11 +585,10 @@
     <ClCompile Include="project\application\Object\Camera\Work\LockAt\WorkLockAt.cpp" />
     <ClCompile Include="project\application\Object\Camera\Work\Shake\WorkShake.cpp" />
     <ClCompile Include="project\application\Object\SkyBox\SkyBox.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\Bee\Enemy_Bee.cpp" />
+    <ClCompile Include="project\application\Scenes\State\Test\Test.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="project\application\Object\Box\BoxObject.h">
-      <Filter>project\application\Object\Box</Filter>
-    </ClInclude>
     <ClInclude Include="project\application\Object\Camera\FollowCamera.h">
       <Filter>project\application\Object\Camera</Filter>
     </ClInclude>
@@ -1103,6 +1084,9 @@
     <ClInclude Include="project\application\Object\Camera\Work\LockAt\WorkLockAt.h" />
     <ClInclude Include="project\application\Object\Camera\Work\FOV\WorkFOV.h" />
     <ClInclude Include="project\application\Object\SkyBox\SkyBox.h" />
+    <ClInclude Include="project\application\Object\Enemy\Bee\Enemy_Bee.h" />
+    <ClInclude Include="project\application\Scenes\State\Test\Test.h" />
+    <ClInclude Include="project\application\Object\Enemy\IEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\hlsl\Object3d.hlsli">

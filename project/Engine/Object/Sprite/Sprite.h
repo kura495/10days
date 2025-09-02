@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 /*スプライトクラス*/
 #include "Common/DirectX/DirectXCommon.h"
 #include "Common/WinApp/WinApp.h"
@@ -16,8 +16,8 @@ class Sprite
 {
 public:
 
-	void Initialize(const Vector2& LeftTop, const Vector2& LeftBottom, const Vector2& RightTop, const Vector2& RightBottom);
-	void Initialize(const Vector2& anchorPoint, const Vector2& TextureSize);
+	void Init(const Vector2& LeftTop, const Vector2& LeftBottom, const Vector2& RightTop, const Vector2& RightBottom);
+	void Init(const Vector2& anchorPoint, const Vector2& TextureSize);
 	void RendererDraw(WorldTransform& transform);
 	void Draw(const WorldTransform& transform);
 	void ImGui(const char* Title);

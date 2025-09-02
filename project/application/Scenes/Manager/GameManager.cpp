@@ -39,7 +39,7 @@ void GameManager::Initialize()
 	//グローバル変数読み込み
 	GlobalVariables::GetInstance()->LoadFiles();
 	//State
-	state_ = std::make_unique<TitleState>();
+	state_ = std::make_unique<TestState>();
 	currentSceneNum_ = state_.get()->GetSceneNum();
 	state_->Init();
 
@@ -116,6 +116,10 @@ void GameManager::ChangeScene(){
 	if (prevSceneNum_ != currentSceneNum_) {
 		if (currentSceneNum_ == GameStateNo::TITLE) {
 			state_ = std::make_unique<TitleState>();
+		}
+		
+		if (currentSceneNum_ == GameStateNo::TEST) {
+			state_ = std::make_unique<TestState>();
 		}
 
 		state_->Init();
