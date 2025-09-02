@@ -8,7 +8,6 @@
 #include "Sprite/Sprite.h"
 #include "WorldTransform/WorldTransform.h"
 
-
 #include "Object/SkyBox/SkyBox.h"
 
 struct DrawModelData {

@@ -409,68 +409,11 @@
     <ClCompile Include="project\application\Object\Camera\FollowCamera.cpp">
       <Filter>project\application\Object\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="project\application\Object\Enemy\Enemy.cpp">
-      <Filter>project\application\Object\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Enemy\Manager\EnemyManager.cpp">
-      <Filter>project\application\Object\Enemy\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Enemy\Boss\Boss.cpp">
-      <Filter>project\application\Object\Enemy\Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Enemy\Boss\Ball\Ball.cpp">
-      <Filter>project\application\Object\Enemy\Boss\Ball</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Enemy\Boss\State\EDown\EDown.cpp">
-      <Filter>project\application\Object\Enemy\Boss\State\EDown</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Enemy\Boss\State\EDead\EDead.cpp">
-      <Filter>project\application\Object\Enemy\Boss\State\EDead</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Enemy\Boss\State\EAttackSlam\EAttackSlam.cpp">
-      <Filter>project\application\Object\Enemy\Boss\State\EAttackSlam</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Enemy\Boss\State\EAttackThrowball\EAttackThrowball.cpp">
-      <Filter>project\application\Object\Enemy\Boss\State\EAttackThrowball</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Enemy\Boss\State\EReturnPosition\EReturnPosition.cpp">
-      <Filter>project\application\Object\Enemy\Boss\State\EReturnPosition</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Enemy\Boss\State\ESpawn\ESpawn.cpp">
-      <Filter>project\application\Object\Enemy\Boss\State\ESpawn</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Enemy\Boss\State\ERoot\ERoot.cpp">
-      <Filter>project\application\Object\Enemy\Boss\State\ERoot</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\FloorManager\FloorManager.cpp">
-      <Filter>project\application\Object\FloorManager</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Plane\PlaneObject.cpp">
-      <Filter>project\application\Object\Plane</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Player\Player.cpp">
-      <Filter>project\application\Object\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\SkyBox\SkyBox.cpp">
-      <Filter>project\application\Object\SkyBox</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\SkyDome\SkyDome.cpp">
-      <Filter>project\application\Object\SkyDome</Filter>
-    </ClCompile>
     <ClCompile Include="project\application\Object\Transition\Fade\Fade.cpp">
       <Filter>project\application\Object\Transition\Fade</Filter>
     </ClCompile>
     <ClCompile Include="project\application\Scenes\Manager\GameManager.cpp">
       <Filter>project\application\Scenes\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Scenes\State\Clear\GameClearState.cpp">
-      <Filter>project\application\Scenes\State\Clear</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Scenes\State\GameOver\GameOverState.cpp">
-      <Filter>project\application\Scenes\State\GameOver</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Scenes\State\Play\GamePlayState.cpp">
-      <Filter>project\application\Scenes\State\Play</Filter>
     </ClCompile>
     <ClCompile Include="project\application\main.cpp">
       <Filter>project\application</Filter>
@@ -580,9 +523,6 @@
     <ClCompile Include="project\Engine\Object\Line\Line.cpp">
       <Filter>project\Engine\Object\Line</Filter>
     </ClCompile>
-    <ClCompile Include="project\Engine\Object\Manager\ObjectManager.cpp">
-      <Filter>project\Engine\Object\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="project\Engine\Object\Mesh\Mesh.cpp">
       <Filter>project\Engine\Object\Mesh</Filter>
     </ClCompile>
@@ -604,26 +544,11 @@
     <ClCompile Include="project\Engine\Object\CubeMap\Pipeline\CubeMap.cpp">
       <Filter>project\Engine\PipeLineState\CubeMap</Filter>
     </ClCompile>
-    <ClCompile Include="project\Engine\PostProsess\Dissolve\Pipeline\Dissolve.cpp">
-      <Filter>project\Engine\PipeLineState\Dissolve</Filter>
-    </ClCompile>
     <ClCompile Include="project\Engine\Object\Line\PipeLine\DrawLinePSO.cpp">
       <Filter>project\Engine\PipeLineState\DrawLine</Filter>
     </ClCompile>
-    <ClCompile Include="project\Engine\PostProsess\GaussianFilter\Pipeline\GaussianFilter.cpp">
-      <Filter>project\Engine\PipeLineState\GaussianFilter</Filter>
-    </ClCompile>
-    <ClCompile Include="project\Engine\PostProsess\GrayScale\Pipeline\GrayScale.cpp">
-      <Filter>project\Engine\PipeLineState\GrayScale</Filter>
-    </ClCompile>
-    <ClCompile Include="project\Engine\PostProsess\LuminanceBasedOutline\Pipeline\LuminanceBasedOutline.cpp">
-      <Filter>project\Engine\PipeLineState\LuminanceBasedOutline</Filter>
-    </ClCompile>
     <ClCompile Include="project\Engine\PostProsess\Pipeline\PostProsessPSO.cpp">
       <Filter>project\Engine\PipeLineState\PostProsess</Filter>
-    </ClCompile>
-    <ClCompile Include="project\Engine\PostProsess\RGBtoHSV\Pipeline\RGBtoHSV.cpp">
-      <Filter>project\Engine\PipeLineState\RGBtoHSV</Filter>
     </ClCompile>
     <ClCompile Include="project\Engine\Object\Model\PipeLine\Skinning\Skinning.cpp">
       <Filter>project\Engine\PipeLineState\Skinning</Filter>
@@ -633,9 +558,6 @@
     </ClCompile>
     <ClCompile Include="project\Engine\Object\Model\PipeLine\ModelPSO.cpp">
       <Filter>project\Engine\PipeLineState\Standard</Filter>
-    </ClCompile>
-    <ClCompile Include="project\Engine\PostProsess\Vinette\Pipeline\Vinette.cpp">
-      <Filter>project\Engine\PipeLineState\Vignetting</Filter>
     </ClCompile>
     <ClCompile Include="project\Engine\Object\Model\PipeLine\WireFlame\WireFlame.cpp">
       <Filter>project\Engine\PipeLineState\WireFlame</Filter>
@@ -652,29 +574,11 @@
     <ClCompile Include="project\Engine\Utility\Log.cpp">
       <Filter>project\Engine\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="project\Engine\PostProsess\GaussianFilter\renderTextrue\Filter.cpp">
-      <Filter>project\Engine\PostProsess\Filter</Filter>
-    </ClCompile>
     <ClCompile Include="project\Engine\PostProsess\renderTextrue\PostProsess.cpp">
       <Filter>project\Engine\PostProsess</Filter>
     </ClCompile>
     <ClCompile Include="project\Engine\Object\CubeMap\renderTextrue\PPCubeMap.cpp">
       <Filter>project\Engine\PostProsess\CubeMap</Filter>
-    </ClCompile>
-    <ClCompile Include="project\Engine\PostProsess\Dissolve\renderTextrue\PPDissolve.cpp">
-      <Filter>project\Engine\PostProsess\Dissolve</Filter>
-    </ClCompile>
-    <ClCompile Include="project\Engine\PostProsess\GrayScale\renderTextrue\PPGrayScale.cpp">
-      <Filter>project\Engine\PostProsess\GrayScale</Filter>
-    </ClCompile>
-    <ClCompile Include="project\Engine\PostProsess\LuminanceBasedOutline\renderTextrue\PPLuminanceBasedOutline.cpp">
-      <Filter>project\Engine\PostProsess\LuminanceBasedOutline</Filter>
-    </ClCompile>
-    <ClCompile Include="project\Engine\PostProsess\RGBtoHSV\renderTextrue\PPRGBtoHSV.cpp">
-      <Filter>project\Engine\PostProsess\RGBtoHSV</Filter>
-    </ClCompile>
-    <ClCompile Include="project\Engine\PostProsess\Vinette\renderTextrue\PPVinette.cpp">
-      <Filter>project\Engine\PostProsess\Vinette</Filter>
     </ClCompile>
     <ClCompile Include="project\Engine\Renderer\Renderer.cpp">
       <Filter>project\Engine\Renderer</Filter>
@@ -694,74 +598,13 @@
     <ClCompile Include="project\Engine\WorldTransform\WorldTransform.cpp">
       <Filter>project\Engine\WorldTransform</Filter>
     </ClCompile>
-    <ClCompile Include="project\application\Object\Player\State\PAttack\PAttack.cpp">
-      <Filter>project\application\Object\Player\State\PAttack</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Player\State\PJump\PJump.cpp">
-      <Filter>project\application\Object\Player\State\PJump</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Player\State\PRoot\PRoot.cpp">
-      <Filter>project\application\Object\Player\State\PRoot</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Player\State\PDead\PDead.cpp">
-      <Filter>project\application\Object\Player\State\PDead</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Enemy\Boss\State\EAttackRocketPunch\EAttackRocketPunch.cpp">
-      <Filter>project\application\Object\Enemy\Boss\State\ERocketPunch</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Scenes\State\Play\PauseMenu\PauseMenu.cpp">
-      <Filter>project\application\Scenes\State\Play\PauseManu</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Scenes\State\Play\GamePlayPhase\TitlePhase\TitlePhase.cpp">
-      <Filter>project\application\Scenes\State\Play\GamePlayPhase\TitlePhase</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Scenes\State\Play\GamePlayPhase\PlayPhase\PlayPhase.cpp">
-      <Filter>project\application\Scenes\State\Play\GamePlayPhase\PlayPhase</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Scenes\State\Play\GamePlayPhase\GameOverPhase\GameOverPhase.cpp">
-      <Filter>project\application\Scenes\State\Play\GamePlayPhase\GameOverPhase</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Scenes\State\Play\GamePlayPhase\ClearPhase\ClearPhase.cpp">
-      <Filter>project\application\Scenes\State\Play\GamePlayPhase\ClearPhase</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Enemy\Boss\State\IBossState.cpp">
-      <Filter>project\application\Object\Enemy\Boss\State</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Enemy\Boss\State\ESwordAttack\ESwordAttack.cpp">
-      <Filter>project\application\Object\Enemy\Boss\State\ESwingSword</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Enemy\Boss\BeamSword\BeamSword.cpp">
-      <Filter>project\application\Object\Enemy\Boss\Sword</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Enemy\Boss\State\EReStert\EReStert.cpp">
-      <Filter>project\application\Object\Enemy\Boss\State\EReStert</Filter>
-    </ClCompile>
     <ClCompile Include="project\application\Object\UI\Life\Life_UI.cpp">
       <Filter>project\application\Object\UI\Life</Filter>
     </ClCompile>
     <ClCompile Include="project\Engine\Utility\random\random.cpp">
       <Filter>project\Engine\Utility\random</Filter>
     </ClCompile>
-    <ClCompile Include="project\application\Scenes\State\Play\GamePlayPhase\ReStertPhase\ReStertPhase.cpp">
-      <Filter>project\application\Scenes\State\Play\GamePlayPhase\ReStertPhase</Filter>
-    </ClCompile>
-    <ClCompile Include="project\Engine\PostProsess\RGBshift\renderTextrue\RGBshift.cpp">
-      <Filter>project\Engine\PostProsess\RGBShift</Filter>
-    </ClCompile>
-    <ClCompile Include="project\Engine\PostProsess\RGBshift\Pipeline\RGBshiftPSO.cpp">
-      <Filter>project\Engine\PipeLineState\RGBShiftPSO</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Object\Player\State\PReStert\PReStert.cpp">
-      <Filter>project\application\Object\Player\State\PReStert</Filter>
-    </ClCompile>
-    <ClCompile Include="project\Engine\PostProsess\GlitchNoise\renderTexture\PPGlitchNoise.cpp" />
-    <ClCompile Include="project\Engine\PostProsess\GlitchNoise\Pipeline\GlitchNoise.cpp" />
     <ClCompile Include="project\application\Scenes\State\Title\TitleState.cpp" />
-    <ClCompile Include="project\application\Object\UFO\UFO.cpp" />
-    <ClCompile Include="project\application\Object\UFO\state\Boost\Boost.cpp" />
-    <ClCompile Include="project\application\Object\UFO\state\Idle\Idle.cpp" />
-    <ClCompile Include="project\application\Object\UFO\state\Normal\Normal.cpp" />
-    <ClCompile Include="project\application\Object\UFO\state\StartAnime\StartAnime.cpp" />
     <ClCompile Include="project\application\Object\Camera\Work\FOV\WorkFOV.cpp" />
     <ClCompile Include="project\application\Object\Camera\Work\LockAt\WorkLockAt.cpp" />
     <ClCompile Include="project\application\Object\Camera\Work\Shake\WorkShake.cpp" />
@@ -773,57 +616,6 @@
     <ClInclude Include="project\application\Object\Camera\FollowCamera.h">
       <Filter>project\application\Object\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="project\application\Object\Enemy\Enemy.h">
-      <Filter>project\application\Object\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Enemy\Manager\EnemyManager.h">
-      <Filter>project\application\Object\Enemy\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Enemy\Boss\Boss.h">
-      <Filter>project\application\Object\Enemy\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Enemy\Boss\Ball\Ball.h">
-      <Filter>project\application\Object\Enemy\Boss\Ball</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Enemy\Boss\State\EDown\EDown.h">
-      <Filter>project\application\Object\Enemy\Boss\State\EDown</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Enemy\Boss\State\EDead\EDead.h">
-      <Filter>project\application\Object\Enemy\Boss\State\EDead</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Enemy\Boss\State\EAttackSlam\EAttackSlam.h">
-      <Filter>project\application\Object\Enemy\Boss\State\EAttackSlam</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Enemy\Boss\State\EAttackThrowball\EAttackThrowball.h">
-      <Filter>project\application\Object\Enemy\Boss\State\EAttackThrowball</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Enemy\Boss\State\EReturnPosition\EReturnPosition.h">
-      <Filter>project\application\Object\Enemy\Boss\State\EReturnPosition</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Enemy\Boss\State\ESpawn\ESpawn.h">
-      <Filter>project\application\Object\Enemy\Boss\State\ESpawn</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Enemy\Boss\State\ERoot\ERoot.h">
-      <Filter>project\application\Object\Enemy\Boss\State\ERoot</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Enemy\Boss\State\IBossState.h">
-      <Filter>project\application\Object\Enemy\Boss\State</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\FloorManager\FloorManager.h">
-      <Filter>project\application\Object\FloorManager</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Plane\PlaneObject.h">
-      <Filter>project\application\Object\Plane</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Player\Player.h">
-      <Filter>project\application\Object\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\SkyBox\SkyBox.h">
-      <Filter>project\application\Object\SkyBox</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\SkyDome\SkyDome.h">
-      <Filter>project\application\Object\SkyDome</Filter>
-    </ClInclude>
     <ClInclude Include="project\application\Object\Transition\Fade\Fade.h">
       <Filter>project\application\Object\Transition\Fade</Filter>
     </ClInclude>
@@ -832,15 +624,6 @@
     </ClInclude>
     <ClInclude Include="project\application\Scenes\State\IgameState.h">
       <Filter>project\application\Scenes\State</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Scenes\State\Clear\GameClearState.h">
-      <Filter>project\application\Scenes\State\Clear</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Scenes\State\GameOver\GameOverState.h">
-      <Filter>project\application\Scenes\State\GameOver</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Scenes\State\Play\GamePlayState.h">
-      <Filter>project\application\Scenes\State\Play</Filter>
     </ClInclude>
     <ClInclude Include="project\externals\imgui\ImGuizmo.h">
       <Filter>project\externals\imguizmo</Filter>
@@ -1232,9 +1015,6 @@
     <ClInclude Include="project\Engine\Object\Line\Line.h">
       <Filter>project\Engine\Object\Line</Filter>
     </ClInclude>
-    <ClInclude Include="project\Engine\Object\Manager\ObjectManager.h">
-      <Filter>project\Engine\Object\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="project\Engine\Object\Mesh\Mesh.h">
       <Filter>project\Engine\Object\Mesh</Filter>
     </ClInclude>
@@ -1259,26 +1039,11 @@
     <ClInclude Include="project\Engine\Object\CubeMap\Pipeline\CubeMap.h">
       <Filter>project\Engine\PipeLineState\CubeMap</Filter>
     </ClInclude>
-    <ClInclude Include="project\Engine\PostProsess\Dissolve\Pipeline\Dissolve.h">
-      <Filter>project\Engine\PipeLineState\Dissolve</Filter>
-    </ClInclude>
     <ClInclude Include="project\Engine\Object\Line\PipeLine\DrawLinePSO.h">
       <Filter>project\Engine\PipeLineState\DrawLine</Filter>
     </ClInclude>
-    <ClInclude Include="project\Engine\PostProsess\GaussianFilter\Pipeline\GaussianFilter.h">
-      <Filter>project\Engine\PipeLineState\GaussianFilter</Filter>
-    </ClInclude>
-    <ClInclude Include="project\Engine\PostProsess\GrayScale\Pipeline\GrayScale.h">
-      <Filter>project\Engine\PipeLineState\GrayScale</Filter>
-    </ClInclude>
-    <ClInclude Include="project\Engine\PostProsess\LuminanceBasedOutline\Pipeline\LuminanceBasedOutline.h">
-      <Filter>project\Engine\PipeLineState\LuminanceBasedOutline</Filter>
-    </ClInclude>
     <ClInclude Include="project\Engine\PostProsess\Pipeline\PostProsessPSO.h">
       <Filter>project\Engine\PipeLineState\PostProsess</Filter>
-    </ClInclude>
-    <ClInclude Include="project\Engine\PostProsess\RGBtoHSV\Pipeline\RGBtoHSV.h">
-      <Filter>project\Engine\PipeLineState\RGBtoHSV</Filter>
     </ClInclude>
     <ClInclude Include="project\Engine\Object\Model\PipeLine\Skinning\Skinning.h">
       <Filter>project\Engine\PipeLineState\Skinning</Filter>
@@ -1288,9 +1053,6 @@
     </ClInclude>
     <ClInclude Include="project\Engine\Object\Model\PipeLine\ModelPSO.h">
       <Filter>project\Engine\PipeLineState\Standard</Filter>
-    </ClInclude>
-    <ClInclude Include="project\Engine\PostProsess\Vinette\Pipeline\Vinette.h">
-      <Filter>project\Engine\PipeLineState\Vignetting</Filter>
     </ClInclude>
     <ClInclude Include="project\Engine\Object\Model\PipeLine\WireFlame\WireFlame.h">
       <Filter>project\Engine\PipeLineState\WireFlame</Filter>
@@ -1313,29 +1075,11 @@
     <ClInclude Include="project\Engine\Utility\Log.h">
       <Filter>project\Engine\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="project\Engine\PostProsess\GaussianFilter\renderTextrue\Filter.h">
-      <Filter>project\Engine\PostProsess\Filter</Filter>
-    </ClInclude>
     <ClInclude Include="project\Engine\PostProsess\renderTextrue\PostProsess.h">
       <Filter>project\Engine\PostProsess</Filter>
     </ClInclude>
     <ClInclude Include="project\Engine\Object\CubeMap\renderTextrue\PPCubeMap.h">
       <Filter>project\Engine\PostProsess\CubeMap</Filter>
-    </ClInclude>
-    <ClInclude Include="project\Engine\PostProsess\Dissolve\renderTextrue\PPDissolve.h">
-      <Filter>project\Engine\PostProsess\Dissolve</Filter>
-    </ClInclude>
-    <ClInclude Include="project\Engine\PostProsess\GrayScale\renderTextrue\PPGrayScale.h">
-      <Filter>project\Engine\PostProsess\GrayScale</Filter>
-    </ClInclude>
-    <ClInclude Include="project\Engine\PostProsess\LuminanceBasedOutline\renderTextrue\PPLuminanceBasedOutline.h">
-      <Filter>project\Engine\PostProsess\LuminanceBasedOutline</Filter>
-    </ClInclude>
-    <ClInclude Include="project\Engine\PostProsess\RGBtoHSV\renderTextrue\PPRGBtoHSV.h">
-      <Filter>project\Engine\PostProsess\RGBtoHSV</Filter>
-    </ClInclude>
-    <ClInclude Include="project\Engine\PostProsess\Vinette\renderTextrue\PPVinette.h">
-      <Filter>project\Engine\PostProsess\Vinette</Filter>
     </ClInclude>
     <ClInclude Include="project\Engine\Renderer\Renderer.h">
       <Filter>project\Engine\Renderer</Filter>
@@ -1355,53 +1099,8 @@
     <ClInclude Include="project\Engine\WorldTransform\WorldTransform.h">
       <Filter>project\Engine\WorldTransform</Filter>
     </ClInclude>
-    <ClInclude Include="project\application\Object\Player\State\PAttack\PAttack.h">
-      <Filter>project\application\Object\Player\State\PAttack</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Player\State\IPlayerState.h">
-      <Filter>project\application\Object\Player\State</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Player\State\PJump\PJump.h">
-      <Filter>project\application\Object\Player\State\PJump</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Player\State\PRoot\PRoot.h">
-      <Filter>project\application\Object\Player\State\PRoot</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Player\State\PDead\PDead.h">
-      <Filter>project\application\Object\Player\State\PDead</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Enemy\Boss\State\EAttackRocketPunch\EAttackRocketPunch.h">
-      <Filter>project\application\Object\Enemy\Boss\State\ERocketPunch</Filter>
-    </ClInclude>
     <ClInclude Include="project\Engine\Utility\GlobalTime.h">
       <Filter>project\Engine\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Scenes\State\Play\PauseMenu\PauseMenu.h">
-      <Filter>project\application\Scenes\State\Play\PauseManu</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Scenes\State\Play\GamePlayPhase\TitlePhase\TitlePhase.h">
-      <Filter>project\application\Scenes\State\Play\GamePlayPhase\TitlePhase</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Scenes\State\Play\GamePlayPhase\PlayPhase\PlayPhase.h">
-      <Filter>project\application\Scenes\State\Play\GamePlayPhase\PlayPhase</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Scenes\State\Play\GamePlayPhase\GameOverPhase\GameOverPhase.h">
-      <Filter>project\application\Scenes\State\Play\GamePlayPhase\GameOverPhase</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Scenes\State\Play\GamePlayPhase\ClearPhase\ClearPhase.h">
-      <Filter>project\application\Scenes\State\Play\GamePlayPhase\ClearPhase</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Scenes\State\Play\GamePlayPhase\GamePlayStatePhase.h">
-      <Filter>project\application\Scenes\State\Play\GamePlayPhase</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Enemy\Boss\State\ESwordAttack\ESwordAttack.h">
-      <Filter>project\application\Object\Enemy\Boss\State\ESwingSword</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Enemy\Boss\BeamSword\BeamSword.h">
-      <Filter>project\application\Object\Enemy\Boss\Sword</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Enemy\Boss\State\EReStert\EReStert.h">
-      <Filter>project\application\Object\Enemy\Boss\State\EReStert</Filter>
     </ClInclude>
     <ClInclude Include="project\application\Object\UI\Life\Life_UI.h">
       <Filter>project\application\Object\UI\Life</Filter>
@@ -1409,27 +1108,7 @@
     <ClInclude Include="project\Engine\Utility\random\random.h">
       <Filter>project\Engine\Utility\random</Filter>
     </ClInclude>
-    <ClInclude Include="project\application\Scenes\State\Play\GamePlayPhase\ReStertPhase\ReStertPhase.h">
-      <Filter>project\application\Scenes\State\Play\GamePlayPhase\ReStertPhase</Filter>
-    </ClInclude>
-    <ClInclude Include="project\Engine\PostProsess\RGBshift\renderTextrue\RGBshift.h">
-      <Filter>project\Engine\PostProsess\RGBShift</Filter>
-    </ClInclude>
-    <ClInclude Include="project\Engine\PostProsess\RGBshift\Pipeline\RGBshiftPSO.h">
-      <Filter>project\Engine\PipeLineState\RGBShiftPSO</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Player\State\PReStert\PReStert.h">
-      <Filter>project\application\Object\Player\State\PReStert</Filter>
-    </ClInclude>
-    <ClInclude Include="project\Engine\PostProsess\GlitchNoise\renderTexture\PPGlitchNoise.h" />
-    <ClInclude Include="project\Engine\PostProsess\GlitchNoise\Pipeline\GlitchNoise.h" />
     <ClInclude Include="project\application\Scenes\State\Title\TitleState.h" />
-    <ClInclude Include="project\application\Object\UFO\UFO.h" />
-    <ClInclude Include="project\application\Object\UFO\state\Boost\Boost.h" />
-    <ClInclude Include="project\application\Object\UFO\state\Idle\Idle.h" />
-    <ClInclude Include="project\application\Object\UFO\state\Normal\Normal.h" />
-    <ClInclude Include="project\application\Object\UFO\state\IUFOState.h" />
-    <ClInclude Include="project\application\Object\UFO\state\StartAnime\StartAnime.h" />
     <ClInclude Include="project\application\Object\Camera\Work\InterFace\Iwork.h" />
     <ClInclude Include="project\application\Object\Camera\Work\Shake\WorkShake.h" />
     <ClInclude Include="project\application\Object\Camera\Work\LockAt\WorkLockAt.h" />

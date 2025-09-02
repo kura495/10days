@@ -12,14 +12,6 @@
 #include "Object/CubeMap/Pipeline/CubeMap.h"
 
 #include "PostProsess/Pipeline/PostProsessPSO.h"
-#include "PostProsess/GaussianFilter/Pipeline/GaussianFilter.h"
-#include "PostProsess/GrayScale/Pipeline/GrayScale.h"
-#include "PostProsess/Vinette/Pipeline/Vinette.h"
-#include "PostProsess/LuminanceBasedOutline/Pipeline/LuminanceBasedOutline.h"
-#include "PostProsess/RGBtoHSV/Pipeline/RGBtoHSV.h"
-#include "PostProsess/Dissolve/Pipeline/Dissolve.h"
-#include "PostProsess/RGBshift/Pipeline/RGBshiftPSO.h"
-#include "PostProsess/GlitchNoise/Pipeline/GlitchNoise.h"
 
 #include "Engine/ParticleSystem/PipeLine/ParticlePipeLine.h"
 

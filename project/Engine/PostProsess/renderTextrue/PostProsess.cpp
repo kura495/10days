@@ -1,5 +1,6 @@
 #include "PostProsess.h"
 
+
 void PostProsess::Init()
 {
 	DirectX = DirectXCommon::GetInstance();

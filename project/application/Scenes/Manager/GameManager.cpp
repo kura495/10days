@@ -36,9 +36,6 @@ void GameManager::Initialize()
 	//Editer
 	editer = Editer::GetInstance();
 	editer->Initalize();
-	//objectManager
-	objectManager = ObjectManager::GetInstance();
-	objectManager->Initalize();
 	//グローバル変数読み込み
 	GlobalVariables::GetInstance()->LoadFiles();
 	//State
@@ -49,12 +46,6 @@ void GameManager::Initialize()
 	renderTextrue = std::make_unique<PostProsess>();
 	renderTextrue->Init();
 	renderTextrue->Create(1);
-	rgbShift = std::make_unique<RGBshift>();
-	rgbShift->Init();
-	rgbShift->Create(2);
-	glitchNoise = std::make_unique<PPGlitchNoise>();
-	glitchNoise->Init();
-	glitchNoise->Create(3);
 }
 void GameManager::Gameloop() {
 	while (msg.message != WM_QUIT) {
@@ -71,15 +62,12 @@ void GameManager::Gameloop() {
 		imGuiManager->BeginFrame();
 #pragma region Update
 		editer->Update();
-		objectManager->Update();
 		input->Update();
 		light->Update();
 		GlobalVariables::GetInstance()->Update();
 		state_->Update();
 		//ポストエフェクトアップデート
 		renderTextrue->Update();
-		rgbShift->Update();
-		glitchNoise->Update();
 
 		renderer_->Update();
 #pragma endregion
@@ -89,29 +77,18 @@ void GameManager::Gameloop() {
 		state_->Draw();
 		renderer_->Draw();
 		renderTextrue->PostDraw();
-
-		rgbShift->PreDraw();
+		directX->PreDraw();
 		//パイプラインの変更
 		renderer_->ChangePipeline(PostProsessType::PostProsessPSO);
 		//レンダーテクスチャの内容を書き込み
 		renderTextrue->Draw();
-		rgbShift->PostDraw();
-
-		glitchNoise->PreDraw();
-		//ここにPipelineとDrawを書き込んでいく
-		renderer_->ChangePipeline(PostProsessType::RGBshift);
-		rgbShift->Draw();
-		glitchNoise->PostDraw();
-
-		//directXのSRVに書き込む設定に変更
-		directX->PreDraw();
-		renderer_->ChangePipeline(PostProsessType::GlitchNoise);
-		glitchNoise->Draw();
 
 		editer->Draw();
 		imGuiManager->EndFrame();
 			
 		directX->PostDraw();
+		//directXのSRVに書き込む設定に変更
+
 
 		//流れと使い方(ポストエフェクト)
 		//描画先A->PreDraw();
@@ -140,15 +117,7 @@ void GameManager::ChangeScene(){
 		if (currentSceneNum_ == GameStateNo::TITLE) {
 			state_ = std::make_unique<TitleState>();
 		}
-		if (currentSceneNum_ == GameStateNo::PLAY) {
-			state_ = std::make_unique<GamePlayState>();
-		}
-		if (currentSceneNum_ == GameStateNo::GAMEOVER) {
-			state_ = std::make_unique<GameOverState>();
-		}
-		if (currentSceneNum_ == GameStateNo::CLEAR) {
-			state_ = std::make_unique<GameClearState>();
-		}
+
 		state_->Init();
 	}
 }

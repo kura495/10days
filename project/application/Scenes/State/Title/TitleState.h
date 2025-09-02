@@ -21,19 +21,6 @@ public:
 private:
 	std::unique_ptr<FollowCamera>followCamera;
 
-	std::unique_ptr<UFO> ufo_;
-	//天球
-	std::unique_ptr<SkyDome> skyDome_;
-	//振動の倍率
-	int vibScale = 100;
-	//カウント(フレーム)
-	float countSecond = 0;
-	//カウントの最大値(秒数)
-	const float kMaxSecond = 2.0f;
-	//カウントの倍率
-	int countScale = 2;
-	//画面遷移演出
-	Fade fade;
 	//タイトル用画像
 	std::unique_ptr<Sprite> titleSprite;
 	WorldTransform title;

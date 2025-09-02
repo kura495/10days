@@ -1,11 +1,12 @@
 #pragma once
 /*ポストプロセスクラス*/
+#include "Vector/Vector4.h"
 #include "Common/DirectX/DirectXCommon.h"
 #include "Manager/SRV/SRVManager.h"
-#include "Object/Player/Player.h"
 #include "externals/DirectXTex/DirectXTex.h"
 
 using namespace Microsoft::WRL;
+using namespace Math;
 
 class PostProsess
 {
