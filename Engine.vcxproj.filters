@@ -409,9 +409,6 @@
     <ClCompile Include="project\application\Object\Camera\FollowCamera.cpp">
       <Filter>project\application\Object\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="project\application\Object\Transition\Fade\Fade.cpp">
-      <Filter>project\application\Object\Transition\Fade</Filter>
-    </ClCompile>
     <ClCompile Include="project\application\Scenes\Manager\GameManager.cpp">
       <Filter>project\application\Scenes\Manager</Filter>
     </ClCompile>
@@ -598,9 +595,6 @@
     <ClCompile Include="project\Engine\WorldTransform\WorldTransform.cpp">
       <Filter>project\Engine\WorldTransform</Filter>
     </ClCompile>
-    <ClCompile Include="project\application\Object\UI\Life\Life_UI.cpp">
-      <Filter>project\application\Object\UI\Life</Filter>
-    </ClCompile>
     <ClCompile Include="project\Engine\Utility\random\random.cpp">
       <Filter>project\Engine\Utility\random</Filter>
     </ClCompile>
@@ -608,6 +602,7 @@
     <ClCompile Include="project\application\Object\Camera\Work\FOV\WorkFOV.cpp" />
     <ClCompile Include="project\application\Object\Camera\Work\LockAt\WorkLockAt.cpp" />
     <ClCompile Include="project\application\Object\Camera\Work\Shake\WorkShake.cpp" />
+    <ClCompile Include="project\application\Object\SkyBox\SkyBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="project\application\Object\Box\BoxObject.h">
@@ -615,9 +610,6 @@
     </ClInclude>
     <ClInclude Include="project\application\Object\Camera\FollowCamera.h">
       <Filter>project\application\Object\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Object\Transition\Fade\Fade.h">
-      <Filter>project\application\Object\Transition\Fade</Filter>
     </ClInclude>
     <ClInclude Include="project\application\Scenes\Manager\GameManager.h">
       <Filter>project\application\Scenes\Manager</Filter>
@@ -1102,9 +1094,6 @@
     <ClInclude Include="project\Engine\Utility\GlobalTime.h">
       <Filter>project\Engine\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="project\application\Object\UI\Life\Life_UI.h">
-      <Filter>project\application\Object\UI\Life</Filter>
-    </ClInclude>
     <ClInclude Include="project\Engine\Utility\random\random.h">
       <Filter>project\Engine\Utility\random</Filter>
     </ClInclude>
@@ -1113,6 +1102,7 @@
     <ClInclude Include="project\application\Object\Camera\Work\Shake\WorkShake.h" />
     <ClInclude Include="project\application\Object\Camera\Work\LockAt\WorkLockAt.h" />
     <ClInclude Include="project\application\Object\Camera\Work\FOV\WorkFOV.h" />
+    <ClInclude Include="project\application\Object\SkyBox\SkyBox.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\hlsl\Object3d.hlsli">

@@ -19,12 +19,6 @@ struct DrawSkinningData {
 	WorldTransform* world_;
 	SkinCluster* skinCluster;
 };
-struct DrawSkinningDissolveData {
-	Model* modelData;
-	WorldTransform* world_;
-	SkinCluster* skinCluster;
-	float DissolveValue;
-};
 struct DrawLineData {
 	Line* lineData;
 	WorldTransform* world_;
@@ -58,14 +52,6 @@ public:
 	/// <param name="world">座標情報</param>
 	/// <param name="skinCluster">スキンクラスター</param>
 	static void AddModelSkinningData(Model& model,WorldTransform& world,SkinCluster& skinCluster);
-	/// <summary>
-	/// スキンアニメーション+ディゾルブのモデルデータを描画リストに追加
-	/// </summary>
-	/// <param name="model">モデルデータ</param>
-	/// <param name="world">座標情報</param>
-	/// <param name="skinCluster">スキンクラスター<</param>
-	/// <param name="DissolveValue">ディゾルブの値</param>
-	static void AddModelSkinningDissolveData(Model& model,WorldTransform& world,SkinCluster& skinCluster, float DissolveValue);
 	/// <summary>
 	/// ラインデータの描画リストに追加
 	/// </summary>
@@ -117,7 +103,6 @@ private:
 
 	static std::vector<DrawModelData> drawModelData_;
 	static std::vector<DrawSkinningData> drawModelSkinningData_;
-	static std::vector<DrawSkinningDissolveData> drawModelSkinningDissolveData_;
 	static std::vector<DrawLineData> drawLineData_;
 	static std::vector<DrawModelData> drawWireFlameData_;
 	static std::vector<DrawSpriteData> drawSpriteData_;

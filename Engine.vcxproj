@@ -185,8 +185,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatFormVersion)\x64\dxil.dll"</Command>
     <ClCompile Include="project\application\main.cpp" />
     <ClCompile Include="project\application\Object\Box\BoxObject.cpp" />
     <ClCompile Include="project\application\Object\Camera\FollowCamera.cpp" />
-    <ClCompile Include="project\application\Object\Transition\Fade\Fade.cpp" />
-    <ClCompile Include="project\application\Object\UI\Life\Life_UI.cpp" />
+    <ClCompile Include="project\application\Object\SkyBox\SkyBox.cpp" />
     <ClCompile Include="project\application\Scenes\Manager\GameManager.cpp" />
     <ClCompile Include="project\application\Scenes\State\Title\TitleState.cpp" />
     <ClCompile Include="project\Engine\Animation\Animation.cpp" />
@@ -256,12 +255,11 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatFormVersion)\x64\dxil.dll"</Command>
     <ClInclude Include="project\application\Object\Camera\Work\InterFace\Iwork.h" />
     <ClInclude Include="project\application\Object\Camera\Work\LockAt\WorkLockAt.h" />
     <ClInclude Include="project\application\Object\Camera\Work\Shake\WorkShake.h" />
-    <ClInclude Include="project\application\Object\UI\Life\Life_UI.h" />
+    <ClInclude Include="project\application\Object\SkyBox\SkyBox.h" />
     <ClInclude Include="project\application\Scenes\State\Title\TitleState.h" />
     <ClInclude Include="project\Engine\Utility\GlobalTime.h" />
     <ClInclude Include="project\application\Object\Box\BoxObject.h" />
     <ClInclude Include="project\application\Object\Camera\FollowCamera.h" />
-    <ClInclude Include="project\application\Object\Transition\Fade\Fade.h" />
     <ClInclude Include="project\application\Scenes\Manager\GameManager.h" />
     <ClInclude Include="project\application\Scenes\State\IgameState.h" />
     <ClInclude Include="project\Engine\Animation\Animation.h" />

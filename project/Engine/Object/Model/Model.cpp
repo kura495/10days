@@ -162,11 +162,6 @@ void Model::RendererSkinDraw(WorldTransform& transform, SkinCluster& skinCluster
 	Renderer::AddModelSkinningData(*this, transform, skinCluster);
 }
 
-void Model::RendererSkinDissolveDraw(WorldTransform& transform, SkinCluster& skinCluster,float DissolveValue)
-{
-	Renderer::AddModelSkinningDissolveData(*this, transform, skinCluster, DissolveValue);
-}
-
 void Model::WireFrameDraw(WorldTransform& transform)
 {
 	Renderer::AddWireFlameData(*this,transform);

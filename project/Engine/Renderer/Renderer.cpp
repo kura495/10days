@@ -4,7 +4,6 @@
 ViewProjection Renderer::viewProjection;
 std::vector<DrawModelData> Renderer::drawModelData_;
 std::vector<DrawSkinningData> Renderer::drawModelSkinningData_;
-std::vector<DrawSkinningDissolveData> Renderer::drawModelSkinningDissolveData_;
 std::vector<DrawLineData> Renderer::drawLineData_;
 std::vector<DrawModelData> Renderer::drawWireFlameData_;
 std::vector<DrawSpriteData> Renderer::drawSpriteData_;
@@ -62,14 +61,6 @@ void Renderer::Draw()
 	}
 	//中身を消す
 	drawModelSkinningData_.clear();
-	//SkinningとDissolve
-	ChangePipeline(PipelineType::SkinningDissolve);
-	///描画
-	for (DrawSkinningDissolveData model : drawModelSkinningDissolveData_) {
-		model.modelData->SkinDissolveDraw(*model.world_,*model.skinCluster, Texture, model.DissolveValue);
-	}
-	//中身を消す
-	drawModelSkinningDissolveData_.clear();
 	//ライン描画
 	ChangePipeline(PipelineType::DrawLine);
 	///描画
@@ -125,16 +116,6 @@ void Renderer::AddModelSkinningData(Model& model, WorldTransform& world,SkinClus
 	result.world_ = &world;
 	result.skinCluster = &skinCluster;
 	drawModelSkinningData_.push_back(result);
-}
-
-void Renderer::AddModelSkinningDissolveData(Model& model, WorldTransform& world, SkinCluster& skinCluster, float DissolveValue)
-{
-	DrawSkinningDissolveData result;
-	result.modelData = &model;
-	result.world_ = &world;
-	result.skinCluster = &skinCluster;
-	result.DissolveValue = DissolveValue;
-	drawModelSkinningDissolveData_.push_back(result);
 }
 
 void Renderer::AddLineData(Line& line, WorldTransform& world)

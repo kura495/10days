@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 //モデルオブジェクト//
 #include "Material.h"
 #include "Transform.h"
@@ -45,10 +45,7 @@ public:
 	/// <param name="transform">トランスフォーム</param>
 	/// <param name="skinCluster">スキンクラスター</param>
 	void RendererSkinDraw(WorldTransform& transform, SkinCluster& skinCluster);
-	/// <summary>
-	/// 使用不可
-	/// </summary>
-	void RendererSkinDissolveDraw(WorldTransform& transform, SkinCluster& skinCluster, float DissolveValue);
+
 	void WireFrameDraw(WorldTransform& transform);
 
 	static Model* CreateModelFromObj(const std::string& directoryPath, const std::string& filename);
