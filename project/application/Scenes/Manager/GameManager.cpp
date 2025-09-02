@@ -10,6 +10,7 @@ void GameManager::Initialize()
 	//COMの初期化
 	CoInitializeEx(0, COINIT_MULTITHREADED);
 	//Engine
+
 	myEngine = MyEngine::GetInstance();
 	myEngine->Initialize();
 	//Window
