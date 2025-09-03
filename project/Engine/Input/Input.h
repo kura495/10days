@@ -74,7 +74,7 @@ public:
 	/// </summary>
 	/// <param name="keyNumber"></param>
 	/// <returns>bool</returns>
-	bool pushPad(uint32_t buttonNumber);
+	static bool pushPad(uint32_t buttonNumber);
 	/// <summary>
 	/// 押している間
 	/// </summary>

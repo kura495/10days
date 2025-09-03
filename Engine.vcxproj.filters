@@ -587,6 +587,8 @@
     <ClCompile Include="project\application\Object\SkyBox\SkyBox.cpp" />
     <ClCompile Include="project\application\Object\Enemy\Bee\Enemy_Bee.cpp" />
     <ClCompile Include="project\application\Scenes\State\Test\Test.cpp" />
+    <ClCompile Include="project\application\Object\Manager\ObjectManager.cpp" />
+    <ClCompile Include="project\application\Object\Player\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="project\application\Object\Camera\FollowCamera.h">
@@ -1087,6 +1089,8 @@
     <ClInclude Include="project\application\Object\Enemy\Bee\Enemy_Bee.h" />
     <ClInclude Include="project\application\Scenes\State\Test\Test.h" />
     <ClInclude Include="project\application\Object\Enemy\IEnemy.h" />
+    <ClInclude Include="project\application\Object\Manager\ObjectManager.h" />
+    <ClInclude Include="project\application\Object\Player\Player.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\hlsl\Object3d.hlsli">

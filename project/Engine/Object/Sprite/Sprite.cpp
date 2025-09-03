@@ -52,6 +52,7 @@ void Sprite::Init(const Vector2& anchorPoint,const Vector2& textureSize)
 	indexResource = directX_->CreateBufferResource(sizeof(uint32_t) * 6);
 	MakeIndexBufferView();
 	vertexResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
+	//Vector2 Texsize = { textureSize.x / 2,textureSize.y / 2 };
 	//左下
 	vertexData[0].position = { anchorPoint.x - textureSize.x, anchorPoint.y + textureSize.y,0.0f,1.0f };
 	vertexData[0].texcoord = { 0.0f,1.0f };
