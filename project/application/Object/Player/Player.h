@@ -28,7 +28,7 @@ public:
 	void Init(std::vector<Model*> models);
 	// 更新
 	void Update();
-	// 描画
+	// �`��
 	void Draw();
 
 	// -- 座標関係 -- // 

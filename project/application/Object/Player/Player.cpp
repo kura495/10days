@@ -53,29 +53,29 @@ void Player::Update() {
 		move_ = Vector3::Normalize(move_);
 		// 移動量に移動速度を掛ける
 		move_.x *= 0.25f;
-	}
+}
 
-	// ジャンプ
+	// �W�����v
 	if (Input::GetInstance()->pushPad(XINPUT_GAMEPAD_B)) {
 		move_.y += 1.0f;
 	} else {
-		move_.y = 0.0f; // ジャンプ入力がなければY成分をリセット
+		move_.y = 0.0f; // �W�����v���͂��Ȃ����Y��������Z�b�g
 	}
 
-	//重力を加える
+	//�d�͂������
 	if (1) {
 		move_.y -= gravity_;
 	}
-	//地面にいないなら落ちるスピードが加速する
+	//�n�ʂɂ��Ȃ��Ȃ痎����X�s�[�h����������
 	if (isOnFloorFlag_ == false) {
 		gravity_ = std::min(gravity_ + kGravity, kMaxGravity);
 	}
 	isOnFloorFlag_ = false;
 
-	// 移動量を加算
+	// �ړ��ʂ���Z
 	world_.transform.translate += move_;
 
-	// -- アニメーション -- //
+	// -- �A�j���[�V���� -- //
 
 	animation_->PlayAnimation();
 
@@ -85,7 +85,7 @@ void Player::Update() {
 	ImGui::End();
 #pragma endregion
 
-	// 座標更新
+	// ���W�X�V
 	world_.Update();
 
 }

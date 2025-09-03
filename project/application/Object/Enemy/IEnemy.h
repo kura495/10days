@@ -1,8 +1,12 @@
 #pragma once
 #include "Sprite/Sprite.h"
+#include "Input/Input.h"
 
 class IEnemy {
 public:
+	IEnemy() = default;
+	virtual ~IEnemy() = default;
+
 	virtual void Init(std::string mainTexName,Vector2 texSize) {
 		mainTex_TF.Init();
 		mainTex_TF.transform.translate = { 64.0f,64.0f };
@@ -24,7 +28,10 @@ public:
 
 	};
 	virtual void Draw() { mainTex_Sprite->RendererDraw(mainTex_TF); };
+	void PlayerPos(Math::Vector3 position) { player_Pos = position; };
 protected:
 	std::unique_ptr<Sprite> mainTex_Sprite;
 	WorldTransform mainTex_TF;
+	Vector3 player_Pos = {0.0f};
+
 };

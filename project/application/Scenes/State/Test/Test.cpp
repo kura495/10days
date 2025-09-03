@@ -11,17 +11,17 @@ void TestState::Init()
 	followCamera->Initialize();
 	followCamera->GetParameter().translation_ = { 0.0f,0.0f,-10.0f };
 
-	enemy_Bee = std::make_unique<Enemy_Bee>();
-	enemy_Bee->Init("project/resources/BlackTexture.png", { 64.0f,64.0f });
+	objectManager_ = std::make_unique<ObjectManager>();
+	objectManager_->Init();
 }
 
 void TestState::Update()
 {
 	Renderer::SetViewProj(followCamera->GetParameter());
-	enemy_Bee->Update();
+	objectManager_->Update();
 }
 
 void TestState::Draw()
 {
-	enemy_Bee->Draw();
+	objectManager_->Draw();
 }
