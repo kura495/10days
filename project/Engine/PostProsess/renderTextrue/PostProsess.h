@@ -30,7 +30,7 @@ public:
 	void Create(int Index);
 	virtual void CreateBuffer();
 	virtual void Update() {};
-	void PreDraw();
+	virtual void PreDraw();
 
 
 protected:
@@ -43,11 +43,11 @@ protected:
 
 	ComPtr<ID3D12Resource> CreateRenderTextureResource(ComPtr<ID3D12Device> device, uint32_t width, uint32_t height, DXGI_FORMAT format, const Vector4& clearColor);
 
-	void CreateRTV(int Index);
+	virtual void CreateRTV(int Index);
 	void CreateSRV();
 	void CreateDepth();
-	void CreateViewport();
-	void CreateScissor();
+	virtual void CreateViewport();
+	virtual void CreateScissor();
 
 	DirectXCommon* DirectX = nullptr;
 	SRVManager* sRVManager_ = nullptr;

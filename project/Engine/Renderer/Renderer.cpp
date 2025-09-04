@@ -93,8 +93,12 @@ void Renderer::Draw()
 	}
 	//中身を消す
 	drawSpriteData_.clear();
-
-
+	
+	//TODO
+	//1.パイプラインを切り替える
+	//Renderer::viewProjectionをサブカメラに切り替え
+	//サブカメラから見たオブジェクトを書き込む
+	//描画をまとめる
 }
 
 void Renderer::PostProsessDraw()
