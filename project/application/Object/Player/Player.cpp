@@ -1,5 +1,4 @@
 #include "Player.h"
-#include "Engine/Input/Input.h"
 
 void Player::Init(std::string mainTexName, Vector2 texSize) {
 	mainTex_TF.Init();
@@ -13,10 +12,21 @@ void Player::Update() {
 
 	// -- 入力 -- //
 
-	// 移動量の算出
-	Vector2 addVel = Input::GetInstance()->GetPadTrreger();
+	// 入力内容の取得
+	Input::GetInstance()->GetJoystickState(joyState);
 
-	mainTex_TF.transform.translate.x += addVel.x;
+	//移動量
+	if (joyState.Gamepad.sThumbLX != 0 && joyState.Gamepad.sThumbLY != 0) {
+		
+		//スティックから移動量を計算
+		Math::Vector2 move = {
+		(float)joyState.Gamepad.sThumbLX / SHRT_MAX,
+		(float)joyState.Gamepad.sThumbLY / SHRT_MAX 
+		};
+
+		mainTex_TF.transform.translate.x += move.x;
+
+	}
 
 	// ジャンプ
 	if (Input::GetInstance()->pushPad(XINPUT_GAMEPAD_B)) {
