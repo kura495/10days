@@ -6,6 +6,7 @@
 #include "Object/Camera/FollowCamera.h"
 #include "ParticleSystem/ParticleSystem.h"
 #include "Enemy/Bee/Enemy_Bee.h"
+#include "Player/Player.h"
 
 // -- ゲームシーン -- //
 class PlayState :
@@ -19,7 +20,7 @@ public:
 	void Draw()override;
 private:
 	std::unique_ptr<FollowCamera>followCamera;
-
+	std::unique_ptr<Player> player;
 	std::unique_ptr<Enemy_Bee>enemy_Bee;
 
 };

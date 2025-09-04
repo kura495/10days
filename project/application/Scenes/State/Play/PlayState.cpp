@@ -13,15 +13,23 @@ void PlayState::Init()
 
 	enemy_Bee = std::make_unique<Enemy_Bee>();
 	enemy_Bee->Init("project/resources/BlackTexture.png", { 64.0f,64.0f });
+
+
+	// プレイヤーの初期化
+	player = std::make_unique<Player>();
+	player->Init("project/resources/BlackTexture.png", { 64.0f,64.0f });
+
 }
 
 void PlayState::Update()
 {
 	Renderer::SetViewProj(followCamera->GetParameter());
 	enemy_Bee->Update();
+	player->Update();
 }
 
 void PlayState::Draw()
 {
 	enemy_Bee->Draw();
+	player->Draw();
 }
