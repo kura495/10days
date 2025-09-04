@@ -18,9 +18,6 @@ public:
 	void Update()override;
 	void Draw()override;
 private:
-	//タイトル用画像
-	std::unique_ptr<Sprite> sprite_bg;
-	WorldTransform worldTF_bg;
 
 	std::unique_ptr<FollowCamera>followCamera;
 
