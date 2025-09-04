@@ -46,7 +46,6 @@ private:
 	MSG msg{};
 	//State
 	std::unique_ptr<IGameState>state_;
-	Vector4 ClearColor{ 0.1f,0.25f,0.5f,1.0f };
 	//ポストプロセス
 	std::unique_ptr<PostProsess> renderTextrue;
 

@@ -1,6 +1,6 @@
 #include "Model.h"
 #include "Renderer/Renderer.h"
-void Model::Initialize(const std::string& directoryPath, const std::string& filename)
+void Model::Init(const std::string& directoryPath, const std::string& filename)
 {
 	directX_ = DirectXCommon::GetInstance();
 	textureManager_ = TextureManager::GetInstance();
@@ -170,7 +170,7 @@ void Model::WireFrameDraw(WorldTransform& transform)
 Model* Model::CreateModelFromObj(const std::string& directoryPath, const std::string& filename)
 {
 	Model* model = new Model();
-	model->Initialize(directoryPath,filename);
+	model->Init(directoryPath,filename);
 	return model;
 }
 

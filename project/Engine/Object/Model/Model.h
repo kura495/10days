@@ -28,7 +28,7 @@
 class Model
 {
 public:
-	void Initialize(const std::string& directoryPath, const std::string& filename);
+	void Init(const std::string& directoryPath, const std::string& filename);
 	void Draw(const WorldTransform& transform, int DDSTexHandle);
 	void WireFlameDraw(const WorldTransform& transform);
 	void SkinDraw(const WorldTransform& transform,const SkinCluster& skinCluster);

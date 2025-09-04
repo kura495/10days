@@ -9,6 +9,7 @@
 #include "ParticleSystem/ParticleSystem.h"
 #include "Object/Manager/ObjectManager.h"
 
+
 class TestState :public IGameState
 {
 public:
@@ -17,8 +18,15 @@ public:
 	void Update()override;
 	void Draw()override;
 private:
+	//タイトル用画像
+	std::unique_ptr<Sprite> sprite_bg;
+	WorldTransform worldTF_bg;
+
 	std::unique_ptr<FollowCamera>followCamera;
 
 	std::unique_ptr<ObjectManager>objectManager_;
+
+	std::unique_ptr<Model> mainModel_3D;
+	WorldTransform worldTF_3Dmodel_;
 
 };

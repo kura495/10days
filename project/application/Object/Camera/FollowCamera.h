@@ -92,6 +92,6 @@ private:
 	//追従対象からのオフセットを計算する
 	Vector3 OffsetCalc();
 
-	Vector3 offsetPos = { 0.0f,0.0f,0.0f };
+	Vector3 offsetPos = { 0.0f,0.0f,-10.0f };
 
 };
