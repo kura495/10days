@@ -3,12 +3,13 @@
 #include "Input/Input.h"
 #include "Collider/OBB/OBBoxCollider.h"
 
-class Player {
+class Player_Test {
 public:
-	void Init(std::string mainTexName, Vector2 texSize);
+	void Init();
 	void Update();
 	void Draw();
 private:
-	std::unique_ptr<Sprite> mainTex_Sprite;
-	WorldTransform mainTex_TF;
+
+	std::unique_ptr<Model> mainModel_3D;
+	WorldTransform worldTF_3Dmodel_;
 };

@@ -191,6 +191,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatFormVersion)\x64\dxil.dll"</Command>
     <ClCompile Include="project\application\Scenes\Manager\GameManager.cpp" />
     <ClCompile Include="project\application\Scenes\State\Test\Test.cpp" />
     <ClCompile Include="project\application\Scenes\State\Title\TitleState.cpp" />
+    <ClCompile Include="project\application\testObject\Player_Test\Player_Test.cpp" />
     <ClCompile Include="project\Engine\Animation\Animation.cpp" />
     <ClCompile Include="project\Engine\Audio\Audio.cpp" />
     <ClCompile Include="project\Engine\Camera\DebugCamera\DebugCamera.cpp" />
@@ -265,6 +266,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatFormVersion)\x64\dxil.dll"</Command>
     <ClInclude Include="project\application\Object\SkyBox\SkyBox.h" />
     <ClInclude Include="project\application\Scenes\State\Test\Test.h" />
     <ClInclude Include="project\application\Scenes\State\Title\TitleState.h" />
+    <ClInclude Include="project\application\testObject\Player_Test\Player_Test.h" />
     <ClInclude Include="project\Engine\Utility\GlobalTime.h" />
     <ClInclude Include="project\application\Object\Camera\FollowCamera.h" />
     <ClInclude Include="project\application\Scenes\Manager\GameManager.h" />

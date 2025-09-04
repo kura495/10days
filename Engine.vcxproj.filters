@@ -589,6 +589,7 @@
     <ClCompile Include="project\application\Scenes\State\Test\Test.cpp" />
     <ClCompile Include="project\application\Object\Manager\ObjectManager.cpp" />
     <ClCompile Include="project\application\Object\Player\Player.cpp" />
+    <ClCompile Include="project\application\testObject\Player_Test\Player_Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="project\application\Object\Camera\FollowCamera.h">
@@ -1091,6 +1092,7 @@
     <ClInclude Include="project\application\Object\Enemy\IEnemy.h" />
     <ClInclude Include="project\application\Object\Manager\ObjectManager.h" />
     <ClInclude Include="project\application\Object\Player\Player.h" />
+    <ClInclude Include="project\application\testObject\Player_Test\Player_Test.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\hlsl\Object3d.hlsli">

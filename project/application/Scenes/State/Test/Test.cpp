@@ -35,7 +35,7 @@ void TestState::Update()
 
 void TestState::Draw()
 {
-	//objectManager_->Draw();
+	objectManager_->Draw();
 
 	mainModel_3D->RendererDraw(worldTF_3Dmodel_);
 }
