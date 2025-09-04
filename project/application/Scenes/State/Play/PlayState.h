@@ -21,8 +21,12 @@ public:
 private:
 	std::unique_ptr<FollowCamera>followCamera;
 	
+	// プレイヤー
 	std::unique_ptr<Player> player;
 	std::vector<Model*> playerModel_;
+
+	// 床
+	std::unique_ptr<Model> floor_;
 
 	std::unique_ptr<Enemy_Bee>enemy_Bee;
 
