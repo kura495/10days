@@ -1,7 +1,16 @@
 #pragma once
+#include "Object/IObject.h"
 #include "Sprite/Sprite.h"
 #include "Model/Model.h"
+
+#include "Math/Matrix/MatrixCalc.h"
+#include "Collider/Box/BoxCollider.h"
+#include "Collider/OBB/OBBoxCollider.h"
 #include "Input/Input.h"
+#include "Animation/Animation.h"
+
+#include "Object/Camera/FollowCamera.h"
+#include "ParticleSystem/ParticleSystem.h"
 
 
 // -- プレイヤークラス -- //
@@ -9,21 +18,11 @@ class Player
 {
 public:
 
-	/// <summary>
-	/// 初期化
-	/// </summary>
-	/// <param name="mainTexName"> テクスチャ </param>
-	/// <param name="texSize"> テクスチャサイズ </param>
-	void Init(std::string mainTexName, Vector2 texSize);
-
-	/// <summary>
-	/// 更新
-	/// </summary>
+	// 初期化
+	void Init(std::vector<Model*> models);
+	// 更新
 	void Update();
-
-	/// <summary>
-	/// 描画
-	/// </summary>
+	// 描画
 	void Draw();
 
 protected:
@@ -31,14 +30,24 @@ protected:
 	// 入力
 	XINPUT_STATE joyState;
 
-	// スプライト
-	std::unique_ptr<Sprite> mainTex_Sprite;
-	
-	// モデル
-	std::unique_ptr<Model> Model;
+	// モデル配列
+	std::vector<Model*> models_;
+	// アニメーション
+	Animation* animation_;
+
+	// ステート(各行動/状態に応じた処理を分割)
+
 
 	// ワールド座標
-	WorldTransform mainTex_TF;
+	WorldTransform world_;
+	
+
+
+
+	// ストレスメーター
+
+	// スペース範囲
+
 
 };
 

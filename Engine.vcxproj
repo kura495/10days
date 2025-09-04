@@ -255,6 +255,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatFormVersion)\x64\dxil.dll"</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="project\application\Object\Player\Player.h" />
+    <ClInclude Include="project\application\Object\Player\State\IState.h" />
     <ClInclude Include="project\application\Scenes\State\Play\PlayState.h" />
     <ClInclude Include="project\application\Object\Camera\Work\FOV\WorkFOV.h" />
     <ClInclude Include="project\application\Object\Camera\Work\InterFace\Iwork.h" />

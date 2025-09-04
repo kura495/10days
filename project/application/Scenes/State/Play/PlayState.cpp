@@ -16,20 +16,23 @@ void PlayState::Init()
 
 
 	// プレイヤーの初期化
+	playerModel_.push_back(Model::CreateModelFromObj("project/resources/Player", "player.gltf"));
+	playerModel_.push_back(Model::CreateModelFromObj("project/resources/Weapon", "Weapon.obj"));
+
 	player = std::make_unique<Player>();
-	player->Init("project/resources/BlackTexture.png", { 64.0f,64.0f });
+	player->Init(playerModel_);
 
 }
 
 void PlayState::Update()
 {
 	Renderer::SetViewProj(followCamera->GetParameter());
-	enemy_Bee->Update();
+	//enemy_Bee->Update();
 	player->Update();
 }
 
 void PlayState::Draw()
 {
-	enemy_Bee->Draw();
+	//enemy_Bee->Draw();
 	player->Draw();
 }

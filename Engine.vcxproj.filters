@@ -1091,6 +1091,7 @@
     <ClInclude Include="project\application\Object\Enemy\IEnemy.h" />
     <ClInclude Include="project\application\Scenes\State\Play\PlayState.h" />
     <ClInclude Include="project\application\Object\Player\Player.h" />
+    <ClInclude Include="project\application\Object\Player\State\IState.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\hlsl\Object3d.hlsli">

@@ -20,7 +20,10 @@ public:
 	void Draw()override;
 private:
 	std::unique_ptr<FollowCamera>followCamera;
+	
 	std::unique_ptr<Player> player;
+	std::vector<Model*> playerModel_;
+
 	std::unique_ptr<Enemy_Bee>enemy_Bee;
 
 };

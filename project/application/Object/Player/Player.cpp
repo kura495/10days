@@ -1,11 +1,19 @@
 #include "Player.h"
 
-void Player::Init(std::string mainTexName, Vector2 texSize) {
-	mainTex_TF.Init();
-	mainTex_TF.transform.translate = { 640.0f,32.0f };
-	mainTex_Sprite = std::make_unique<Sprite>();
-	mainTex_Sprite->Init({ 0.5f,0.5f }, texSize);
-	mainTex_Sprite->TextureHandle = TextureManager::GetInstance()->LoadTexture(mainTexName);
+void Player::Init(std::vector<Model*> models) {
+
+	// モデル配列を取得
+	models_ = models;
+	
+	// ワールド座標
+	world_.Init();
+	world_.Update();// 一度更新しておく
+
+	// アニメーション
+	animation_ = Animation::LoadAnimationFile("project/resources/Player", "player_walk.gltf");
+	animation_->Init();
+	animation_->Reset();
+	animation_->AnimeInit(*models_[0],true);
 }
 
 void Player::Update() {
@@ -24,27 +32,35 @@ void Player::Update() {
 		(float)joyState.Gamepad.sThumbLY / SHRT_MAX 
 		};
 
-		mainTex_TF.transform.translate.x += move.x;
+		world_.transform.translate.x += move.x;
 
 	}
 
 	// ジャンプ
 	if (Input::GetInstance()->pushPad(XINPUT_GAMEPAD_B)) {
-		mainTex_TF.transform.translate.y += 1.0f;
+		world_.transform.translate.y += 1.0f;
 	}
 
+	// -- アニメーション -- //
 
+	animation_->PlayAnimation();
 
 #pragma region
 	ImGui::Begin("Player");
-	ImGui::DragFloat3("TexPos", &mainTex_TF.transform.translate.x);
+	ImGui::DragFloat3("TexPos", &world_.transform.translate.x);
 	ImGui::End();
 #pragma endregion
 
-	mainTex_TF.Update();
+	// 座標更新
+	world_.Update();
 
 }
 
 void Player::Draw() {
-	mainTex_Sprite->RendererDraw(mainTex_TF);
+
+	// モデルの描画
+	models_[0]->RendererSkinDraw(world_, animation_->GetSkinCluster());
+
+
+
 }
