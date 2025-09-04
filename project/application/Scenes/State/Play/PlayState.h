@@ -7,6 +7,8 @@
 #include "ParticleSystem/ParticleSystem.h"
 #include "Enemy/Bee/Enemy_Bee.h"
 #include "Player/Player.h"
+#include "Object/MapObject/Floor/Floor.h"
+#include "Collider/Manager/CollisionManager.h"
 
 // -- ゲームシーン -- //
 class PlayState :
@@ -19,6 +21,11 @@ public:
 	void Update()override;
 	void Draw()override;
 private:
+
+	// コリジョンマネージャー
+	std::unique_ptr<CollisionManager> collisionManager;
+
+	// フォローカメラ
 	std::unique_ptr<FollowCamera>followCamera;
 	
 	// プレイヤー
@@ -26,7 +33,10 @@ private:
 	std::vector<Model*> playerModel_;
 
 	// 床
-	std::unique_ptr<Model> floor_;
+	std::unique_ptr<Floor> floor_;
+	std::vector<Model*> floorModel_;
+
+
 
 	std::unique_ptr<Enemy_Bee>enemy_Bee;
 

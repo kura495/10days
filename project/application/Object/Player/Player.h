@@ -40,7 +40,11 @@ public:
 
 	//プレイヤーキャラ事態の当たり判定
 	void ColliderInit();
+	void SetColliderUse(int number, bool flag);
+	void SetColliderAttribute(int number, uint32_t collisionAttribute);
 	void OnCollision(const ICollider& collider);
+	void AttackColliderInit();
+	void AttackOnCollision(const ICollider& collider);
 
 protected:
 
@@ -83,6 +87,11 @@ protected:
 
 	Vector3 colliderSize = { 0.5f,0.7f,0.5f };
 	Vector3 colliderOffset = { 0.0f,0.7f,0.0f };
+
+	//攻撃の当たり判定
+	Vector3 attackColliderOffset = { 0.0f,0.5f,1.0f };
+	float hitStopValue = 0.2f;
+	float vibValue = 0.2f;
 
 
 	// -- システム -- //

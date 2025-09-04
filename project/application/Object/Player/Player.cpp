@@ -7,6 +7,7 @@ void Player::Init(std::vector<Model*> models) {
 	
 	// ワールド座標
 	world_.Init();
+	world_.transform.translate.z = 2.0f;
 	world_.Update();// 一度更新しておく
 
 	// アニメーション
@@ -14,6 +15,10 @@ void Player::Init(std::vector<Model*> models) {
 	animation_->Init();
 	animation_->Reset();
 	animation_->AnimeInit(*models_[0],true);
+
+	// コライダー
+	ColliderInit();
+	AttackColliderInit();
 }
 
 void Player::Update() {
@@ -87,6 +92,17 @@ void Player::ColliderInit()
 	colliders_[ColliderType::pCollider].SetcollisionMask(~Collider::Tag::Player & ~Collider::Tag::Weapon);
 	colliders_[ColliderType::pCollider].colliderName = "Player";
 }
+
+void Player::SetColliderUse(int number, bool flag)
+{
+	colliders_[number].IsUsing = flag;
+}
+
+void Player::SetColliderAttribute(int number, uint32_t collisionAttribute)
+{
+	colliders_[number].SetcollitionAttribute(collisionAttribute);
+}
+
 void Player::OnCollision(const ICollider& ICollider)
 {
 	if (ICollider.GetcollitionAttribute() == Collider::Tag::Enemy) {
@@ -103,4 +119,54 @@ void Player::OnCollision(const ICollider& ICollider)
 
 	//state_->OnCollision(this, ICollider);
 	return;
+}
+
+void Player::AttackColliderInit()
+{
+	attackColliderWorld_.SetParent(&world_);
+	colliders_[ColliderType::Attack].Init(&attackColliderWorld_);
+	colliders_[ColliderType::Attack].SetSize({ 1.0f,1.0f,1.0f });
+	colliders_[ColliderType::Attack].SetOffset(attackColliderOffset);
+	colliders_[ColliderType::Attack].OnCollision = [this](ICollider& collider) { AttackOnCollision(collider); };
+	colliders_[ColliderType::Attack].SetcollitionAttribute(Collider::Tag::Weapon);
+	colliders_[ColliderType::Attack].SetcollisionMask(~Collider::Tag::Player & ~Collider::Tag::Weapon & ~Collider::Tag::Floor);
+	colliders_[ColliderType::Attack].IsUsing = false;
+	colliders_[ColliderType::Attack].colliderName = "PlayerAttack";
+}
+void Player::AttackOnCollision(const ICollider& collider)
+{
+	if (collider.GetcollitionAttribute() == Collider::Tag::EnemyCore) {
+		colliders_[ColliderType::Attack].IsUsing = false;
+		////パーティクル用のベクトル
+		//attackVector = TransformNormal({ 0.0f,0.0f,1.0f }, Matrix4x4(MakeRotateMatrix(world_.transform.quaternion)));
+		//attackVector.Normalize();
+		//attackVector *= -1;
+		////パーティクル生成
+		//AttackHitParticleEmitter.world_.transform.translate = attackColliderWorld_.transform.translate + world_.transform.translate;
+		//AttackHitParticleEmitter.world_.transform.translate.y += 1.0f;
+		//attackHitParticle_->SpawnParticle(AttackHitParticleEmitter);
+		////音関連
+		//Audio::Stop(SEattack, true, false);
+		//Audio::Play(SEHitattack, 1.0f);
+		////ヒットストップ
+		//PlayPhase::HitStop(hitStopValue);
+		//コントローラー振動
+		Input::VibrateController(VIBRATION_MAX, VIBRATION_MIN, vibValue);
+	}
+	if (collider.GetcollitionAttribute() == Collider::Tag::EnemyBall) {
+		colliders_[ColliderType::Attack].IsUsing = false;
+		//パーティクル用のベクトル
+		//attackVector = TransformNormal({ 0.0f,0.0f,1.0f }, Matrix4x4(MakeRotateMatrix(world_.transform.quaternion)));
+		//attackVector.Normalize();
+		//attackVector *= -1;
+		////パーティクル生成
+		//AttackHitBombParticleEmitter.color = { 0.5f,0.5f,1.0f };
+		//AttackHitBombParticleEmitter.world_.transform.translate = attackColliderWorld_.transform.translate + world_.transform.translate;
+		//AttackHitBombParticleEmitter.world_.transform.translate.y += 1.0f;
+		//attackHitBombParticle_->SpawnParticle(AttackHitBombParticleEmitter);
+		////ヒットストップ
+		//PlayPhase::HitStop(hitStopValue);
+		//コントローラー振動
+		Input::VibrateController(VIBRATION_MAX, VIBRATION_MIN, vibValue);
+	}
 }

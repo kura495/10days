@@ -7,7 +7,10 @@ void PlayState::Init()
 	Editer::GetInstance()->SetViewProjection(&Renderer::GetViewProjection());
 	Editer::GetInstance()->IsEnable(true);
 
-	
+	//コリジョンマネージャー
+	collisionManager = std::make_unique<CollisionManager>();
+	collisionManager->Init();
+
 	
 
 	enemy_Bee = std::make_unique<Enemy_Bee>();
@@ -27,6 +30,12 @@ void PlayState::Init()
 	followCamera->SetTarget(&player->GetWorld());
 	followCamera->SetOffset(Vector3(0.0f,0.0f,-10.0f));
 
+
+	// 床 初期化
+	floorModel_.push_back(Model::CreateModelFromObj("project/resources/Plane", "Plane.obj"));
+	floor_ = std::make_unique<Floor>();
+	floor_->Init(floorModel_);
+
 }
 
 void PlayState::Update()
@@ -36,16 +45,23 @@ void PlayState::Update()
 	Renderer::SetViewProj(followCamera->GetParameter());
 
 	//enemy_Bee->Update();
+
 	player->Update();
+	floor_->Update();
+
+	// コリジョンマネージャー 更新
+	collisionManager->Update();
+
 }
 
 void PlayState::Draw()
 {
 	//enemy_Bee->Draw();
 
-	// 床 描画
-	//floor_->Draw();
-
 	// プレイヤー描画
 	player->Draw();
+
+	// 床 描画
+	floor_->Draw();
+	
 }
