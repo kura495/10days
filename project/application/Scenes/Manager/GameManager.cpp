@@ -122,6 +122,13 @@ void GameManager::ChangeScene(){
 			state_ = std::make_unique<TestState>();
 		}
 
+		if (currentSceneNum_ == GameStateNo::GAMEOVER) {
+			//state_ = std::make_unique<GameOverState>();
+		}
+		if (currentSceneNum_ == GameStateNo::CLEAR) {
+			//state_ = std::make_unique<GameClearState>();
+		}
+
 		state_->Init();
 	}
 }
