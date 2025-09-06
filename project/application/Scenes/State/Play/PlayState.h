@@ -36,7 +36,9 @@ private:
 	std::unique_ptr<Floor> floor_;
 	std::vector<Model*> floorModel_;
 
-
+	// 背景(仮)
+	std::unique_ptr<Sprite> backgroundSprite_;
+	WorldTransform backgroundWorld_;
 
 	std::unique_ptr<Enemy_Bee>enemy_Bee;
 

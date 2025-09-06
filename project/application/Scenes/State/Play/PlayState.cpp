@@ -36,6 +36,12 @@ void PlayState::Init()
 	floor_ = std::make_unique<Floor>();
 	floor_->Init(floorModel_);
 
+	// 背景(仮) 初期化
+	backgroundWorld_.Init();
+	backgroundSprite_ = std::make_unique<Sprite>();
+	backgroundSprite_->Init({ 0.5f,0.5f },Vector2(1920,1080));
+	backgroundSprite_->TextureHandle = TextureManager::GetInstance()->LoadTexture("project/resources/PlayStateBack.png");
+
 }
 
 void PlayState::Update()
@@ -44,8 +50,7 @@ void PlayState::Update()
 	followCamera->Update();
 	Renderer::SetViewProj(followCamera->GetParameter());
 
-	//enemy_Bee->Update();
-
+	backgroundWorld_.Update();
 	player->Update();
 	floor_->Update();
 
@@ -56,7 +61,7 @@ void PlayState::Update()
 
 void PlayState::Draw()
 {
-	//enemy_Bee->Draw();
+	// backgroundSprite_->RendererDraw(backgroundWorld_);
 
 	// プレイヤー描画
 	player->Draw();
