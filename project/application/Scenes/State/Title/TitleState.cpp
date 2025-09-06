@@ -24,6 +24,22 @@ void TitleState::Init()
 void TitleState::Update()
 {
 	Renderer::SetViewProj(followCamera->GetParameter());
+	
+#ifdef _DEBUG
+	if (Input::GetPadPrecede(XINPUT_GAMEPAD_A, 10)) {
+		//ifの条件は後で変える
+		if (StateNo != GameStateNo::CLEAR) {
+			StateNo = GameStateNo::CLEAR;
+		}
+	}
+
+	if (Input::GetPadPrecede(XINPUT_GAMEPAD_B, 10)) {
+		//ifの条件は後で変える
+		if (StateNo != GameStateNo::GAMEOVER) {
+			StateNo = GameStateNo::GAMEOVER;
+		}
+	}
+#endif
 
 }
 

@@ -17,6 +17,7 @@ public:
 	void Draw()override;
 private:
 	TextureManager* textureManager_;
-
+	std::unique_ptr<Sprite> clearSprite;
+	WorldTransform clear;
 	
 };

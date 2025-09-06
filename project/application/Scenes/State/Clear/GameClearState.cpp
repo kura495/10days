@@ -2,7 +2,10 @@
 
 void GameClearState::Init()
 {
-	
+	clearSprite = std::make_unique<Sprite>();
+	clearSprite->Init({ 0.0f,0.0f }, { 0.0f,720.0f }, { 1280.0f,0.0f }, { 1280.0f,720.0f });
+	clearSprite->TextureHandle = TextureManager::GetInstance()->LoadTexture("project/resources/Clear.png");
+	clear.Init();
 }
 
 void GameClearState::Update()
@@ -17,7 +20,7 @@ void GameClearState::Update()
 
 void GameClearState::Draw()
 {
-
+	clearSprite->RendererDraw(clear);
 	
 }
 

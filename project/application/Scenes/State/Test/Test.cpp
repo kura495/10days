@@ -19,6 +19,8 @@ void TestState::Update()
 {
 	Renderer::SetViewProj(followCamera->GetParameter());
 	objectManager_->Update();
+
+
 }
 
 void TestState::Draw()

@@ -17,7 +17,7 @@ public:
 private:
 	TextureManager* textureManager_;
 
-	
-
+	std::unique_ptr<Sprite> gameOverSprite;
+	WorldTransform gameOver;
 	
 };
