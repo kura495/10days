@@ -47,5 +47,5 @@ void TitleState::Draw()
 {
 
 	titleSprite->RendererDraw(title);
-	texture->RendererDraw(title);
+	//texture->RendererDraw(title);
 }
