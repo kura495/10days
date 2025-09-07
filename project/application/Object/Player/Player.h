@@ -96,11 +96,14 @@ protected:
 
 	// -- システム -- //
 
+
 	// ストレスメーター
 
 
 	// スペース範囲
-
+	Model* spaceRangeModel_ = nullptr;
+	WorldTransform spaceRangeWorld_;
+	float spaceRange_ = 5.0f;
 
 };
 

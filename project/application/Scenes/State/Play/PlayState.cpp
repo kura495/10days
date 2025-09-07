@@ -28,15 +28,16 @@ void PlayState::Init()
 	followCamera = std::make_unique<FollowCamera>();
 	followCamera->Initialize();
 	followCamera->SetTarget(&player->GetWorld());
-	followCamera->SetOffset(Vector3(0.0f,0.0f,-10.0f));
+	followCamera->SetOffset(Vector3(0.0f,0.0f,-30.0f));
 
 
 	// 床 初期化
-	floorModel_.push_back(Model::CreateModelFromObj("project/resources/Plane", "Plane.obj"));
-	floor_ = std::make_unique<Floor>();
-	floor_->Init(floorModel_);
+	floorManager_ = std::make_unique<FloorManager>();
+	floorManager_->Init();
 
 	// 背景(仮) 初期化
+	skydome_ = Model::CreateModelFromObj("project/resources/SkyDome", "SkyDome.obj");
+
 	backgroundWorld_.Init();
 	backgroundSprite_ = std::make_unique<Sprite>();
 	backgroundSprite_->Init({ 0.5f,0.5f },Vector2(1920,1080));
@@ -46,13 +47,14 @@ void PlayState::Init()
 
 void PlayState::Update()
 {
+
 	// フォローカメラ 更新
 	followCamera->Update();
 	Renderer::SetViewProj(followCamera->GetParameter());
 
 	backgroundWorld_.Update();
 	player->Update();
-	floor_->Update();
+	floorManager_->Update();
 
 	// コリジョンマネージャー 更新
 	collisionManager->Update();
@@ -61,12 +63,14 @@ void PlayState::Update()
 
 void PlayState::Draw()
 {
-	// backgroundSprite_->RendererDraw(backgroundWorld_);
+	skydome_->RendererDraw(backgroundWorld_);
+
+	//backgroundSprite_->RendererDraw(backgroundWorld_);
 
 	// プレイヤー描画
 	player->Draw();
 
 	// 床 描画
-	floor_->Draw();
+	floorManager_->Draw();
 	
 }

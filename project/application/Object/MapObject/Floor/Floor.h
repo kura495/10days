@@ -8,7 +8,7 @@ class Floor
 public:
 
 	// 初期化
-	void Init(std::vector<Model*> models);
+	void Init(std::vector<Model*> models,Vector2 pos);
 	// 更新
 	void Update();
 	// 描画

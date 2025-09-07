@@ -1,14 +1,16 @@
 #include "Floor.h"
 
 
-void Floor::Init(std::vector<Model*> models)
+void Floor::Init(std::vector<Model*> models, Vector2 pos)
 {
 	models_ = models;
 	world_.Init();
+	world_.transform.scale = Vector3(1.0f, 1.0f, 1.0f);
+	world_.transform.translate = Vector3(pos.x, pos.y, 0.0f);
 	world_.Update();
 
 	collider.Init(&world_);
-	collider.SetSize({ 15.0f,0.0f,15.0f });
+	collider.SetSize({ 1.0f,1.0f,1.0f });
 	collider.SetcollitionAttribute(Collider::Tag::Floor);
 	collider.SetcollisionMask(~Collider::Tag::Floor);
 	collider.OnCollision = [this](ICollider& collider) { OnCollision(collider); };
@@ -27,6 +29,7 @@ void Floor::Draw()
 	for (Model* model : models_) {
 		if (collider.IsUsing) {
 			model->RendererDraw(world_);
+			collider.CollisionDraw();
 		}
 	}
 }

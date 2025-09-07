@@ -4,17 +4,26 @@ void Player::Init(std::vector<Model*> models) {
 
 	// モデル配列を取得
 	models_ = models;
-	
+
 	// ワールド座標
 	world_.Init();
-	world_.transform.translate.z = 2.0f;
+	world_.transform.translate = Vector3(5.0f, 3.0f, 0.0f);
 	world_.Update();// 一度更新しておく
 
 	// アニメーション
 	animation_ = Animation::LoadAnimationFile("project/resources/Player", "player_walk.gltf");
 	animation_->Init();
 	animation_->Reset();
-	animation_->AnimeInit(*models_[0],true);
+	animation_->AnimeInit(*models_[0], true);
+
+	// スペース範囲
+	//spaceRangeModel_ = Model::CreateModelFromObj("project/resurces/Space","Space.obj");
+
+	spaceRange_ = 5.0f;
+
+	spaceRangeWorld_.Init();
+	spaceRangeWorld_.SetParent(&world_);
+	spaceRangeWorld_.transform.scale = Vector3(spaceRange_, spaceRange_, 0.0f);
 
 	// コライダー
 	ColliderInit();
@@ -33,30 +42,38 @@ void Player::Update() {
 
 	// 左右入力時に移動
 	if (joyState.Gamepad.sThumbLX != 0 && joyState.Gamepad.sThumbLY != 0) {
-		
-		//スティックから移動量を計算
+
+		//スティックから移動量を計算(X軸のみ)
 		move_ = {
 		(float)joyState.Gamepad.sThumbLX / SHRT_MAX,
-		(float)joyState.Gamepad.sThumbLY / SHRT_MAX 
+		0,
 		};
 
-		world_.transform.translate.x += move_.x;
+		// 移動量を正規化
+		move_ = Vector3::Normalize(move_);
+		// 移動量に移動速度を掛ける
+		move_.x *= 0.25f;
 	}
 
 	// ジャンプ
 	if (Input::GetInstance()->pushPad(XINPUT_GAMEPAD_B)) {
-		world_.transform.translate.y += 1.0f;
+		move_.y += 1.0f;
+	} else {
+		move_.y = 0.0f; // ジャンプ入力がなければY成分をリセット
 	}
 
 	//重力を加える
 	if (1) {
-		world_.transform.translate.y -= gravity_;
+		move_.y -= gravity_;
 	}
 	//地面にいないなら落ちるスピードが加速する
 	if (isOnFloorFlag_ == false) {
 		gravity_ = std::min(gravity_ + kGravity, kMaxGravity);
 	}
 	isOnFloorFlag_ = false;
+
+	// 移動量を加算
+	world_.transform.translate += move_;
 
 	// -- アニメーション -- //
 
@@ -78,7 +95,8 @@ void Player::Draw() {
 	// モデルの描画
 	models_[0]->RendererSkinDraw(world_, animation_->GetSkinCluster());
 
-
+	// コライダーの描画
+	colliders_[ColliderType::pCollider].CollisionDraw();
 
 }
 
@@ -105,20 +123,43 @@ void Player::SetColliderAttribute(int number, uint32_t collisionAttribute)
 
 void Player::OnCollision(const ICollider& ICollider)
 {
-	if (ICollider.GetcollitionAttribute() == Collider::Tag::Enemy) {
+    if (ICollider.GetcollitionAttribute() == Collider::Tag::Floor) {
 
-		world_.transform.translate -= move_;
-		world_.Update();
-	}
-	if (ICollider.GetcollitionAttribute() == Collider::Tag::Floor) {
-		world_.transform.translate.y = ICollider.GetCenter().y;
-		world_.Update();
-		gravity_ = kGravity;
-		isOnFloorFlag_ = true;
-	}
+		// プレイヤーとブロックの差分を取得
+		Vector3 diff = world_.transform.translate - ICollider.GetCenter();
+		// プレイヤーとブロックの衝突方向を取得
+		Vector3 direction = Vector3::Normalize(diff);
+		// プレイヤーがブロックの上にいるかどうかを判定
+		bool isAbove = direction.y > 0.5f;
+		// プレイヤーがブロックの下にいるかどうかを判定
+		bool isBelow = direction.y < -0.5f;
+		// プレイヤーがブロックの左にいるかどうかを判定
+		bool isLeft = direction.x < -0.5f;
+		// プレイヤーがブロックの右にいるかどうかを判定
+		bool isRight = direction.x > 0.5f;
+		// 下方向への押し出し
+		if (isBelow) {
+			world_.transform.translate.y = -(colliders_[ColliderType::pCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f);
+		}
+		// 上方向への押し出し
+		if (isAbove) {
+			world_.transform.translate.y = colliders_[ColliderType::pCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f;
+		}
+		// 左方向への押し出し
+		if (isLeft) {
+			world_.transform.translate.x -= colliders_[ColliderType::pCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f;
+		}
+		// 右方向への押し出し
+		if (isRight) {
+			world_.transform.translate.x += colliders_[ColliderType::pCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f;
+		}
 
-	//state_->OnCollision(this, ICollider);
-	return;
+
+        world_.Update();
+        gravity_ = kGravity;
+        isOnFloorFlag_ = true;
+    }
+    return;
 }
 
 void Player::AttackColliderInit()

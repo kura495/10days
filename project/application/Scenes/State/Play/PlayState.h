@@ -9,6 +9,7 @@
 #include "Player/Player.h"
 #include "Object/MapObject/Floor/Floor.h"
 #include "Collider/Manager/CollisionManager.h"
+#include "MapObject/FloorManager.h"
 
 // -- ゲームシーン -- //
 class PlayState :
@@ -33,10 +34,10 @@ private:
 	std::vector<Model*> playerModel_;
 
 	// 床
-	std::unique_ptr<Floor> floor_;
-	std::vector<Model*> floorModel_;
+	std::unique_ptr<FloorManager> floorManager_;
 
 	// 背景(仮)
+	Model* skydome_;
 	std::unique_ptr<Sprite> backgroundSprite_;
 	WorldTransform backgroundWorld_;
 
