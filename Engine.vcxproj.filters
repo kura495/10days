@@ -591,6 +591,8 @@
     <ClCompile Include="project\application\Object\Player\Player.cpp" />
     <ClCompile Include="project\application\Object\MapObject\Floor\Floor.cpp" />
     <ClCompile Include="project\application\Object\MapObject\FloorManager.cpp" />
+    <ClCompile Include="project\application\Scenes\State\GameOver\GameOverState.cpp" />
+    <ClCompile Include="project\application\Scenes\State\Clear\GameClearState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="project\application\Object\Camera\FollowCamera.h">
@@ -1096,6 +1098,8 @@
     <ClInclude Include="project\application\Object\Player\State\IState.h" />
     <ClInclude Include="project\application\Object\MapObject\Floor\Floor.h" />
     <ClInclude Include="project\application\Object\MapObject\FloorManager.h" />
+    <ClInclude Include="project\application\Scenes\State\GameOver\GameOverState.h" />
+    <ClInclude Include="project\application\Scenes\State\Clear\GameClearState.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\hlsl\Object3d.hlsli">

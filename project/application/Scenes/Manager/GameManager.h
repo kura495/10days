@@ -10,6 +10,8 @@
 
 #include "Scenes/State/Title/TitleState.h"
 #include "Scenes/State/Play/PlayState.h"
+#include "Scenes/State/Clear/GameClearState.h"
+#include "Scenes/State/GameOver/GameOverState.h"
 #include "Scenes/State/Test/Test.h"
 #include "Scenes/State/IgameState.h"
 #include "Audio.h"
