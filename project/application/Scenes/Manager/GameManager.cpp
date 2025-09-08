@@ -40,7 +40,7 @@ void GameManager::Initialize()
 	//グローバル変数読み込み
 	GlobalVariables::GetInstance()->LoadFiles();
 	//State
-	state_ = std::make_unique<TitleState>();
+	state_ = std::make_unique<PlayState>();
 	currentSceneNum_ = state_.get()->GetSceneNum();
 	state_->Init();
 
