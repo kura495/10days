@@ -14,6 +14,10 @@ class EnemyAI
 {
 public:
 
+	EnemyAI() = default;
+	~EnemyAI() = default;
+
+
 	// 初期化
 	void Init(class IEnemy* enemy);
 	// 更新
@@ -28,17 +32,9 @@ protected:
 	// 敵キャラのポインタ
 	IEnemy* enemy_;
 	// 現在の状態
-	IEnemyState* currentState_;
+	std::unique_ptr<IEnemyState> currentState_;
 	// ビヘイビアツリーの駆動状態
 	IBehavior::State behaviorState_;
-
-	// 各状態のインスタンス
-	IEnemyState* idleState_;
-	IEnemyState* patrolState_;
-	IEnemyState* chaseState_;
-	IEnemyState* attackState_;
-	IEnemyState* deadState_;
-
 
 
 };

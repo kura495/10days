@@ -14,8 +14,9 @@ class AttackState :
         state_ = ATTACK;
     };
     // 更新
-    void Update() override {
+    IBehavior::State Update() override {
         // 攻撃状態の処理
+        return IBehavior::State::RUNNING;
     };
     // 状態取得
     State GetState() override {

@@ -87,8 +87,11 @@ public:
 	// ジャンプ
 	int32_t Jump();
 
-	// プレイヤーから一定の範囲内(50.0f)にいるか
-	bool IsPlayerInRange50();
+
+	// プレイヤーから指定値の範囲内にいるか
+	bool IsPlayerInRange(float range);
+	// プレイヤーから指定値の範囲外にいるか
+	bool IsPlayerOutOfRange(float range);
 
 
 protected:

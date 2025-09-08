@@ -10,11 +10,15 @@ class IdleState : public IEnemyState
 {
 public:
     
+    IdleState() = default;
+	~IdleState() = default;
+
+
     // 初期化
     void Init(IEnemy* enemy) override;
 
     // 更新
-    void Update() override;
+    IBehavior::State Update() override;
 
     // 状態取得
     State GetState() override {

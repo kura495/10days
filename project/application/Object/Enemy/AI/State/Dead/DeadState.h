@@ -14,8 +14,9 @@ class DeadState :
         state_ = DEAD;
     };
     // 更新
-    void Update() override {
+    IBehavior::State Update() override {
         // 死亡状態の処理
+        return IBehavior::State::RUNNING;
     };
     // 状態取得
     State GetState() override {

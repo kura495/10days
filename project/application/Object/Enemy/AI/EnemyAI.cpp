@@ -6,15 +6,8 @@ void EnemyAI::Init(IEnemy* enemy) {
 	// 敵キャラのポインタを保存
 	enemy_ = enemy;
 	
-	// 各状態のインスタンスを生成
-	idleState_ = new IdleState();
-	patrolState_ = new PatrolState();
-	chaseState_ = new ChaseState();
-	attackState_ = new AttackState();
-	deadState_ = new DeadState();
-	
 	// 初期状態を待機に設定
-	currentState_ = idleState_;
+	currentState_ = std::make_unique<IdleState>();
 	currentState_->Init(enemy_);
 
 	// ビヘイビアツリーの駆動状態
@@ -35,27 +28,27 @@ void EnemyAI::Update() {
 		switch (currentState_->GetNextState())
 		{
 			case IEnemyState::State::IDLE:
-			currentState_ = idleState_;
+			currentState_ =  std::make_unique<IdleState>();
 			currentState_->Init(enemy_);
 			break;
 
 			case IEnemyState::State::PATROL:
-				currentState_ = patrolState_;
+				currentState_ = std::make_unique<PatrolState>();
 				currentState_->Init(enemy_);
 				break;
 			
 			case IEnemyState::State::CHASE:
-				currentState_ = chaseState_;
+				currentState_ = std::make_unique<ChaseState>();
 				currentState_->Init(enemy_);
 				break;
 			
 			case IEnemyState::State::ATTACK:
-				currentState_ = attackState_;
+				currentState_ = std::make_unique<AttackState>();
 				currentState_->Init(enemy_);
 				break;
 			
 			case IEnemyState::State::DEAD:
-				currentState_ = deadState_;
+				currentState_ = std::make_unique<DeadState>();
 				currentState_->Init(enemy_);
 				break;
 

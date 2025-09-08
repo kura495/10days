@@ -9,15 +9,8 @@ public:
 
 	// 初期化
 	void Init(std::vector<Model*> models, Player* player)override;
-	
 	// 更新
 	void Update()override;
-
-
-
-protected:
-
-
 };
 
 

@@ -17,24 +17,31 @@ void IdleState::Init(IEnemy* enemy)
 	// Conditionノード内に条件用のメンバ関数ポインタを渡す
 	std::unique_ptr<IBehavior> moveAction = std::make_unique<Condition>(
     enemy_,
-    [this](){ return this->enemy_->IsPlayerInRange50(); }
-   );
+    [this](){ return this->enemy_->IsPlayerInRange(5.0f); }
+	);
 	rootNode_->SetChild(std::move(moveAction));
 
 }
 
-void IdleState::Update()
+IBehavior::State IdleState::Update()
 {
-
 	// 待機状態の処理
 	// ビヘイビアツリーの実行
-	rootNode_->Tick();
+	IBehavior::State result = rootNode_->Tick();
 
 	// ビヘイビアツリーの実行結果が成功か失敗だったら( ≒ 実行中ではない場合)
-	if (enemy_->GetBehaviorState() != IBehavior::State::RUNNING) {
+	if (result != IBehavior::State::RUNNING) {
+
+		// 成功していたら( ≒ 条件を満たしていたら)
+		if (result == IBehavior::State::SUCCESS) {
+			isStateChengeRequest_ = true;
+			nextState_ = PATROL;
+		}
 
 		// ビヘイビアツリーをリセット
 		rootNode_->Reset();
 	}
 
+	// 結果を返す
+	return result;
 }

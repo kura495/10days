@@ -18,9 +18,10 @@ public:
 		DEAD,	// 死亡
 	};
 
+	IEnemyState() = default;
 	virtual ~IEnemyState() = default;
 	virtual void Init(IEnemy* enemy) = 0;
-	virtual void Update() = 0;
+	virtual IBehavior::State Update() = 0;
 	
 	// 現在の状態を返す
 	virtual State GetState() = 0;

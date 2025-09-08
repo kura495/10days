@@ -29,10 +29,22 @@ void IEnemy::Init(std::vector<Model*> models, Player* player)
 
 }
 
-bool IEnemy::IsPlayerInRange50()
+bool IEnemy::IsPlayerInRange(float range)
+{	
+	// プレイヤーが一定範囲内(50.0f)にいるか
+	if (Vector3::Distance(world_.transform.translate, player_->GetWorld().transform.translate) <= range) {
+		// いる場合はtrueを返す
+		return true;
+	}
+
+	// いない場合はfalseを返す
+	return false;
+}
+
+bool IEnemy::IsPlayerOutOfRange(float range)
 {
 	// プレイヤーが一定範囲内(50.0f)にいるか
-	if (Vector3::Distance(world_.transform.translate, player_->GetWorld().transform.translate) <= 50.0f) {
+	if (Vector3::Distance(world_.transform.translate, player_->GetWorld().transform.translate) >= range) {
 		// いる場合はtrueを返す
 		return true;
 	}

@@ -14,8 +14,9 @@ class ChaseState :
         state_ = CHASE;
     };
     // 更新
-    void Update() override {
+    IBehavior::State Update() override {
         // 追跡状態の処理
+        return IBehavior::State::RUNNING;
     };
     // 状態取得
     State GetState() override {
