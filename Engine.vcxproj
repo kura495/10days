@@ -181,7 +181,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatFormVersion)\x64\dxil.dll"</Command>
   <ItemGroup>
     <ClCompile Include="project\application\Object\MapObject\FloorManager.cpp" />
     <ClCompile Include="project\application\Object\MapObject\Floor\Floor.cpp" />
-    <ClCompile Include="project\application\Object\Player\Player.cpp" />
     <ClCompile Include="project\application\Scenes\State\Clear\GameClearState.cpp" />
     <ClCompile Include="project\application\Scenes\State\GameOver\GameOverState.cpp" />
     <ClCompile Include="project\application\Scenes\State\Play\PlayState.cpp" />
@@ -192,7 +191,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatFormVersion)\x64\dxil.dll"</Command>
     <ClCompile Include="project\application\Object\Camera\FollowCamera.cpp" />
     <ClCompile Include="project\application\Object\Enemy\Bee\Enemy_Bee.cpp" />
     <ClCompile Include="project\application\Object\Manager\ObjectManager.cpp" />
-    <ClCompile Include="project\application\Object\Player\Player.cpp" />
     <ClCompile Include="project\application\Object\SkyBox\SkyBox.cpp" />
     <ClCompile Include="project\application\Scenes\Manager\GameManager.cpp" />
     <ClCompile Include="project\application\Scenes\State\Test\Test.cpp" />
@@ -262,7 +260,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatFormVersion)\x64\dxil.dll"</Command>
   <ItemGroup>
     <ClInclude Include="project\application\Object\MapObject\FloorManager.h" />
     <ClInclude Include="project\application\Object\MapObject\Floor\Floor.h" />
-    <ClInclude Include="project\application\Object\Player\Player.h" />
     <ClInclude Include="project\application\Object\Player\State\IState.h" />
     <ClInclude Include="project\application\Scenes\State\Clear\GameClearState.h" />
     <ClInclude Include="project\application\Scenes\State\GameOver\GameOverState.h" />
