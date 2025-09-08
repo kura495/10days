@@ -12,7 +12,7 @@ void TestState::Init()
 	followCamera->GetParameter().translation_ = { 0.0f,0.0f,-10.0f };
 
 	enemy_Bee = std::make_unique<Enemy_Bee>();
-	enemy_Bee->Init("project/resources/BlackTexture.png", { 64.0f,64.0f });
+	//enemy_Bee->Init("project/resources/BlackTexture.png", { 64.0f,64.0f });
 }
 
 void TestState::Update()

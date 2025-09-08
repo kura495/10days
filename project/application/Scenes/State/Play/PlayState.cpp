@@ -13,9 +13,6 @@ void PlayState::Init()
 
 	
 
-	enemy_Bee = std::make_unique<Enemy_Bee>();
-	enemy_Bee->Init("project/resources/BlackTexture.png", { 64.0f,64.0f });
-
 
 	// プレイヤー 初期化
 	playerModel_.push_back(Model::CreateModelFromObj("project/resources/Player", "player.gltf"));
