@@ -11,6 +11,8 @@
 
 #include "Enemy/AI/EnemyAI.h"
 
+class Player;
+
 // -- 敵キャラ 基底クラス -- //
 class IEnemy {
 public:
@@ -23,25 +25,7 @@ public:
 
 
 	// 初期化
-	virtual void Init(std::vector<Model*> models) {
-
-		// モデル配列を取得
-		models_ = models;
-
-		// ワールド座標
-		world_.Init();
-		world_.transform.translate = Vector3(5.0f, 3.0f, 0.0f);
-		world_.Update();// 一度更新しておく
-
-		// アニメーション
-		animation_ = Animation::LoadAnimationFile("project/resources/Player", "player_walk.gltf");
-		animation_->Init();
-		animation_->Reset();
-		animation_->AnimeInit(*models_[0], true);
-
-		// コライダー
-		ColliderInit();
-	}
+	virtual void Init(std::vector<Model*> models,Player* player);
 	
 
 	// 更新
@@ -62,25 +46,55 @@ public:
 #endif
 	}
 
-	// コライダー 初期化
-	void ColliderInit() {
-		colliders_[ColliderType::eCollider].Init(&world_);
-		colliders_[ColliderType::eCollider].SetSize(colliderSize);
-		colliders_[ColliderType::eCollider].SetOffset(colliderOffset);
-		colliders_[ColliderType::eCollider].OnCollision = [this](ICollider& collider) { OnCollision(collider); };
-		colliders_[ColliderType::eCollider].SetcollitionAttribute(Collider::Tag::Player);
-		colliders_[ColliderType::eCollider].SetcollisionMask(~Collider::Tag::Player & ~Collider::Tag::Weapon);
-		colliders_[ColliderType::eCollider].colliderName = "Player";
-	}
-
 	// -- 座標関係 -- // 
 
 	WorldTransform& GetWorld() { return world_; };
 
+	// コライダー 初期化
+	virtual void ColliderInit();
 
-	void OnCollision(const ICollider& collider) { collider; return; }
+	
+	// -- 衝突関係 -- //
+	virtual void OnCollision(const ICollider& collider);
+	virtual void SetColliderUse(int number, bool flag);
+	virtual void SetColliderAttribute(int number, uint32_t collisionAttribute);
+	virtual void AttackColliderInit();
+	virtual void AttackOnCollision(const ICollider& collider);
+
+	// -- 行動制御(共通の制御関数) -- //
+
+	// 外部(主Behavior)から行動を指定する
+	void SetAction(Action::Name actionName) {
+		switch (actionName)
+		{
+		case Action::MOVE:
+			break;
+		case Action::JUMP:
+			break;
+		default:
+			break;
+		}
+	}
+
+	// Behaviorの実行状況を返す
+	IBehavior::State GetBehaviorState() { return enemyAI_->GetBehaviorState(); }
+	
+	// 行動の実行結果を返す(実行中/終了)
+	IBehavior::State GetActionState(Action::Name actionName);
+
+	// 移動
+	int32_t Move();
+	// ジャンプ
+	int32_t Jump();
+
+	// プレイヤーから一定の範囲内(50.0f)にいるか
+	bool IsPlayerInRange50();
+
 
 protected:
+
+	// プレイヤーのポインタ
+	Player* player_ = nullptr;
 
 	// -- オブジェクト / モデル / アニメーション -- //
 
@@ -119,7 +133,12 @@ protected:
 	Vector3 colliderSize = { 0.5f,0.7f,0.5f };
 	Vector3 colliderOffset = { 0.0f,0.7f,0.0f };
 
+	//攻撃の当たり判定
+	Vector3 attackColliderOffset = { 0.0f,0.5f,1.0f };
+	float hitStopValue = 0.2f;
+	float vibValue = 0.2f;
+
 	// -- 行動制御 -- //
-	EnemyAI enemyAI_;
+	std::unique_ptr<EnemyAI> enemyAI_;
 
 };

@@ -1,4 +1,5 @@
 #pragma once
+#include "AI/Behavior/Behavior.h"
 
 // 前方宣言
 class IEnemy;
@@ -20,7 +21,15 @@ public:
 	virtual ~IEnemyState() = default;
 	virtual void Init(IEnemy* enemy) = 0;
 	virtual void Update() = 0;
+	
+	// 現在の状態を返す
 	virtual State GetState() = 0;
+
+	// 状態遷移のリクエストがされているか
+	bool GetIsStateChengeRequest() const { return  isStateChengeRequest_; }
+	// 遷移先を取得
+	State GetNextState() const { return nextState_; }
+
 
 protected: 
 	
@@ -29,5 +38,15 @@ protected:
 
 	// 状態
 	State state_;
+	// 次の状態
+	State nextState_;
+	// 状態遷移のリクエスト
+	bool isStateChengeRequest_;
+
+	// -- 個別行動制御 -- //
+
+	// ルートノード
+	std::unique_ptr<Sequence> rootNode_;
+
 
 };

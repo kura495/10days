@@ -187,6 +187,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatFormVersion)\x64\dxil.dll"</Command>
     <ClCompile Include="project\application\Object\Enemy\AI\State\Idle\IdleState.cpp" />
     <ClCompile Include="project\application\Object\Enemy\AI\EnemyAI.cpp" />
     <ClCompile Include="project\application\Object\Enemy\Human\HumanEnemy.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\IEnemy.cpp" />
     <ClCompile Include="project\application\Object\MapObject\FloorManager.cpp" />
     <ClCompile Include="project\application\Object\MapObject\Floor\Floor.cpp" />
     <ClCompile Include="project\application\Object\Player\Player.cpp" />

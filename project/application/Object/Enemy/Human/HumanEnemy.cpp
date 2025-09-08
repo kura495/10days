@@ -1,10 +1,11 @@
 #include "HumanEnemy.h"
 
-void HumanEnemy::Init(std::vector<Model*> models)
+void HumanEnemy::Init(std::vector<Model*> models, Player* player)
 {
-
 	// モデル配列を取得
 	models_ = models;
+	// プレイヤーのポインタを保存
+	player_ = player;
 
 	// ワールド座標
 	world_.Init();
@@ -19,11 +20,23 @@ void HumanEnemy::Init(std::vector<Model*> models)
 
 	// コライダー
 	ColliderInit();
+	AttackColliderInit();
 
+	// 行動制御
+	enemyAI_ = std::make_unique<EnemyAI>();
+	enemyAI_->Init(this);
 
 }
 
 void HumanEnemy::Update()
 {
+	// 行動制御
+	enemyAI_->Update();
+
+	// アニメーション 更新
+	animation_->PlayAnimation();
+	// 座標更新
+	world_.Update();
+
 
 }

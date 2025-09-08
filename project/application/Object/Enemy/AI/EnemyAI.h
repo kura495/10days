@@ -21,12 +21,17 @@ public:
 	// 現在の状態を取得
 	IEnemyState::State GetCurrentState() { return currentState_->GetState(); }
 	
+	IBehavior::State GetBehaviorState()const { return this->behaviorState_; }
+	
 protected:
 
 	// 敵キャラのポインタ
 	IEnemy* enemy_;
 	// 現在の状態
 	IEnemyState* currentState_;
+	// ビヘイビアツリーの駆動状態
+	IBehavior::State behaviorState_;
+
 	// 各状態のインスタンス
 	IEnemyState* idleState_;
 	IEnemyState* patrolState_;

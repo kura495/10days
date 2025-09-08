@@ -601,6 +601,7 @@
     <ClCompile Include="project\application\Object\Enemy\AI\State\Dead\DeadState.cpp" />
     <ClCompile Include="project\application\Object\Enemy\AI\State\Attack\AttackState.cpp" />
     <ClCompile Include="project\application\Object\Enemy\AI\Behavior\Behavior.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\IEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="project\application\Object\Camera\FollowCamera.h">

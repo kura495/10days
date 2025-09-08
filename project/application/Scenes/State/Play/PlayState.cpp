@@ -11,8 +11,6 @@ void PlayState::Init()
 	collisionManager = std::make_unique<CollisionManager>();
 	collisionManager->Init();
 
-	
-
 
 	// プレイヤー 初期化
 	playerModel_.push_back(Model::CreateModelFromObj("project/resources/Player", "player.gltf"));
@@ -20,6 +18,10 @@ void PlayState::Init()
 	player = std::make_unique<Player>();
 	player->Init(playerModel_);
 
+	enemyModel_.push_back(Model::CreateModelFromObj("project/resources/Player", "player.gltf"));
+	enemyModel_.push_back(Model::CreateModelFromObj("project/resources/Weapon", "Weapon.obj"));
+	enemy_ = std::make_unique<HumanEnemy>();
+	enemy_->Init(playerModel_,player.get());
 
 	// フォローカメラ 初期化
 	followCamera = std::make_unique<FollowCamera>();
@@ -51,6 +53,7 @@ void PlayState::Update()
 
 	backgroundWorld_.Update();
 	player->Update();
+	enemy_->Update();
 	floorManager_->Update();
 
 	// コリジョンマネージャー 更新
@@ -66,6 +69,10 @@ void PlayState::Draw()
 
 	// プレイヤー描画
 	player->Draw();
+	
+	// 敵キャラ 描画
+	enemy_->Draw();
+
 
 	// 床 描画
 	floorManager_->Draw();
