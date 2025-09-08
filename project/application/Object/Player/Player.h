@@ -93,6 +93,9 @@ protected:
 	float hitStopValue = 0.2f;
 	float vibValue = 0.2f;
 
+	//移動制御
+	void FixTranslate(Vector3 colliderPos, Vector3 HitcolliderSize);
+	Vector3 tlanslatePre;
 
 	// -- システム -- //
 
