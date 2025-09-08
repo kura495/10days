@@ -1,7 +1,7 @@
-﻿#include"Sprite.h"
+#include"Sprite.h"
 #include "Renderer/Renderer.h"
 
-void Sprite::Initialize(const Vector2& LeftTop, const Vector2& LeftBottom, const Vector2& RightTop, const Vector2& RightBottom)
+void Sprite::Init(const Vector2& LeftTop, const Vector2& LeftBottom, const Vector2& RightTop, const Vector2& RightBottom)
 {
 	directX_ = DirectXCommon::GetInstance();
 	textureManager_ = TextureManager::GetInstance();
@@ -40,7 +40,7 @@ void Sprite::Initialize(const Vector2& LeftTop, const Vector2& LeftBottom, const
 	viewProjection_.constMap_VS->view = Matrix4x4::CreateIdentity();
 	viewProjection_.constMap_VS->projection = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::kClientWidth), float(WinApp::kClientHeight), 0.0f, 100.0f);
 }
-void Sprite::Initialize(const Vector2& anchorPoint,const Vector2& textureSize)
+void Sprite::Init(const Vector2& anchorPoint,const Vector2& textureSize)
 {
 	directX_ = DirectXCommon::GetInstance();
 	textureManager_ = TextureManager::GetInstance();

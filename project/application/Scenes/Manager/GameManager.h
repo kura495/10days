@@ -9,6 +9,8 @@
 #include "Utility/ImGuiManager.h"
 
 #include "Scenes/State/Title/TitleState.h"
+#include "Scenes/State/Play/PlayState.h"
+#include "Scenes/State/Test/Test.h"
 #include "Scenes/State/IgameState.h"
 #include "Audio.h"
 #include "Input.h"

@@ -179,14 +179,19 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatFormVersion)\x64\dxil.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="project\application\Object\MapObject\FloorManager.cpp" />
+    <ClCompile Include="project\application\Object\MapObject\Floor\Floor.cpp" />
+    <ClCompile Include="project\application\Object\Player\Player.cpp" />
+    <ClCompile Include="project\application\Scenes\State\Play\PlayState.cpp" />
     <ClCompile Include="project\application\Object\Camera\Work\FOV\WorkFOV.cpp" />
     <ClCompile Include="project\application\Object\Camera\Work\LockAt\WorkLockAt.cpp" />
     <ClCompile Include="project\application\Object\Camera\Work\Shake\WorkShake.cpp" />
     <ClCompile Include="project\application\main.cpp" />
-    <ClCompile Include="project\application\Object\Box\BoxObject.cpp" />
     <ClCompile Include="project\application\Object\Camera\FollowCamera.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\Bee\Enemy_Bee.cpp" />
     <ClCompile Include="project\application\Object\SkyBox\SkyBox.cpp" />
     <ClCompile Include="project\application\Scenes\Manager\GameManager.cpp" />
+    <ClCompile Include="project\application\Scenes\State\Test\Test.cpp" />
     <ClCompile Include="project\application\Scenes\State\Title\TitleState.cpp" />
     <ClCompile Include="project\Engine\Animation\Animation.cpp" />
     <ClCompile Include="project\Engine\Audio\Audio.cpp" />
@@ -251,14 +256,21 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatFormVersion)\x64\dxil.dll"</Command>
     <ClCompile Include="project\Engine\Utility\random\random.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="project\application\Object\MapObject\FloorManager.h" />
+    <ClInclude Include="project\application\Object\MapObject\Floor\Floor.h" />
+    <ClInclude Include="project\application\Object\Player\Player.h" />
+    <ClInclude Include="project\application\Object\Player\State\IState.h" />
+    <ClInclude Include="project\application\Scenes\State\Play\PlayState.h" />
     <ClInclude Include="project\application\Object\Camera\Work\FOV\WorkFOV.h" />
     <ClInclude Include="project\application\Object\Camera\Work\InterFace\Iwork.h" />
     <ClInclude Include="project\application\Object\Camera\Work\LockAt\WorkLockAt.h" />
     <ClInclude Include="project\application\Object\Camera\Work\Shake\WorkShake.h" />
+    <ClInclude Include="project\application\Object\Enemy\Bee\Enemy_Bee.h" />
+    <ClInclude Include="project\application\Object\Enemy\IEnemy.h" />
     <ClInclude Include="project\application\Object\SkyBox\SkyBox.h" />
+    <ClInclude Include="project\application\Scenes\State\Test\Test.h" />
     <ClInclude Include="project\application\Scenes\State\Title\TitleState.h" />
     <ClInclude Include="project\Engine\Utility\GlobalTime.h" />
-    <ClInclude Include="project\application\Object\Box\BoxObject.h" />
     <ClInclude Include="project\application\Object\Camera\FollowCamera.h" />
     <ClInclude Include="project\application\Scenes\Manager\GameManager.h" />
     <ClInclude Include="project\application\Scenes\State\IgameState.h" />
