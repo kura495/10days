@@ -27,8 +27,8 @@ void TitleState::Update()
 
 	if (Input::GetPadPrecede(XINPUT_GAMEPAD_A, 10)) {
 		//ifの条件は後で変える
-		if (StateNo != GameStateNo::CLEAR) {
-			StateNo = GameStateNo::CLEAR;
+		if (StateNo != GameStateNo::PLAY) {
+			StateNo = GameStateNo::PLAY;
 		}
 	}
 
