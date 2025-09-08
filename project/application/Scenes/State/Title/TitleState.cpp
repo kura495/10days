@@ -11,6 +11,9 @@ void TitleState::Init()
 	followCamera->Initialize();
 	followCamera->GetParameter().translation_ = { 0.0f,0.0f,-10.0f };
 
+	skydome_ = Model::CreateModelFromObj("project/resources/TitleSkyDome", "TitleSkyDome.obj");
+
+
 	titleSprite = std::make_unique<Sprite>();
 	titleSprite->Init({ 0.0f,0.0f }, { 0.0f,720.0f }, { 1280.0f,0.0f }, { 1280.0f,720.0f });
 	titleSprite->TextureHandle = TextureManager::GetInstance()->LoadTexture("project/resources/Title.png");
@@ -19,6 +22,8 @@ void TitleState::Init()
 	texture = std::make_unique<Sprite>();
 	texture->TextureHandle = TextureManager::GetInstance()->LoadTexture("project/resources/TitleTuto.png");
 	texture->Init({ 0.0f,0.0f }, { 0.0f,720.0f }, { 1280.0f,0.0f }, { 1280.0f,720.0f });
+
+	
 }
 
 void TitleState::Update()
@@ -47,4 +52,5 @@ void TitleState::Draw()
 
 	titleSprite->RendererDraw(title);
 	//texture->RendererDraw(title);
+	skydome_->RendererDraw(title);
 }

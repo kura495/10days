@@ -22,4 +22,7 @@ private:
 	WorldTransform title;
 
 	std::unique_ptr<Sprite>texture;
+
+	Model* skydome_ = nullptr;
+
 };
