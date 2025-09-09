@@ -59,7 +59,7 @@ void Player::Update() {
 
 	// �W�����v
 	if (Input::GetInstance()->pushPad(XINPUT_GAMEPAD_B)) {
-		move_.y += 5.0f;
+		move_.y += 1.0f;
 	} else {
 		//move_.y = 0.0f; // �W�����v���͂��Ȃ����Y��������Z�b�g
 	}
