@@ -21,7 +21,7 @@ public:
 	enum ColliderType {
 		pCollider,//プレイヤーの当たり判定
 		Attack,//攻撃判定
-		JumpTunnel,//ジャンプした時の通り抜け防止コライダー
+		//JumpTunnel,//ジャンプした時の通り抜け防止コライダー
 		ColliderTypeEND,
 	};
 

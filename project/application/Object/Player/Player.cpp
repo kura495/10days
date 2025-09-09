@@ -189,47 +189,62 @@ void Player::AttackOnCollision(const ICollider& collider)
 void Player::FixTranslate(Vector3 colliderPos, Vector3 HitcolliderSize)
 {
 #pragma region
+	//ImGui::Begin("ColliderTest");
 
 	if (tlanslatePre.y - colliderSize.y + colliderOffset.y < colliderPos.y + HitcolliderSize.y && tlanslatePre.y + colliderSize.y + colliderOffset.y > colliderPos.y - HitcolliderSize.y) {
 		if (tlanslatePre.x > colliderPos.x + colliderSize.x) {
 			//左から右
 			if (world_.transform.translate.x - colliderSize.x < colliderPos.x + HitcolliderSize.x) {
 				world_.transform.translate.x = colliderPos.x + HitcolliderSize.x + colliderSize.x;
+				//ImGui::Text("Left");
+				return;
 			}
 		}
 		if (tlanslatePre.x < colliderPos.x - HitcolliderSize.x) {
 			//右から左
 			if (world_.transform.translate.x + colliderSize.x > colliderPos.x - HitcolliderSize.x) {
 				world_.transform.translate.x = colliderPos.x - HitcolliderSize.x - colliderSize.x;
+				//ImGui::Text("Right");
+
+				return;
 			}
 		}
 	}
-	if (tlanslatePre.y >= colliderPos.y + HitcolliderSize.y) {
-		//上から下
-		if (world_.transform.translate.y - colliderSize.y < colliderPos.y + HitcolliderSize.y) {
-			world_.transform.translate.y = colliderPos.y + HitcolliderSize.y;
 
-		}
-	}
-	if (tlanslatePre.y < colliderPos.y - HitcolliderSize.y) {
-		//下から上
-		if (world_.transform.translate.y + colliderSize.y > colliderPos.y - HitcolliderSize.y) {
-			float hogehoge = (colliderPos.y - HitcolliderSize.y) - (world_.transform.translate.y);
+	if (tlanslatePre.x - colliderSize.x + colliderOffset.x < colliderPos.x + HitcolliderSize.x && tlanslatePre.x + colliderSize.x + colliderOffset.x > colliderPos.x - HitcolliderSize.x) {
+		if (tlanslatePre.y >= colliderPos.y + HitcolliderSize.y) {
+			//上から下
+			if (world_.transform.translate.y - colliderSize.y < colliderPos.y + HitcolliderSize.y) {
+				world_.transform.translate.y = colliderPos.y + HitcolliderSize.y;
+				//ImGui::Text("Top");
 
-			if (saveTrans.x > world_.transform.translate.y) {
-				//yの位置を保存
-				saveTrans.x = world_.transform.translate.y;
-				//引いた値を元に戻す
-				world_.transform.translate.y += saveTrans.y;
-				saveTrans.y = hogehoge;
 			}
-			//world_.transform.translate.y -= colliderPos.y - HitcolliderSize.y;
-			world_.transform.translate.y -= hogehoge;
 		}
+		if (tlanslatePre.y < colliderPos.y - HitcolliderSize.y) {
+			//下から上
+			if (world_.transform.translate.y + colliderSize.y > colliderPos.y - HitcolliderSize.y) {
+				//別のところに移す予定
+				
+				float hogehoge = (colliderPos.y - HitcolliderSize.y) - (world_.transform.translate.y);
 
-		if (move_.y >= 0.0f) {
-			move_.y = 0.0f;
+				if (saveTrans.x > world_.transform.translate.y) {
+					//yの位置を保存
+					saveTrans.x = world_.transform.translate.y;
+					//引いた値を元に戻す
+					world_.transform.translate.y += saveTrans.y;
+					saveTrans.y = hogehoge;
+				}
+				//world_.transform.translate.y -= colliderPos.y - HitcolliderSize.y;
+				world_.transform.translate.y -= hogehoge;
+				//ImGui::Text("Bottom");
+
+			}
+
+			if (move_.y >= 0.0f) {
+				move_.y = 0.0f;
+			}
 		}
 	}
+	//ImGui::End();
 #pragma endregion 移動制御
 }
