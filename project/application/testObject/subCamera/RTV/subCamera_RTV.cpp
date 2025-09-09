@@ -37,7 +37,7 @@ void subCamera_RTV::CreateRTV(int Index)
 {
 	//RTVを作る
 	const Vector4 kRenderTargetClearValue{ 0.0f,1.0f,0.0f,1.0f };
-	renderTextureResource = CreateRenderTextureResource(DirectX->GetDevice(), textureSize_.x, textureSize_.y, DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, kRenderTargetClearValue);
+	renderTextureResource = CreateRenderTextureResource(DirectX->GetDevice(), (uint32_t)textureSize_.x, (uint32_t)textureSize_.y, DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, kRenderTargetClearValue);
 	D3D12_RENDER_TARGET_VIEW_DESC rtvDesc{};
 	rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 	rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
@@ -63,7 +63,7 @@ void subCamera_RTV::CreateViewport()
 void subCamera_RTV::CreateScissor()
 {
 	scissorRect.left = 0;
-	scissorRect.right = textureSize_.x;
+	scissorRect.right = (uint32_t)textureSize_.x;
 	scissorRect.top = 0;
-	scissorRect.bottom = textureSize_.y;
+	scissorRect.bottom = (uint32_t)textureSize_.y;
 }

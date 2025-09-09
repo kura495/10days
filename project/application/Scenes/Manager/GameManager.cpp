@@ -46,6 +46,10 @@ void GameManager::Initialize()
 	renderTextrue = std::make_unique<PostProsess>();
 	renderTextrue->Init();
 	renderTextrue->Create(1);
+
+	subCamera = std::make_unique<PostProsess>();
+	subCamera->Init();
+	subCamera->Create(2);
 }
 void GameManager::Gameloop() {
 	while (msg.message != WM_QUIT) {
@@ -68,24 +72,33 @@ void GameManager::Gameloop() {
 		state_->Update();
 		//ポストエフェクトアップデート
 		renderTextrue->Update();
+		subCamera->Update();
 
 		renderer_->Update();
 #pragma endregion
 #pragma region Draw
 		//renderTextureに書き込む設定に変更
+		subCamera->PreDraw();
+		subCamera->PostDraw();
+
 		renderTextrue->PreDraw();
 		state_->Draw();
 		renderer_->Draw();
 		renderTextrue->PostDraw();
+
 		directX->PreDraw();
 		//パイプラインの変更
+
 		renderer_->ChangePipeline(PostProsessType::PostProsessPSO);
 		//レンダーテクスチャの内容を書き込み
+
 		renderTextrue->Draw();
+
+		subCamera->Draw();	
 
 		editer->Draw();
 		imGuiManager->EndFrame();
-			
+		
 		directX->PostDraw();
 		//directXのSRVに書き込む設定に変更
 

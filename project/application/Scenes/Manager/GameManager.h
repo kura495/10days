@@ -18,6 +18,7 @@
 #include "Editer/Editer.h"
 
 #include "PostProsess/renderTextrue/PostProsess.h"
+#include "testObject/subCamera/RTV/subCamera_RTV.h"
 
 class GameManager
 {
@@ -48,6 +49,7 @@ private:
 	std::unique_ptr<IGameState>state_;
 	//ポストプロセス
 	std::unique_ptr<PostProsess> renderTextrue;
+	std::unique_ptr<PostProsess> subCamera;
 
 	int currentSceneNum_;
 	int prevSceneNum_;
