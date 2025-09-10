@@ -54,11 +54,12 @@ void Player::Update() {
 		move_ = Vector3::Normalize(move_);
 		// 移動量に移動速度を掛ける
 		move_.x *= moveSpeed_;
-}
+	}
 
 	//ジャンプする処理
-	if (Input::GetInstance()->pushPad(XINPUT_GAMEPAD_B)) {
-		gravity_ += 0.5f;
+	if (Input::GetInstance()->pushPad(XINPUT_GAMEPAD_B) && jumpLimit < 3) {
+		gravity_ += 0.7f - (0.05f * jumpLimit);
+		jumpLimit += 1;
 	}
 
 	//落下している処理
@@ -185,6 +186,8 @@ void Player::FixTranslate(Vector3 colliderPos, Vector3 HitcolliderSize)
 			//上から下
 			if (world_.transform.translate.y - colliderSize.y < colliderPos.y + HitcolliderSize.y) {
 				world_.transform.translate.y = colliderPos.y + HitcolliderSize.y;
+
+				jumpLimit = 0;
 			}
 		}
 
