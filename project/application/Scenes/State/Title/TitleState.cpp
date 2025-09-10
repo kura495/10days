@@ -30,6 +30,8 @@ void TitleState::Update()
 {
 	Renderer::SetViewProj(followCamera->GetParameter());
 
+
+#ifndef NDEBUG
 	if (Input::GetPadPrecede(XINPUT_GAMEPAD_A, 10)) {
 		//ifの条件は後で変える
 		if (StateNo != GameStateNo::CLEAR) {
@@ -44,6 +46,19 @@ void TitleState::Update()
 		}
 	}
 
+#else
+	if (Input::GetPadPrecede(XINPUT_GAMEPAD_B, 10)) {
+		//ifの条件は後で変える
+		if (StateNo != GameStateNo::PLAY) {
+			StateNo = GameStateNo::PLAY;
+		}
+	}
+
+
+#endif // DEBUG
+
+	
+
 
 }
 
@@ -51,6 +66,6 @@ void TitleState::Draw()
 {
 
 	titleSprite->RendererDraw(title);
-	//texture->RendererDraw(title);
+	texture->RendererDraw(title);
 	skydome_->RendererDraw(title);
 }
