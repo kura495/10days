@@ -179,6 +179,15 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatFormVersion)\x64\dxil.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="project\application\Object\Enemy\AI\Behavior\Behavior.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\AI\State\Attack\AttackState.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\AI\State\Dead\DeadState.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\AI\State\Chase\ChaseState.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\AI\State\Patrol\PatrolState.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\AI\State\Idle\IdleState.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\AI\EnemyAI.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\Human\HumanEnemy.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\IEnemy.cpp" />
     <ClCompile Include="project\application\Object\MapObject\FloorManager.cpp" />
     <ClCompile Include="project\application\Object\MapObject\Floor\Floor.cpp" />
     <ClCompile Include="project\application\Object\Player\Player.cpp" />
@@ -191,6 +200,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatFormVersion)\x64\dxil.dll"</Command>
     <ClCompile Include="project\application\main.cpp" />
     <ClCompile Include="project\application\Object\Camera\FollowCamera.cpp" />
     <ClCompile Include="project\application\Object\Enemy\Bee\Enemy_Bee.cpp" />
+    <ClCompile Include="project\application\Object\Manager\ObjectManager.cpp" />
     <ClCompile Include="project\application\Object\SkyBox\SkyBox.cpp" />
     <ClCompile Include="project\application\Scenes\Manager\GameManager.cpp" />
     <ClCompile Include="project\application\Scenes\State\Test\Test.cpp" />
@@ -258,9 +268,17 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatFormVersion)\x64\dxil.dll"</Command>
     <ClCompile Include="project\Engine\Utility\random\random.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="project\application\Object\Enemy\AI\Behavior\Behavior.h" />
+    <ClInclude Include="project\application\Object\Enemy\AI\State\Attack\AttackState.h" />
+    <ClInclude Include="project\application\Object\Enemy\AI\State\Dead\DeadState.h" />
+    <ClInclude Include="project\application\Object\Enemy\AI\State\Chase\ChaseState.h" />
+    <ClInclude Include="project\application\Object\Enemy\AI\State\Patrol\PatrolState.h" />
+    <ClInclude Include="project\application\Object\Enemy\AI\State\Idle\IdleState.h" />
+    <ClInclude Include="project\application\Object\Enemy\AI\EnemyAI.h" />
+    <ClInclude Include="project\application\Object\Enemy\AI\State\IEnemyState.h" />
+    <ClInclude Include="project\application\Object\Enemy\Human\HumanEnemy.h" />
     <ClInclude Include="project\application\Object\MapObject\FloorManager.h" />
     <ClInclude Include="project\application\Object\MapObject\Floor\Floor.h" />
-    <ClInclude Include="project\application\Object\Player\Player.h" />
     <ClInclude Include="project\application\Object\Player\State\IState.h" />
     <ClInclude Include="project\application\Scenes\State\Clear\GameClearState.h" />
     <ClInclude Include="project\application\Scenes\State\GameOver\GameOverState.h" />
@@ -271,6 +289,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatFormVersion)\x64\dxil.dll"</Command>
     <ClInclude Include="project\application\Object\Camera\Work\Shake\WorkShake.h" />
     <ClInclude Include="project\application\Object\Enemy\Bee\Enemy_Bee.h" />
     <ClInclude Include="project\application\Object\Enemy\IEnemy.h" />
+    <ClInclude Include="project\application\Object\Manager\ObjectManager.h" />
+    <ClInclude Include="project\application\Object\Player\Player.h" />
     <ClInclude Include="project\application\Object\SkyBox\SkyBox.h" />
     <ClInclude Include="project\application\Scenes\State\Test\Test.h" />
     <ClInclude Include="project\application\Scenes\State\Title\TitleState.h" />

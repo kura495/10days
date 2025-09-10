@@ -588,15 +588,21 @@
     <ClCompile Include="project\application\Object\Enemy\Bee\Enemy_Bee.cpp" />
     <ClCompile Include="project\application\Scenes\State\Test\Test.cpp" />
     <ClCompile Include="project\application\Scenes\State\Play\PlayState.cpp" />
-    <ClCompile Include="project\application\Object\Player\Player.cpp" />
     <ClCompile Include="project\application\Object\MapObject\Floor\Floor.cpp" />
     <ClCompile Include="project\application\Object\MapObject\FloorManager.cpp" />
-    <ClCompile Include="project\application\Scenes\State\Clear\GameClearState.cpp">
-      <Filter>project\application\Scenes\State\Play\GamePlayPhase\ClearPhase</Filter>
-    </ClCompile>
-    <ClCompile Include="project\application\Scenes\State\GameOver\GameOverState.cpp">
-      <Filter>project\application\Scenes\State\Play\GamePlayPhase\GameOverPhase</Filter>
-    </ClCompile>
+    <ClCompile Include="project\application\Scenes\State\GameOver\GameOverState.cpp" />
+    <ClCompile Include="project\application\Scenes\State\Clear\GameClearState.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\Human\HumanEnemy.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\AI\EnemyAI.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\AI\State\Idle\IdleState.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\AI\State\Patrol\PatrolState.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\AI\State\Chase\ChaseState.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\AI\State\Dead\DeadState.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\AI\State\Attack\AttackState.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\AI\Behavior\Behavior.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\IEnemy.cpp" />
+    <ClCompile Include="project\application\Object\Manager\ObjectManager.cpp" />
+    <ClCompile Include="project\application\Object\Player\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="project\application\Object\Camera\FollowCamera.h">
@@ -1102,12 +1108,18 @@
     <ClInclude Include="project\application\Object\Player\State\IState.h" />
     <ClInclude Include="project\application\Object\MapObject\Floor\Floor.h" />
     <ClInclude Include="project\application\Object\MapObject\FloorManager.h" />
-    <ClInclude Include="project\application\Scenes\State\Clear\GameClearState.h">
-      <Filter>project\application\Scenes\State\Play\GamePlayPhase\ClearPhase</Filter>
-    </ClInclude>
-    <ClInclude Include="project\application\Scenes\State\GameOver\GameOverState.h">
-      <Filter>project\application\Scenes\State\Play\GamePlayPhase\GameOverPhase</Filter>
-    </ClInclude>
+    <ClInclude Include="project\application\Scenes\State\GameOver\GameOverState.h" />
+    <ClInclude Include="project\application\Scenes\State\Clear\GameClearState.h" />
+    <ClInclude Include="project\application\Object\Enemy\Human\HumanEnemy.h" />
+    <ClInclude Include="project\application\Object\Enemy\AI\EnemyAI.h" />
+    <ClInclude Include="project\application\Object\Enemy\AI\State\IEnemyState.h" />
+    <ClInclude Include="project\application\Object\Enemy\AI\State\Idle\IdleState.h" />
+    <ClInclude Include="project\application\Object\Enemy\AI\State\Patrol\PatrolState.h" />
+    <ClInclude Include="project\application\Object\Enemy\AI\State\Chase\ChaseState.h" />
+    <ClInclude Include="project\application\Object\Enemy\AI\State\Dead\DeadState.h" />
+    <ClInclude Include="project\application\Object\Enemy\AI\State\Attack\AttackState.h" />
+    <ClInclude Include="project\application\Object\Enemy\AI\Behavior\Behavior.h" />
+    <ClInclude Include="project\application\Object\Manager\ObjectManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\hlsl\Object3d.hlsli">

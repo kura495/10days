@@ -7,7 +7,7 @@
 #include "Editer/Editer.h"
 #include "Object/Camera/FollowCamera.h"
 #include "ParticleSystem/ParticleSystem.h"
-#include "Enemy/Bee/Enemy_Bee.h"
+#include "Object/Manager/ObjectManager.h"
 
 class TestState :public IGameState
 {
@@ -19,5 +19,6 @@ public:
 private:
 	std::unique_ptr<FollowCamera>followCamera;
 
-	std::unique_ptr<Enemy_Bee>enemy_Bee;
+	std::unique_ptr<ObjectManager>objectManager_;
+
 };

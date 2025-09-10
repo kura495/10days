@@ -96,7 +96,7 @@ bool Input::IsTriggerKey(uint8_t keyNumber)
 
 bool Input::pushPad(uint32_t buttonNumber)
 {
-	if (joyState.Gamepad.wButtons & buttonNumber && !(joyStatePre.Gamepad.wButtons & buttonNumber)) {
+	if (Input::GetInstance()->joyState.Gamepad.wButtons & buttonNumber && !(Input::GetInstance()->joyStatePre.Gamepad.wButtons & buttonNumber)) {
 		return true;
 	}
 	return false;

@@ -32,6 +32,7 @@ void Player::Init(std::vector<Model*> models) {
 
 void Player::Update() {
 
+	tlanslatePre = world_.transform.translate;
 	// -- 入力 -- //
 
 	// 入力内容の取得
@@ -53,29 +54,29 @@ void Player::Update() {
 		move_ = Vector3::Normalize(move_);
 		// 移動量に移動速度を掛ける
 		move_.x *= 0.25f;
-	}
+}
 
-	// ジャンプ
+	// �W�����v
 	if (Input::GetInstance()->pushPad(XINPUT_GAMEPAD_B)) {
 		move_.y += 1.0f;
 	} else {
-		move_.y = 0.0f; // ジャンプ入力がなければY成分をリセット
+		move_.y = 0.0f; // �W�����v���͂��Ȃ����Y��������Z�b�g
 	}
 
-	//重力を加える
+	//�d�͂������
 	if (1) {
 		move_.y -= gravity_;
 	}
-	//地面にいないなら落ちるスピードが加速する
+	//�n�ʂɂ��Ȃ��Ȃ痎����X�s�[�h����������
 	if (isOnFloorFlag_ == false) {
 		gravity_ = std::min(gravity_ + kGravity, kMaxGravity);
 	}
 	isOnFloorFlag_ = false;
 
-	// 移動量を加算
+	// �ړ��ʂ���Z
 	world_.transform.translate += move_;
 
-	// -- アニメーション -- //
+	// -- �A�j���[�V���� -- //
 
 	animation_->PlayAnimation();
 
@@ -85,7 +86,7 @@ void Player::Update() {
 	ImGui::End();
 #pragma endregion
 
-	// 座標更新
+	// ���W�X�V
 	world_.Update();
 
 }
@@ -125,35 +126,38 @@ void Player::OnCollision(const ICollider& ICollider)
 {
     if (ICollider.GetcollitionAttribute() == Collider::Tag::Floor) {
 
-		// プレイヤーとブロックの差分を取得
-		Vector3 diff = world_.transform.translate - ICollider.GetCenter();
-		// プレイヤーとブロックの衝突方向を取得
-		Vector3 direction = Vector3::Normalize(diff);
-		// プレイヤーがブロックの上にいるかどうかを判定
-		bool isAbove = direction.y > 0.5f;
-		// プレイヤーがブロックの下にいるかどうかを判定
-		bool isBelow = direction.y < -0.5f;
-		// プレイヤーがブロックの左にいるかどうかを判定
-		bool isLeft = direction.x < -0.5f;
-		// プレイヤーがブロックの右にいるかどうかを判定
-		bool isRight = direction.x > 0.5f;
-		// 下方向への押し出し
-		if (isBelow) {
-			world_.transform.translate.y = -(colliders_[ColliderType::pCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f);
-		}
-		// 上方向への押し出し
-		if (isAbove) {
-			world_.transform.translate.y = colliders_[ColliderType::pCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f;
-		}
-		// 左方向への押し出し
-		if (isLeft) {
-			world_.transform.translate.x -= colliders_[ColliderType::pCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f;
-		}
-		// 右方向への押し出し
-		if (isRight) {
-			world_.transform.translate.x += colliders_[ColliderType::pCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f;
-		}
+		FixTranslate(ICollider.GetCenter(), ICollider.GetSize());
 
+#pragma region
+		//// プレイヤーとブロックの差分を取得
+		//Vector3 diff = world_.transform.translate - ICollider.GetCenter();
+		//// プレイヤーとブロックの衝突方向を取得
+		//Vector3 direction = Vector3::Normalize(diff);
+		//// プレイヤーがブロックの上にいるかどうかを判定
+		//bool isAbove = direction.y > 0.5f;
+		//// プレイヤーがブロックの下にいるかどうかを判定
+		//bool isBelow = direction.y < -0.5f;
+		//// プレイヤーがブロックの左にいるかどうかを判定
+		//bool isLeft = direction.x < -0.5f;
+		//// プレイヤーがブロックの右にいるかどうかを判定
+		//bool isRight = direction.x > 0.5f;
+		//// 下方向への押し出し
+		//if (isBelow) {
+		//	world_.transform.translate.y = -(colliders_[ColliderType::pCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f);
+		//}
+		//// 上方向への押し出し
+		//if (isAbove) {
+		//	world_.transform.translate.y = colliders_[ColliderType::pCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f;
+		//}
+		//// 左方向への押し出し
+		//if (isLeft) {
+		//	world_.transform.translate.x -= colliders_[ColliderType::pCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f;
+		//}
+		//// 右方向への押し出し
+		//if (isRight) {
+		//	world_.transform.translate.x += colliders_[ColliderType::pCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f;
+		//}
+#pragma endregion 押し出し処理
 
         world_.Update();
         gravity_ = kGravity;
@@ -210,4 +214,51 @@ void Player::AttackOnCollision(const ICollider& collider)
 		//コントローラー振動
 		Input::VibrateController(VIBRATION_MAX, VIBRATION_MIN, vibValue);
 	}
+}
+
+void Player::FixTranslate(Vector3 colliderPos, Vector3 HitcolliderSize)
+{
+#pragma region
+	if (tlanslatePre.y - colliderSize.y + colliderOffset.y < colliderPos.y + HitcolliderSize.y && tlanslatePre.y + colliderSize.y + colliderOffset.y > colliderPos.y - HitcolliderSize.y) {
+		if (tlanslatePre.x > colliderPos.x + colliderSize.x) {
+			//左から右
+			if (world_.transform.translate.x - colliderSize.x < colliderPos.x + HitcolliderSize.x) {
+				world_.transform.translate.x = colliderPos.x + HitcolliderSize.x + colliderSize.x;
+			}
+		}
+		if (tlanslatePre.x < colliderPos.x - HitcolliderSize.x) {
+			//右から左
+			if (world_.transform.translate.x + colliderSize.x > colliderPos.x - HitcolliderSize.x) {
+				world_.transform.translate.x = colliderPos.x - HitcolliderSize.x - colliderSize.x;
+			}
+		}
+	}
+
+	if (tlanslatePre.y >= colliderPos.y + HitcolliderSize.y) {
+		//上から下
+		if (world_.transform.translate.y - colliderSize.y < colliderPos.y + HitcolliderSize.y) {
+			world_.transform.translate.y = colliderPos.y + HitcolliderSize.y;
+		}
+	}
+	if (tlanslatePre.y < colliderPos.y - HitcolliderSize.y) {
+		//下から上
+		if (world_.transform.translate.y + colliderSize.y > colliderPos.y - HitcolliderSize.y) {
+			world_.transform.translate.y = colliderPos.y - HitcolliderSize.y;
+		}
+	}
+	//if (tlanslatePre.y - colliderSize.y < colliderPos.y + HitcolliderSize.y && tlanslatePre.y + colliderSize.y > colliderPos.y - HitcolliderSize.y) {
+	//	if (tlanslatePre.z < colliderPos.z - HitcolliderSize.z) {
+	//		//手前から奥
+	//		if (world_.translation_.z + colliderSize.z > colliderPos.z - HitcolliderSize.z) {
+	//			world_.translation_.z = colliderPos.z - HitcolliderSize.z - colliderSize.z;
+	//		}
+	//	}
+	//	if (tlanslatePre.z > colliderPos.z + HitcolliderSize.z) {
+	//		//奥から手前
+	//		if (world_.translation_.z - colliderSize.z < colliderPos.z + HitcolliderSize.z) {
+	//			world_.translation_.z = colliderPos.z + HitcolliderSize.z + colliderSize.z;
+	//		}
+	//	}
+	//}
+#pragma endregion 移動制御
 }

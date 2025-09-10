@@ -28,7 +28,7 @@ public:
 	void Init(std::vector<Model*> models);
 	// 更新
 	void Update();
-	// 描画
+	// �`��
 	void Draw();
 
 	// -- 座標関係 -- // 
@@ -93,6 +93,9 @@ protected:
 	float hitStopValue = 0.2f;
 	float vibValue = 0.2f;
 
+	//移動制御
+	void FixTranslate(Vector3 colliderPos, Vector3 HitcolliderSize);
+	Vector3 tlanslatePre;
 
 	// -- システム -- //
 
