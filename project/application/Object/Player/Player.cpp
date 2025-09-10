@@ -32,7 +32,6 @@ void Player::Init(std::vector<Model*> models) {
 
 void Player::Update() {
 
-	saveTrans = { 100.0f,0.0f };
 	tlanslatePre = world_.transform.translate;
 	// -- 入力 -- //
 
@@ -59,7 +58,7 @@ void Player::Update() {
 
 	// �W�����v
 	if (Input::GetInstance()->pushPad(XINPUT_GAMEPAD_B)) {
-		move_.y += 3.0f;
+		move_.y += 2.5f;
 	}
 
 	//�d�͂������
@@ -68,7 +67,7 @@ void Player::Update() {
 	}
 	//�n�ʂɂ��Ȃ��Ȃ痎����X�s�[�h����������
 	if (isOnFloorFlag_ == false) {
-		//gravity_ = std::min(gravity_ + kGravity, kMaxGravity);
+		gravity_ = std::min(gravity_ + kGravity, kMaxGravity);
 	}
 	isOnFloorFlag_ = false;
 
@@ -193,16 +192,12 @@ void Player::FixTranslate(Vector3 colliderPos, Vector3 HitcolliderSize)
 			//左から右
 			if (world_.transform.translate.x - colliderSize.x < colliderPos.x + HitcolliderSize.x) {
 				world_.transform.translate.x = colliderPos.x + HitcolliderSize.x + colliderSize.x;
-
-				return;
 			}
 		}
 		if (tlanslatePre.x < colliderPos.x - HitcolliderSize.x) {
 			//右から左
 			if (world_.transform.translate.x + colliderSize.x > colliderPos.x - HitcolliderSize.x) {
 				world_.transform.translate.x = colliderPos.x - HitcolliderSize.x - colliderSize.x;
-
-				return;
 			}
 		}
 	}
@@ -218,23 +213,8 @@ void Player::FixTranslate(Vector3 colliderPos, Vector3 HitcolliderSize)
 		if (tlanslatePre.y < colliderPos.y - HitcolliderSize.y) {
 			//下から上
 			if (world_.transform.translate.y + colliderSize.y > colliderPos.y - HitcolliderSize.y) {
-				//別のところに移す予定
-				
-				float hogehoge = (colliderPos.y - HitcolliderSize.y) - (world_.transform.translate.y);
 
-				if (saveTrans.x > world_.transform.translate.y) {
-					//yの位置を保存
-					saveTrans.x = world_.transform.translate.y;
-					//引いた値を元に戻す
-					world_.transform.translate.y += saveTrans.y;
-					saveTrans.y = hogehoge;
-				}
-				//world_.transform.translate.y -= colliderPos.y - HitcolliderSize.y;
-				world_.transform.translate.y -= hogehoge;
-			}
-
-			if (move_.y >= 0.0f) {
-				move_.y = 0.0f;
+				world_.transform.translate.y = colliderPos.y - HitcolliderSize.y;
 			}
 		}
 	}

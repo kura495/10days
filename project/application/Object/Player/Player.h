@@ -98,7 +98,6 @@ protected:
 	//移動制御
 	void FixTranslate(Vector3 colliderPos, Vector3 HitcolliderSize);
 	Vector3 tlanslatePre;
-	Vector2 saveTrans;
 
 	// -- システム -- //
 
