@@ -62,6 +62,10 @@ void Player::Update() {
 		jumpLimit += 1;
 	}
 
+	if (Input::GetInstance()->pushPad(XINPUT_GAMEPAD_A)) {
+		//攻撃処理を挟む
+	}
+
 	//落下している処理
 	gravity_ = (std::max)(gravity_ - kGravity, kMaxGravity);
 	move_.y += gravity_;
