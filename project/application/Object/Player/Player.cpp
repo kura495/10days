@@ -189,20 +189,12 @@ void Player::FixTranslate(Vector3 colliderPos, Vector3 HitcolliderSize)
 			}
 		}
 
-		if (tlanslatePre.y < colliderPos.y - HitcolliderSize.y) {
+		if (tlanslatePre.y <= colliderPos.y - HitcolliderSize.y) {
 			//下から上
 			if (world_.transform.translate.y + colliderSize.y > colliderPos.y - HitcolliderSize.y) {
-				float hogehoge = (colliderPos.y - HitcolliderSize.y) - (world_.transform.translate.y - colliderSize.y);
+				float hogehoge = (colliderPos.y - HitcolliderSize.y) - ((colliderSize.y) + (colliderOffset.y / 2))/*- (world_.transform.translate.y - colliderSize.y) + (colliderOffset.y)*/;
 
-				//if (saveTrans.x > world_.transform.translate.y) {
-				//	//yの位置を保存
-				//	saveTrans.x = world_.transform.translate.y;
-				//	//引いた値を元に戻す
-				//	world_.transform.translate.y += saveTrans.y;
-				//	saveTrans.y = hogehoge;
-				//}
-				//world_.transform.translate.y -= colliderPos.y - HitcolliderSize.y;
-				world_.transform.translate.y -= hogehoge;
+				world_.transform.translate.y = hogehoge;
 
 
 				gravity_ = kMaxGravity;
