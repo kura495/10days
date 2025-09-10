@@ -53,25 +53,17 @@ void Player::Update() {
 		// 移動量を正規化
 		move_ = Vector3::Normalize(move_);
 		// 移動量に移動速度を掛ける
-		move_.x *= 0.25f;
+		move_.x *= moveSpeed_;
 }
 
-	// �W�����v
+	//ジャンプする処理
 	if (Input::GetInstance()->pushPad(XINPUT_GAMEPAD_B)) {
-		move_.y += 1.0f;
-	} else {
-		move_.y = 0.0f; // �W�����v���͂��Ȃ����Y��������Z�b�g
+		gravity_ += 0.5f;
 	}
 
-	//�d�͂������
-	if (1) {
-		move_.y -= gravity_;
-	}
-	//�n�ʂɂ��Ȃ��Ȃ痎����X�s�[�h����������
-	if (isOnFloorFlag_ == false) {
-		gravity_ = std::min(gravity_ + kGravity, kMaxGravity);
-	}
-	isOnFloorFlag_ = false;
+	//落下している処理
+	gravity_ = (std::max)(gravity_ - kGravity, kMaxGravity);
+	move_.y += gravity_;
 
 	// �ړ��ʂ���Z
 	world_.transform.translate += move_;
@@ -128,40 +120,8 @@ void Player::OnCollision(const ICollider& ICollider)
 
 		FixTranslate(ICollider.GetCenter(), ICollider.GetSize());
 
-#pragma region
-		//// プレイヤーとブロックの差分を取得
-		//Vector3 diff = world_.transform.translate - ICollider.GetCenter();
-		//// プレイヤーとブロックの衝突方向を取得
-		//Vector3 direction = Vector3::Normalize(diff);
-		//// プレイヤーがブロックの上にいるかどうかを判定
-		//bool isAbove = direction.y > 0.5f;
-		//// プレイヤーがブロックの下にいるかどうかを判定
-		//bool isBelow = direction.y < -0.5f;
-		//// プレイヤーがブロックの左にいるかどうかを判定
-		//bool isLeft = direction.x < -0.5f;
-		//// プレイヤーがブロックの右にいるかどうかを判定
-		//bool isRight = direction.x > 0.5f;
-		//// 下方向への押し出し
-		//if (isBelow) {
-		//	world_.transform.translate.y = -(colliders_[ColliderType::pCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f);
-		//}
-		//// 上方向への押し出し
-		//if (isAbove) {
-		//	world_.transform.translate.y = colliders_[ColliderType::pCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f;
-		//}
-		//// 左方向への押し出し
-		//if (isLeft) {
-		//	world_.transform.translate.x -= colliders_[ColliderType::pCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f;
-		//}
-		//// 右方向への押し出し
-		//if (isRight) {
-		//	world_.transform.translate.x += colliders_[ColliderType::pCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f;
-		//}
-#pragma endregion 押し出し処理
-
         world_.Update();
-        gravity_ = kGravity;
-        isOnFloorFlag_ = true;
+
     }
     return;
 }
@@ -219,6 +179,24 @@ void Player::AttackOnCollision(const ICollider& collider)
 void Player::FixTranslate(Vector3 colliderPos, Vector3 HitcolliderSize)
 {
 #pragma region
+	if (tlanslatePre.x - colliderSize.x + colliderOffset.x < colliderPos.x + HitcolliderSize.x && tlanslatePre.x + colliderSize.x + colliderOffset.x > colliderPos.x - HitcolliderSize.x) {
+
+		if (tlanslatePre.y >= colliderPos.y + HitcolliderSize.y) {
+			//上から下
+			if (world_.transform.translate.y - colliderSize.y < colliderPos.y + HitcolliderSize.y) {
+				world_.transform.translate.y = colliderPos.y + HitcolliderSize.y;
+			}
+		}
+
+		if (tlanslatePre.y <= colliderPos.y - HitcolliderSize.y) {
+			//下から上
+			if (world_.transform.translate.y + colliderSize.y + colliderOffset.y > colliderPos.y - HitcolliderSize.y) {
+
+				world_.transform.translate.y = colliderPos.y - HitcolliderSize.y - (colliderOffset.y * 2);
+			}
+		}
+	}
+
 	if (tlanslatePre.y - colliderSize.y + colliderOffset.y < colliderPos.y + HitcolliderSize.y && tlanslatePre.y + colliderSize.y + colliderOffset.y > colliderPos.y - HitcolliderSize.y) {
 		if (tlanslatePre.x > colliderPos.x + colliderSize.x) {
 			//左から右
@@ -233,32 +211,5 @@ void Player::FixTranslate(Vector3 colliderPos, Vector3 HitcolliderSize)
 			}
 		}
 	}
-
-	if (tlanslatePre.y >= colliderPos.y + HitcolliderSize.y) {
-		//上から下
-		if (world_.transform.translate.y - colliderSize.y < colliderPos.y + HitcolliderSize.y) {
-			world_.transform.translate.y = colliderPos.y + HitcolliderSize.y;
-		}
-	}
-	if (tlanslatePre.y < colliderPos.y - HitcolliderSize.y) {
-		//下から上
-		if (world_.transform.translate.y + colliderSize.y > colliderPos.y - HitcolliderSize.y) {
-			world_.transform.translate.y = colliderPos.y - HitcolliderSize.y;
-		}
-	}
-	//if (tlanslatePre.y - colliderSize.y < colliderPos.y + HitcolliderSize.y && tlanslatePre.y + colliderSize.y > colliderPos.y - HitcolliderSize.y) {
-	//	if (tlanslatePre.z < colliderPos.z - HitcolliderSize.z) {
-	//		//手前から奥
-	//		if (world_.translation_.z + colliderSize.z > colliderPos.z - HitcolliderSize.z) {
-	//			world_.translation_.z = colliderPos.z - HitcolliderSize.z - colliderSize.z;
-	//		}
-	//	}
-	//	if (tlanslatePre.z > colliderPos.z + HitcolliderSize.z) {
-	//		//奥から手前
-	//		if (world_.translation_.z - colliderSize.z < colliderPos.z + HitcolliderSize.z) {
-	//			world_.translation_.z = colliderPos.z + HitcolliderSize.z + colliderSize.z;
-	//		}
-	//	}
-	//}
 #pragma endregion 移動制御
 }

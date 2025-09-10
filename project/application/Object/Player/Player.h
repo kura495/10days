@@ -21,6 +21,7 @@ public:
 	enum ColliderType {
 		pCollider,//プレイヤーの当たり判定
 		Attack,//攻撃判定
+		//JumpTunnel,//ジャンプした時の通り抜け防止コライダー
 		ColliderTypeEND,
 	};
 
@@ -65,16 +66,17 @@ protected:
 
 	// 移動量
 	Vector3 move_ = { 0,0,0 };
-
+	//　移動量の倍率
+	float moveSpeed_ = 0.25f;
 
 	// -- 重力 -- //
 
 	// 最大落下速度
-	const float kMaxGravity = 0.098f;
+	const float kMaxGravity = -0.098f;
 	// 基本落下速度
-	const float kGravity = 0.003f;
+	const float kGravity = 0.05f;
 	// 落下速度
-	float gravity_ = 0.003f;
+	float gravity_ = 0.098f;
 	// 床に接地しているか
 	bool isOnFloorFlag_ = false;
 
