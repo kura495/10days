@@ -8,6 +8,10 @@ void GameOverState::Init()
 	gameOverSprite->Init({ 0.0f,0.0f }, { 0.0f,720.0f }, { 1280.0f,0.0f }, { 1280.0f,720.0f });
 	gameOverSprite->TextureHandle = TextureManager::GetInstance()->LoadTexture("project/resources/GameOver.png");
 	gameOver.Init();
+
+	texture = std::make_unique<Sprite>();
+	texture->TextureHandle = TextureManager::GetInstance()->LoadTexture("project/resources/ATuto.png");
+	texture->Init({ 0.0f,0.0f }, { 0.0f,720.0f }, { 1280.0f,0.0f }, { 1280.0f,720.0f });
 }
 
 void GameOverState::Update()
@@ -20,17 +24,11 @@ void GameOverState::Update()
 	}
 
 
-	//if (Input::pushKey(DIK_SPACE)) {
-	//	//ifの条件は後で変える
-	//	if (StateNo != GameStateNo::TITLE) {
-	//		StateNo = GameStateNo::TITLE;
-	//	}
-	//}
-
 }
 
 void GameOverState::Draw()
 {
 	gameOverSprite->RendererDraw(gameOver);
+	texture->RendererDraw(gameOver);
 }
 
