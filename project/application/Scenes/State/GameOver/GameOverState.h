@@ -19,5 +19,6 @@ private:
 
 	std::unique_ptr<Sprite> gameOverSprite;
 	WorldTransform gameOver;
+	std::unique_ptr<Sprite>texture;
 	
 };

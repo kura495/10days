@@ -38,9 +38,14 @@ void TitleState::Update()
 #ifndef NDEBUG
 	if (Input::GetPadPrecede(XINPUT_GAMEPAD_A, 10)) {
 		//ifの条件は後で変える
-		if (StateNo != GameStateNo::PLAY) {
+		if (StateNo != GameStateNo::PLAY && instructionsScene) {
 			StateNo = GameStateNo::PLAY;
+
 		}
+		else if (!instructionsScene) {
+			instructionsScene = true;
+		}
+
 	}
 
 	if (Input::GetPadPrecede(XINPUT_GAMEPAD_B, 10)) {
