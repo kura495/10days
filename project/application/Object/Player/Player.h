@@ -72,9 +72,9 @@ protected:
 	// -- 重力 -- //
 
 	// 最大落下速度
-	const float kMaxGravity = 0.098f;
+	const float kMaxGravity = -0.098f;
 	// 基本落下速度
-	const float kGravity = 0.098f;
+	const float kGravity = 0.05f;
 	// 落下速度
 	float gravity_ = 0.098f;
 	// 床に接地しているか
