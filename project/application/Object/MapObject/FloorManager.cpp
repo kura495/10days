@@ -23,7 +23,7 @@ void FloorManager::Init()
 		for (uint32_t x = 0; x < floorMatrix_[y].size(); x++) {
 			if (floorMatrix_[y][x] != 0) {
 				std::unique_ptr<Floor> floor = std::make_unique<Floor>();
-				floor->Init(floorModel_, Vector2((float)x*2, (float)y*2));
+				floor->Init(floorModel_, Vector2((float)x * 2, (floorMatrix_.size() - (float)y * 2)));
 				floors_.push_back(std::move(floor));
 			}
 		}

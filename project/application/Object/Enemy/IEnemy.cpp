@@ -30,9 +30,28 @@ void IEnemy::Init(std::vector<Model*> models, Player* player, FloorManager* floo
 
 }
 
+int32_t IEnemy::Move()
+{
+	// 経路探索を活用し、移動方向を取得
+	Vector3 moveDir = enemyAI_->GetPathFinding()->GetMoveDirection();
+
+	if (moveDir.Length() == 0.0f) {
+		moveDir = this->GetPlayerPos() - this->GetPos();
+
+		if(moveDir.Length() == 0.0f){
+			moveDir = { 0.0f ,0.0f ,0.0f };
+		}
+
+	}
+
+	world_.transform.translate += moveDir * 0.01f;
+
+	return 0;
+}
+
 bool IEnemy::IsPlayerInRange(float range)
 {	
-	// プレイヤーが一定範囲内(50.0f)にいるか
+	// プレイヤーが範囲内にいるか
 	if (Vector3::Distance(world_.transform.translate, player_->GetWorld().transform.translate) <= range) {
 		// いる場合はtrueを返す
 		return true;
@@ -44,7 +63,7 @@ bool IEnemy::IsPlayerInRange(float range)
 
 bool IEnemy::IsPlayerOutOfRange(float range)
 {
-	// プレイヤーが一定範囲内(50.0f)にいるか
+	// プレイヤーが範囲外にいるか
 	if (Vector3::Distance(world_.transform.translate, player_->GetWorld().transform.translate) >= range) {
 		// いる場合はtrueを返す
 		return true;
@@ -84,17 +103,17 @@ void IEnemy::OnCollision(const ICollider& ICollider)
 {
 	if (ICollider.GetcollitionAttribute() == Collider::Tag::Floor) {
 
-		// プレイヤーとブロックの差分を取得
+		// 敵キャラとブロックの差分を取得
 		Vector3 diff = world_.transform.translate - ICollider.GetCenter();
-		// プレイヤーとブロックの衝突方向を取得
+		// 敵キャラとブロックの衝突方向を取得
 		Vector3 direction = Vector3::Normalize(diff);
-		// プレイヤーがブロックの上にいるかどうかを判定
+		// 敵キャラがブロックの上にいるかどうかを判定
 		bool isAbove = direction.y > 0.5f;
-		// プレイヤーがブロックの下にいるかどうかを判定
+		// 敵キャラがブロックの下にいるかどうかを判定
 		bool isBelow = direction.y < -0.5f;
-		// プレイヤーがブロックの左にいるかどうかを判定
+		// 敵キャラがブロックの左にいるかどうかを判定
 		bool isLeft = direction.x < -0.5f;
-		// プレイヤーがブロックの右にいるかどうかを判定
+		// 敵キャラがブロックの右にいるかどうかを判定
 		bool isRight = direction.x > 0.5f;
 		// 下方向への押し出し
 		if (isBelow) {
@@ -176,6 +195,10 @@ void IEnemy::SetAction(Action::Name actionName)
 	switch (actionName)
 	{
 	case Action::MOVE:
+
+		// 移動
+		Move();
+
 		break;
 	case Action::JUMP:
 		break;

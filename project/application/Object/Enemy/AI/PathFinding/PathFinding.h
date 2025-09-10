@@ -76,6 +76,9 @@ public:
 	// 斜め移動を許可したマンハッタン距離を計算
 	int32_t ManhattanDistanceWithDiagonal(const MapNode& a, const MapNode& b);
 
+	// 移動方向の取得
+	Vector3 GetMoveDirection();
+
 protected:
 
 	// 敵キャラ ポインタ
@@ -84,12 +87,12 @@ protected:
 	FloorManager* floorManager_ = nullptr;
 
 	// 経路探索の更新頻度
-	const int32_t kPathFindingInterval = 30;
+	const int32_t kPathFindingInterval = 300;
 	// 経路更新までのカウント
-	int32_t pathUpdateCount_ = 0;
+	int32_t pathUpdateCount_;
 
 	// 現在地
-	MapNode now = { 3,4,0,0,0,nullptr };
+	MapNode now = { 0,0,0,0,0,nullptr };
 	// 初期地点
 	MapNode prev_ = now;
 	// ターゲットの位置

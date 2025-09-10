@@ -17,7 +17,7 @@ void IdleState::Init(IEnemy* enemy)
 	// Conditionノード内に条件用のメンバ関数ポインタを渡す
 	std::unique_ptr<IBehavior> moveAction = std::make_unique<Condition>(
     enemy_,
-    [this](){ return this->enemy_->IsPlayerInRange(5.0f); }
+    [this](){ return this->enemy_->IsPlayerInRange(8.0f); }
 	);
 	rootNode_->SetChild(std::move(moveAction));
 

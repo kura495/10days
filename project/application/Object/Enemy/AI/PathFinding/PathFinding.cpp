@@ -8,30 +8,58 @@ void PathFinding::Init(IEnemy* enemy, FloorManager* floorManager) {
 	enemy_ = enemy;
 	// 床マネージャーのポインタを保存
 	floorManager_ = floorManager;
+	// 経路更新までのカウント
+	pathUpdateCount_ = kPathFindingInterval;
+
+	// 初期座標を取得
+	now = ConvertWorldPosToMapChipPos(enemy_->GetPos());
+	prev_ = now;
 
 }
 
 void PathFinding::Update() {
+    
+	// 経路更新カウントを減算
+	if (pathUpdateCount_ > 0) { --pathUpdateCount_; }
 
-	// 経路更新カウントを加算
-	if(pathUpdateCount_ < kPathFindingInterval) {
-		pathUpdateCount_++;
+
+	// 経路更新タイミング
+	if (pathUpdateCount_ == 0) {
+		
+		//now = next_;
+		//prev_ = next_;
+		pathUpdateCount_ = kPathFindingInterval;
+		LoadAI(ConvertWorldPosToMapChipPos(enemy_->GetPos()), ConvertWorldPosToMapChipPos(enemy_->GetPlayerPos()));
 	}
 
-	// カウントが更新頻度に達したら経路を更新
-	if (pathUpdateCount_ >= kPathFindingInterval) {
-		
-		// 経路が存在する場合、リセットを行う
-		if (!path_.empty()) {
-			DeleteRoute();
-		}
 
-		// A*アルゴリズムで経路探索を行い、経路上のノードのポインタ配列を取得
-		LoadAI(ConvertWorldPosToMapChipPos(enemy_->GetPos()),ConvertWorldPosToMapChipPos(enemy_->GetPlayerPos()));
-		
-		// カウントのリセット
-		pathUpdateCount_ = 0;
+
+#ifdef _DEBUG
+
+	ImGui::Begin("Route");
+	int32_t enemyPos[2] = {ConvertWorldPosToMapChipPos(enemy_->GetPos()).x,ConvertWorldPosToMapChipPos(enemy_->GetPos()).y};
+	ImGui::DragInt2("E-Node:",enemyPos );
+	int32_t playerPos[2] = {ConvertWorldPosToMapChipPos(enemy_->GetPlayerPos()).x,ConvertWorldPosToMapChipPos(enemy_->GetPlayerPos()).y};
+	ImGui::DragInt2("P-Node:", playerPos);
+	ImGui::DragInt("Interval", &pathUpdateCount_);
+
+	//
+	ImGui::Text("Prev: (%d, %d, %d, %d, %d)", prev_.x, prev_.y, prev_.g, prev_.h, prev_.f);
+	ImGui::Text("Now: (%d, %d, %d, %d, %d)", now.x, now.y, now.g, now.h, now.f);
+	ImGui::Text("Next: (%d, %d, %d, %d, %d)", next_.x, next_.y, next_.g, next_.h, next_.f);
+
+
+	// 経路(MapNodeの情報)を表示
+	for (size_t i = 0; i < path_.size(); ++i) {
+		ImGui::Text("Path[%d]: (%d, %d, %d, %d, %d)", static_cast<int32_t>(i), path_[i]->x, path_[i]->y, path_[i]->g, path_[i]->h, path_[i]->f);
 	}
+
+	ImGui::End();
+
+#endif // _DEBUG
+
+
+
 
 }
 
@@ -47,15 +75,26 @@ MapNode PathFinding::ConvertWorldPosToMapChipPos(const Vector3& worldPos)
 	int32_t mapWidth = static_cast<int32_t>(floorMatrix[0].size());
 	int32_t mapHeight = static_cast<int32_t>(floorMatrix.size());
 	
-	// ワールド座標をマップチップの座標に変換
-	result.x = static_cast<int32_t>(worldPos.x);
-	result.y = mapHeight - static_cast<int32_t>(worldPos.y) - 1;
+	// マップチップの1セルの大きさ
+	const float cellSize = 2.0f;
+	// ワールド座標をマップチップのスケールに変換
+	Vector3 scaledPos = worldPos / cellSize;
+
+	// 小数点以下を切り捨て
+	result.x = static_cast<int32_t>(scaledPos.x);
+	result.y = static_cast<int32_t>(scaledPos.y);
+
 
 	// 座標がマップチップの範囲外の場合、範囲内に収める
 	if (result.x < 0) result.x = 0;
 	if (result.x >= mapWidth) result.x = mapWidth - 1;
 	if (result.y < 0) result.y = 0;
 	if (result.y >= mapHeight) result.y = mapHeight - 1;
+
+	// 評価値や距離は0に初期化
+	result.g = 0;
+	result.h = 0;
+	result.f = 0;
 
 	// 戻り値を返す
 	return result;
@@ -78,18 +117,19 @@ std::vector<MapNode*> PathFinding::GetAstar(const MapNode& start, const MapNode&
 			[](MapNode* a, MapNode* b) { return a->f < b->f; });
 
 		MapNode* currentNode = *currentIt;
+
 		// 終了ノードに到達した場合、経路を構築して返す
 		if (currentNode->x == end.x && currentNode->y == end.y) {
-			std::vector<MapNode*> path;
-			while (currentNode) {
-				path.push_back(currentNode);
-				currentNode = currentNode->parent;
-			}
-			std::reverse(path.begin(), path.end());
-			// メモリ解放
-			for (auto node : openList) delete node;
-			for (auto node : closedList) delete node;
-			return path;
+            std::vector<MapNode*> path;
+            while (currentNode) {
+                path.push_back(new MapNode(*currentNode)); // コピーを作成
+                currentNode = currentNode->parent;
+            }
+            std::reverse(path.begin(), path.end());
+            // メモリ解放
+            for (auto node : openList) delete node;
+            for (auto node : closedList) delete node;
+            return path;
 		}
 		// 現在のノードをオープンリストから削除し、クローズドリストに追加
 		openList.erase(currentIt);
@@ -108,15 +148,16 @@ std::vector<MapNode*> PathFinding::GetAstar(const MapNode& start, const MapNode&
 				continue;
 			}
 			// 障害物の場合はスキップ
-			if (neighbor.x < 0 || neighbor.x >= (int) floorManager_->GetFloorMatrix()[0].size() ||
-				neighbor.y < 0 || neighbor.y >= (int) floorManager_->GetFloorMatrix().size() ||
-				 floorManager_->GetFloorMatrix()[neighbor.y][neighbor.x] == 0) {
+			if (neighbor.x < 0 || neighbor.x >= (int)floorManager_->GetFloorMatrix()[0].size() ||
+				neighbor.y < 0 || neighbor.y >= (int)floorManager_->GetFloorMatrix().size() ||
+				floorManager_->GetFloorMatrix()[neighbor.y][neighbor.x] == 1) {
 				continue;
 			}
 			// g, h, f値を計算
 			neighbor.g = currentNode->g + 1;
 			neighbor.h = abs(neighbor.x - end.x) + abs(neighbor.y - end.y);
 			neighbor.f = neighbor.g + neighbor.h;
+
 			// オープンリストに存在する場合、g値が小さい場合のみ更新
 			auto openIt = std::find_if(openList.begin(), openList.end(),
 				[&neighbor](MapNode* node) { return node->x == neighbor.x && node->y == neighbor.y; });
@@ -138,15 +179,111 @@ std::vector<MapNode*> PathFinding::GetAstar(const MapNode& start, const MapNode&
 	// メモリ解放
 	for (auto node : openList) delete node;
 	for (auto node : closedList) delete node;
-	return std::vector<MapNode*>();
+	return {};
+
+	//std::set<MapNode*> openSet{};
+	//std::vector<MapNode*> closedSet{};
+
+	//openSet.insert(new MapNode(start));
+
+	//// オープンリストがから出ない場合
+	//while (!openSet.empty()) {
+
+	//	// オープンリストから最小評価値のノードを取り出す
+	//	MapNode* current = *openSet.begin();
+	//	// オープンリスト内の取り出したノードを削除
+	//	openSet.erase(openSet.begin());
+	//	// クローズドリストに取り出したノードを入れる
+	//	closedSet.push_back(current);
+
+	//	if (current->x == end.x && current->y == end.y) {
+	//		std::reverse(closedSet.begin(), closedSet.end());
+	//		while (current->parent != nullptr) {
+	//			path_.push_back(current);
+	//			current = current->parent;
+
+	//			if (current->parent == current) {
+	//				break;
+	//			}
+	//		}
+	//		std::reverse(path_.begin(), path_.end());
+	//		return path_;
+	//	}
+
+	//	for (int32_t dy = -1; dy <= 1; ++dy) {
+	//		for (int32_t dx = -1; dx <= 1; ++dx) {
+	//			// 現在のマスは除外する
+	//			if (dx == 0 && dy == 0) {
+	//				continue;
+	//			}
+	//			// 斜め移動をしない
+	//			if ((dx == -1 && dy == -1) || (dx == 1 && dy == -1) ||
+	//				(dx == -1 && dy == 1) || (dx == 1 && dy == 1)) {
+	//				continue;
+	//			}
+
+	//			// 隣接した点の計算
+	//			int32_t newX = current->x + dx;
+	//			int32_t newY = current->y + dy;
+
+	//			// 進行可能な場合のみ
+	//			if (GetIsValid(newX, newY)) {
+	//				if (std::find_if(closedSet.begin(), closedSet.end(), [newX, newY](const MapNode* MapNode) {
+	//					return MapNode->x == newX && MapNode->y == newY;
+	//					}) == closedSet.end()) {
+
+	//					MapNode* newMapNode = new MapNode{
+	//						newX, newY,
+	//						current->g + 1,
+	//						GetManhattanDistance({ newX, newY, 0, 0, 0, nullptr }, { end.x, end.y, 0, 0, 0, nullptr }),
+	//						0,
+	//						nullptr
+	//					};
+
+	//					newMapNode->f = newMapNode->g + newMapNode->h;
+
+	//					if (!closedSet.empty()) {
+	//						MapNode* lastClosedMapNode = closedSet.back();
+	//						newMapNode->parent = lastClosedMapNode;
+	//					}
+
+	//					if (std::find_if(openSet.begin(), openSet.end(), [newX, newY](const MapNode* MapNode) {
+	//						return MapNode->x == newX && MapNode->y == newY;
+	//						}) != openSet.end()) {
+	//						auto it = std::find_if(openSet.begin(), openSet.end(), [newX, newY](const MapNode* MapNode) {
+	//							return MapNode->x == newX && MapNode->y == newY;
+	//							});
+
+	//						if (newMapNode->f < (*it)->f) {
+	//							openSet.erase(it);
+	//							openSet.insert(newMapNode);
+	//						}
+	//					}
+	//					else {
+	//						openSet.insert(newMapNode);
+	//					}
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
+
+	//return std::vector<MapNode*>();
+
 }
 
 void PathFinding::LoadAI(const MapNode& enemyPos, const MapNode& playerPos)
 {
-
-	// A*アルゴリズムで経路探索を行い、経路上のノードのポインタ配列を取得
-	path_ = GetAstar(enemyPos, playerPos);
-
+    DeleteRoute(); // 既存経路を必ず消す
+    path_ = GetAstar(enemyPos, playerPos);
+    //if (!path_.empty()) {
+    //    // 最初のノードは現在地なので、次のノードをnext_にセット
+    //    if (path_.size() > 1) {
+    //        next_ = *path_[1];
+    //    } else {
+    //        next_ = *path_[0];
+    //    }
+    //}
 }
 
 void PathFinding::ResetRoute(const MapNode& enemyPos, const MapNode& playerPos)
@@ -167,7 +304,8 @@ void PathFinding::DeleteRoute()
 	while (!path_.empty()) {
 		// 経路から最初のノードを削除
 		path_.erase(path_.begin());
-	}
+    }
+    path_.clear();
 }
 
 // マップの境界・障害物チェック
@@ -197,4 +335,21 @@ int32_t PathFinding::ManhattanDistanceWithDiagonal(const MapNode& a, const MapNo
 		return std::abs(b.x - a.x);
 	}
 	return std::abs(b.y - a.y);
+}
+
+Vector3 PathFinding::GetMoveDirection()
+{
+	// 経路が存在しない場合、ゼロベクトルを返す
+	if (path_.empty()) {
+		return Vector3(0.0f, 0.0f, 0.0f);
+	}
+
+	// 現在のノードと次のノードのワールド座標を計算
+	Vector3 currentWorldPos = Vector3(static_cast<float>(now.x) * 2.0f, static_cast<float>(now.y) * 2.0f, 0.0f);
+	Vector3 nextWorldPos = Vector3(static_cast<float>(next_.x) * 2.0f, static_cast<float>(next_.y) * 2.0f, 0.0f);
+	// 移動方向を計算
+	Vector3 moveDir = Vector3::Normalize(nextWorldPos - currentWorldPos);
+
+	return moveDir;
+
 }

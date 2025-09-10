@@ -13,10 +13,10 @@ void PatrolState::Init(IEnemy* enemy)
 	
 	// ビヘイビアツリーの構築
 
-	// プレイヤーが10.0f以内にいない場合、待機状態へ移行
+	// プレイヤーが12.0f以内にいない場合、待機状態へ移行
 	std::unique_ptr<IBehavior> idleDecrator = std::make_unique<Decorator>(
 		enemy_,
-		[this]() { return this->enemy_->IsPlayerOutOfRange(10.0f); }
+		[this]() { return this->enemy_->IsPlayerOutOfRange(12.0f); }
 	);
 
 	// 待機状態への処理
@@ -26,10 +26,10 @@ void PatrolState::Init(IEnemy* enemy)
 	);
 	idleDecrator->SetChild(std::move(idleAction));
 
-	// プレイヤーが5.0f以内にいる場合、追跡状態に移行
+	// プレイヤーが10.0f以内にいる場合、追跡状態に移行
 	std::unique_ptr<IBehavior> chaseDecrator = std::make_unique<Decorator>(
 		enemy_,
-		[this]() { return this->enemy_->IsPlayerInRange(5.0f); }
+		[this]() { return this->enemy_->IsPlayerInRange(10.0f); }
 	);
 	// 追跡状態への処理
 	std::unique_ptr<IBehavior> chaseAction = std::make_unique<Action>(

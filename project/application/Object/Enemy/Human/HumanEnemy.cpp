@@ -10,7 +10,7 @@ void HumanEnemy::Init(std::vector<Model*> models, Player* player, FloorManager* 
 
 	// ワールド座標
 	world_.Init();
-	world_.transform.translate = Vector3(20.0f, 5.0f, 0.0f);
+	world_.transform.translate = Vector3(18.0f, 1.0f, 0.0f);
 	world_.Update();// 一度更新しておく
 
 	// アニメーション
