@@ -92,9 +92,9 @@ void Player::Update() {
 	animation_->PlayAnimation();
 
 #pragma region
-	ImGui::Begin("Player");
+	/*ImGui::Begin("Player");
 	ImGui::DragFloat3("TexPos", &world_.transform.translate.x);
-	ImGui::End();
+	ImGui::End();*/
 #pragma endregion
 
 	// ���W�X�V

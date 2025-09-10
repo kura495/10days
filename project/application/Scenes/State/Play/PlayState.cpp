@@ -55,7 +55,13 @@ void PlayState::Update()
 
 	// 撃破カウント
 	int32_t count = enemyManager_->GetDefeatCount();
-	count;
+	if (count > 40) {
+		// クリア
+		if (StateNo != GameStateNo::CLEAR) {
+			StateNo = GameStateNo::CLEAR;
+		}
+	}
+	
 
 	// コリジョンマネージャー 更新
 	collisionManager->Update();

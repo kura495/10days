@@ -10,6 +10,8 @@ void EnemyManager::Init(Player* player, FloorManager* floorManager)
 	enemyModel_.push_back(Model::CreateModelFromObj("project/resources/Player", "player.gltf"));
 	enemyModel_.push_back(Model::CreateModelFromObj("project/resources/Weapon", "Weapon.obj"));
 
+	// 撃破カウント
+	defeatCount_ = 0;
 
 }
 
@@ -20,18 +22,22 @@ void EnemyManager::Update() {
 	if (enemyCreateTimer_ >= kEnemyCreateInterval_) {
 
 		// 一定数以上の敵キャラがいる場合は生成しない
-		if (enemies_.size() >= 15) {
+		if (enemies_.size() >= 30) {
 			enemyCreateTimer_ = 0.0f;
 			return;
 		}
 
 		// マップの障害物のないマスにランダムに生成
 		Vector3 pos = floorManager_->GetRandomPosInMap();
+		pos.z = 0.0f;
+
 
 		// 敵キャラ生成
-		enemies_.push_back(new HumanEnemy());
-		enemies_.back()->Init(pos, enemyModel_, player_, floorManager_);
+		IEnemy* enemy = new HumanEnemy();
+		enemy->Init(pos, enemyModel_, player_, floorManager_);
+		enemies_.push_back(enemy);
 		enemyCreateTimer_ = 0.0f;
+
 	}
 
 
@@ -44,6 +50,9 @@ void EnemyManager::Update() {
 		if ((*it)->IsAlive() == false) {
 			delete* it;
 			it = enemies_.erase(it);
+
+			// 撃破カウントを増やす
+			++defeatCount_;
 		}
 		else {
 			++it;

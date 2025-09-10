@@ -29,7 +29,7 @@ private:
 	std::vector<Model*> enemyModel_;
 
 	// エネミー生成インターバル
-	const float kEnemyCreateInterval_ = 2.0f;
+	const float kEnemyCreateInterval_ = 1.0f;
 	float enemyCreateTimer_ = 0.0f;
 
 	Player* player_;

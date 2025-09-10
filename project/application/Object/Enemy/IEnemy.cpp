@@ -108,6 +108,14 @@ void IEnemy::OnCollision(const ICollider& ICollider)
 		world_.Update();
 		
 	}
+
+	if( ICollider.GetcollitionAttribute() == Collider::Tag::Weapon) {
+		// 死亡フラグを立てる
+		isAlive_ = false;
+		// コントローラー振動
+		Input::VibrateController(VIBRATION_MAX, VIBRATION_MIN, vibValue);
+	}
+
 	return;
 }
 

@@ -48,23 +48,23 @@ void TitleState::Update()
 
 	}
 
-	if (Input::GetPadPrecede(XINPUT_GAMEPAD_B, 10)) {
-		//ifの条件は後で変える
-		if (StateNo != GameStateNo::GAMEOVER) {
-			StateNo = GameStateNo::GAMEOVER;
-		}
-	}
+	//if (Input::GetPadPrecede(XINPUT_GAMEPAD_B, 10)) {
+	//	//ifの条件は後で変える
+	//	if (StateNo != GameStateNo::GAMEOVER) {
+	//		StateNo = GameStateNo::GAMEOVER;
+	//	}
+	//}
 
-	if (Input::GetPadPrecede(XINPUT_GAMEPAD_X, 10)) {
-		//ifの条件は後で変える
-		if (!instructionsScene) {
-			instructionsScene = true;
-		}
-		else
-		{
-			instructionsScene = false;
-		}
-	}
+	//if (Input::GetPadPrecede(XINPUT_GAMEPAD_X, 10)) {
+	//	//ifの条件は後で変える
+	//	if (!instructionsScene) {
+	//		instructionsScene = true;
+	//	}
+	//	else
+	//	{
+	//		instructionsScene = false;
+	//	}
+	//}
 
 
 
