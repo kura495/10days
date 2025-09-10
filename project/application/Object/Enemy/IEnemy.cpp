@@ -2,7 +2,7 @@
 #include "Player/Player.h"
 #include "MapObject/FloorManager.h"
 
-void IEnemy::Init(std::vector<Model*> models, Player* player, FloorManager* floorManager )
+void IEnemy::Init(Vector3 pos, std::vector<Model*> models, Player* player, FloorManager* floorManager)
 {
 	// モデル配列を取得
 	models_ = models;
@@ -11,7 +11,7 @@ void IEnemy::Init(std::vector<Model*> models, Player* player, FloorManager* floo
 
 	// ワールド座標
 	world_.Init();
-	world_.transform.translate = Vector3(5.0f, 3.0f, 0.0f);
+	world_.transform.translate = pos;
 	world_.Update();// 一度更新しておく
 
 	// アニメーション

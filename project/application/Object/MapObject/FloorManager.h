@@ -15,6 +15,9 @@ public:
 	// 床の行列(マップチップ)取得
 	const std::array<std::array<int32_t, 20>, 10>& GetFloorMatrix() { return floorMatrix_; }
 	
+	// マップ上のランダムな位置を取得
+	Vector3 GetRandomPosInMap();
+
 
 protected:
 

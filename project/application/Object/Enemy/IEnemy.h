@@ -14,6 +14,7 @@
 class Player;
 class FloorManager;
 
+using namespace Math;
 
 // -- 敵キャラ 基底クラス -- //
 class IEnemy {
@@ -27,7 +28,7 @@ public:
 
 
 	// 初期化
-	virtual void Init(std::vector<Model*> models,Player* player,FloorManager* floorManager);
+	virtual void Init(Vector3 pos,std::vector<Model*> models,Player* player,FloorManager* floorManager);
 	
 
 	// 更新
@@ -94,6 +95,13 @@ public:
 	bool IsPlayerOutOfRange(float range);
 
 
+	// -- 生存関係 -- //
+	// 生存フラグの取得
+	bool IsAlive() { return isAlive_; }
+	// 生存フラグの設定
+	void SetAlive(bool isAlive) { isAlive_ = isAlive; }
+
+
 protected:
 
 	// プレイヤーのポインタ
@@ -145,5 +153,8 @@ protected:
 
 	// -- 行動制御 -- //
 	std::unique_ptr<EnemyAI> enemyAI_;
+
+	// 生存フラグ
+	bool isAlive_ = true;
 
 };

@@ -47,3 +47,19 @@ void FloorManager::Draw()
 		floor->Draw();
 	}
 }
+
+Vector3 FloorManager::GetRandomPosInMap()
+{
+	// マップ上のランダムな位置を取得
+	// 障害物のないマスをランダムに選ぶ
+	while (1)
+	{
+		int32_t x = rand() % floorMatrix_[0].size();
+		int32_t y = rand() % floorMatrix_.size();
+		if (floorMatrix_[y][x] == 0) {
+			return Vector3((float)x * 2.0f, 0.0f, (float)(floorMatrix_.size() - y) * 2.0f);
+		}
+	}
+
+	return Vector3();
+}

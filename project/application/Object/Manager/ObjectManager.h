@@ -10,7 +10,7 @@ public:
 
 private:
 
-	std::unique_ptr<Enemy_Bee>enemy_Bee;
+	//std::unique_ptr<Enemy_Bee>enemy_Bee;
 
 	std::unique_ptr<Player>player_;
 };
