@@ -12,6 +12,8 @@
 #include "Enemy/AI/EnemyAI.h"
 
 class Player;
+class FloorManager;
+
 
 // -- 敵キャラ 基底クラス -- //
 class IEnemy {
@@ -25,7 +27,7 @@ public:
 
 
 	// 初期化
-	virtual void Init(std::vector<Model*> models,Player* player);
+	virtual void Init(std::vector<Model*> models,Player* player,FloorManager* floorManager);
 	
 
 	// 更新
@@ -49,6 +51,8 @@ public:
 	// -- 座標関係 -- // 
 
 	WorldTransform& GetWorld() { return world_; };
+	Vector3 GetPos() { return this->GetWorld().transform.translate; };
+	Vector3 GetPlayerPos();
 
 	// コライダー 初期化
 	virtual void ColliderInit();
@@ -64,17 +68,7 @@ public:
 	// -- 行動制御(共通の制御関数) -- //
 
 	// 外部(主Behavior)から行動を指定する
-	void SetAction(Action::Name actionName) {
-		switch (actionName)
-		{
-		case Action::MOVE:
-			break;
-		case Action::JUMP:
-			break;
-		default:
-			break;
-		}
-	}
+	void SetAction(Action::Name actionName);
 
 	// Behaviorの実行状況を返す
 	IBehavior::State GetBehaviorState() { return enemyAI_->GetBehaviorState(); }

@@ -9,16 +9,38 @@ void PatrolState::Init(IEnemy* enemy)
     state_ = PATROL;
 
 	// ルートノードの初期化
-	rootNode_ = std::make_unique<Sequence>();
+	rootNode_ = std::make_unique<Selector>();
+	
 	// ビヘイビアツリーの構築
 
-	// 待機状態は、移動や攻撃を行わずに条件関数のみを実行し、状況に応じて他の状態に遷移する(主に巡回)
-	// Conditionノード内に条件用のメンバ関数ポインタを渡す
-	std::unique_ptr<IBehavior> moveAction = std::make_unique<Condition>(
+	// プレイヤーが10.0f以内にいない場合、待機状態へ移行
+	std::unique_ptr<IBehavior> idleDecrator = std::make_unique<Decorator>(
 		enemy_,
-		[this]() { return this->enemy_->IsPlayerOutOfRange(5.1f); }
+		[this]() { return this->enemy_->IsPlayerOutOfRange(10.0f); }
 	);
-	rootNode_->SetChild(std::move(moveAction));
+
+	// 待機状態への処理
+	std::unique_ptr<IBehavior> idleAction = std::make_unique<Action>(
+		enemy_,
+		Action::kIDLE
+	);
+	idleDecrator->SetChild(std::move(idleAction));
+
+	// プレイヤーが5.0f以内にいる場合、追跡状態に移行
+	std::unique_ptr<IBehavior> chaseDecrator = std::make_unique<Decorator>(
+		enemy_,
+		[this]() { return this->enemy_->IsPlayerInRange(5.0f); }
+	);
+	// 追跡状態への処理
+	std::unique_ptr<IBehavior> chaseAction = std::make_unique<Action>(
+		enemy_,
+		Action::kCHASE
+	);
+	chaseDecrator->SetChild(std::move(chaseAction));
+
+	// セット
+	rootNode_->SetChild(std::move(idleDecrator));
+	rootNode_->SetChild(std::move(chaseDecrator));
 }
 
 IBehavior::State PatrolState::Update()
@@ -29,12 +51,6 @@ IBehavior::State PatrolState::Update()
 
 	// ビヘイビアツリーの実行結果が成功か失敗だったら( ≒ 実行中ではない場合)
 	if (result != IBehavior::State::RUNNING) {
-
-		// 成功していたら( ≒ 条件を満たしていたら)
-		if (result == IBehavior::State::SUCCESS) {
-			isStateChengeRequest_ = true;
-			nextState_ = IDLE;
-		}
 
 		// ビヘイビアツリーをリセット
 		rootNode_->Reset();

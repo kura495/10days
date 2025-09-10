@@ -1,7 +1,8 @@
 #include "IEnemy.h"
 #include "Player/Player.h"
+#include "MapObject/FloorManager.h"
 
-void IEnemy::Init(std::vector<Model*> models, Player* player)
+void IEnemy::Init(std::vector<Model*> models, Player* player, FloorManager* floorManager )
 {
 	// モデル配列を取得
 	models_ = models;
@@ -25,7 +26,7 @@ void IEnemy::Init(std::vector<Model*> models, Player* player)
 
 	// 行動制御
 	enemyAI_ = std::make_unique<EnemyAI>();
-	enemyAI_->Init(this);
+	enemyAI_->Init(this, floorManager);
 
 }
 
@@ -51,6 +52,11 @@ bool IEnemy::IsPlayerOutOfRange(float range)
 
 	// いない場合はfalseを返す
 	return false;
+}
+
+Vector3 IEnemy::GetPlayerPos()
+{
+	return player_->GetWorld().transform.translate;
 }
 
 void IEnemy::ColliderInit()
@@ -162,5 +168,50 @@ void IEnemy::AttackOnCollision(const ICollider& collider)
 		//PlayPhase::HitStop(hitStopValue);
 		//コントローラー振動
 		Input::VibrateController(VIBRATION_MAX, VIBRATION_MIN, vibValue);
+	}
+}
+
+void IEnemy::SetAction(Action::Name actionName)
+{
+	switch (actionName)
+	{
+	case Action::MOVE:
+		break;
+	case Action::JUMP:
+		break;
+	case Action::SHOT:
+		break;
+	case Action::kIDLE:
+
+		// 待機状態への変更リクエストを送る
+		enemyAI_->GetCurrentStatePtr()->SetStateChengeRequest(IEnemyState::State::IDLE);
+
+		break;
+	case Action::kPATROL:
+
+		// 巡回状態への変更リクエストを送る
+		enemyAI_->GetCurrentStatePtr()->SetStateChengeRequest(IEnemyState::State::PATROL);
+
+		break;
+	case Action::kCHASE:
+
+		// 追跡状態への変更リクエストを送る
+		enemyAI_->GetCurrentStatePtr()->SetStateChengeRequest(IEnemyState::State::CHASE);
+
+		break;
+	case Action::kATTACK:
+
+		// 攻撃状態への変更リクエストを送る
+		enemyAI_->GetCurrentStatePtr()->SetStateChengeRequest(IEnemyState::State::ATTACK);
+
+		break;
+	case Action::kDEAD:
+
+		// 死亡状態への変更リクエストを送る
+		enemyAI_->GetCurrentStatePtr()->SetStateChengeRequest(IEnemyState::State::DEAD);
+
+		break;
+	default:
+		break;
 	}
 }

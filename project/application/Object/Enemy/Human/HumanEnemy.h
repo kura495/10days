@@ -8,7 +8,7 @@ class HumanEnemy : public IEnemy
 public:
 
 	// 初期化
-	void Init(std::vector<Model*> models, Player* player)override;
+	void Init(std::vector<Model*> models, Player* player,FloorManager* floorManager)override;
 	// 更新
 	void Update()override;
 };

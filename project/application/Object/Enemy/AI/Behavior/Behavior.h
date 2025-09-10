@@ -205,8 +205,14 @@ public:
 	enum Name {
 		MOVE,
 		JUMP,
-		ATTACK,
+		SHOT,
 
+		// 状態遷移用
+		kIDLE,
+		kPATROL,
+		kCHASE,
+		kATTACK,
+		kDEAD
 	};
 
 	// コンストラクタ
@@ -314,8 +320,9 @@ public:
 			// 条件関数を実行したことを記録する
 			isConditionChecked_ = true;
 		}
+		
 		// 条件を満たしていなければ失敗を返す
-		else if(!isConditionMet_){
+		if(!isConditionMet_){
 			state_ = State::FAILURE;
 		}
 		// 条件を満たしていれば子ノードの処理を実行する

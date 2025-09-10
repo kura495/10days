@@ -10,7 +10,7 @@ void IdleState::Init(IEnemy* enemy)
 	state_ = IDLE;
 
 	// ルートノードの初期化
-	rootNode_ = std::make_unique<Sequence>();
+	rootNode_ = std::make_unique<Selector>();
 	// ビヘイビアツリーの構築
 
 	// 待機状態は、移動や攻撃を行わずに条件関数のみを実行し、状況に応じて他の状態に遷移する(主に巡回)

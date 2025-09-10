@@ -30,7 +30,11 @@ public:
 	bool GetIsStateChengeRequest() const { return  isStateChengeRequest_; }
 	// 遷移先を取得
 	State GetNextState() const { return nextState_; }
-
+	// 外部からリクエストを送る
+	void SetStateChengeRequest(State nextState) {
+		isStateChengeRequest_ = true;
+		nextState_ = nextState;
+	}
 
 protected: 
 	
@@ -47,7 +51,7 @@ protected:
 	// -- 個別行動制御 -- //
 
 	// ルートノード
-	std::unique_ptr<Sequence> rootNode_;
+	std::unique_ptr<Selector> rootNode_;
 
 
 };

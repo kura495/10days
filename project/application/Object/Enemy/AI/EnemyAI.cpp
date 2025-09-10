@@ -1,7 +1,8 @@
 #include "EnemyAI.h"
 #include "Enemy/IEnemy.h"
+#include "MapObject/FloorManager.h"
 
-void EnemyAI::Init(IEnemy* enemy) {
+void EnemyAI::Init(IEnemy* enemy, FloorManager* floorManager) {
 
 	// 敵キャラのポインタを保存
 	enemy_ = enemy;
@@ -14,12 +15,20 @@ void EnemyAI::Init(IEnemy* enemy) {
 	behaviorState_ = IBehavior::State::READY;
 
 
+	// 経路探索クラスの初期化
+	pathFinding_ = std::make_unique<PathFinding>();
+	pathFinding_->Init(enemy_, floorManager);
+
 }
 
 void EnemyAI::Update() {
 
+	// 経路探索クラスの更新
+	pathFinding_->Update();
+
 	// 現在の状態を更新
 	currentState_->Update();
+
 
 	// 状態遷移
 	// Statte Patternを用いて状態遷移を管理

@@ -1,6 +1,7 @@
 #include "HumanEnemy.h"
+#include "MapObject/FloorManager.h"
 
-void HumanEnemy::Init(std::vector<Model*> models, Player* player)
+void HumanEnemy::Init(std::vector<Model*> models, Player* player, FloorManager* floorManager)
 {
 	// モデル配列を取得
 	models_ = models;
@@ -24,7 +25,7 @@ void HumanEnemy::Init(std::vector<Model*> models, Player* player)
 
 	// 行動制御
 	enemyAI_ = std::make_unique<EnemyAI>();
-	enemyAI_->Init(this);
+	enemyAI_->Init(this, floorManager);
 
 }
 

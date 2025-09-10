@@ -603,6 +603,7 @@
     <ClCompile Include="project\application\Object\Enemy\IEnemy.cpp" />
     <ClCompile Include="project\application\Object\Manager\ObjectManager.cpp" />
     <ClCompile Include="project\application\Object\Player\Player.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\AI\PathFinding\PathFinding.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="project\application\Object\Camera\FollowCamera.h">
@@ -1120,6 +1121,7 @@
     <ClInclude Include="project\application\Object\Enemy\AI\State\Attack\AttackState.h" />
     <ClInclude Include="project\application\Object\Enemy\AI\Behavior\Behavior.h" />
     <ClInclude Include="project\application\Object\Manager\ObjectManager.h" />
+    <ClInclude Include="project\application\Object\Enemy\AI\PathFinding\PathFinding.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\hlsl\Object3d.hlsli">
