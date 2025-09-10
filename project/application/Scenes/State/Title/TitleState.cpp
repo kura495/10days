@@ -23,7 +23,11 @@ void TitleState::Init()
 	texture->TextureHandle = TextureManager::GetInstance()->LoadTexture("project/resources/TitleTuto.png");
 	texture->Init({ 0.0f,0.0f }, { 0.0f,720.0f }, { 1280.0f,0.0f }, { 1280.0f,720.0f });
 
-	
+	instructions = std::make_unique<Sprite>();
+	instructions->TextureHandle = TextureManager::GetInstance()->LoadTexture("project/resources/instructions.png");
+	instructions->Init({ 0.0f,0.0f }, { 0.0f,720.0f }, { 1280.0f,0.0f }, { 1280.0f,720.0f });
+
+	instructionsScene = false;
 }
 
 void TitleState::Update()
@@ -46,12 +50,30 @@ void TitleState::Update()
 		}
 	}
 
-#else
-	if (Input::GetPadPrecede(XINPUT_GAMEPAD_B, 10)) {
+	if (Input::GetPadPrecede(XINPUT_GAMEPAD_X, 10)) {
 		//ifの条件は後で変える
-		if (StateNo != GameStateNo::PLAY) {
-			StateNo = GameStateNo::PLAY;
+		if (!instructionsScene) {
+			instructionsScene = true;
 		}
+		else
+		{
+			instructionsScene = false;
+		}
+	}
+
+
+
+#else
+
+	if (Input::GetPadPrecede(XINPUT_GAMEPAD_A, 10)) {
+		//ifの条件は後で変える
+		if (StateNo != GameStateNo::PLAY&& instructionsScene) {
+			StateNo = GameStateNo::PLAY;
+			
+		}else if(!instructionsScene) {
+			instructionsScene = true;
+		}
+
 	}
 
 
@@ -64,8 +86,14 @@ void TitleState::Update()
 
 void TitleState::Draw()
 {
+	if (!instructionsScene) {
 
-	titleSprite->RendererDraw(title);
-	texture->RendererDraw(title);
+		titleSprite->RendererDraw(title);
+		texture->RendererDraw(title);
+	}
+	else {
+		instructions->RendererDraw(title);
+	}
+	
 	skydome_->RendererDraw(title);
 }

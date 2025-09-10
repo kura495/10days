@@ -22,7 +22,10 @@ private:
 	WorldTransform title;
 
 	std::unique_ptr<Sprite>texture;
+	std::unique_ptr<Sprite>instructions;
 
 	Model* skydome_ = nullptr;
+
+	bool instructionsScene = false;
 
 };
