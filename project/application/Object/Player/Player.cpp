@@ -59,9 +59,7 @@ void Player::Update() {
 
 	// �W�����v
 	if (Input::GetInstance()->pushPad(XINPUT_GAMEPAD_B)) {
-		move_.y += 1.0f;
-	} else {
-		//move_.y = 0.0f; // �W�����v���͂��Ȃ����Y��������Z�b�g
+		move_.y += 3.0f;
 	}
 
 	//�d�͂������
@@ -197,6 +195,7 @@ void Player::FixTranslate(Vector3 colliderPos, Vector3 HitcolliderSize)
 			if (world_.transform.translate.x - colliderSize.x < colliderPos.x + HitcolliderSize.x) {
 				world_.transform.translate.x = colliderPos.x + HitcolliderSize.x + colliderSize.x;
 				//ImGui::Text("Left");
+
 				return;
 			}
 		}
