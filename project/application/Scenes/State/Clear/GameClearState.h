@@ -19,5 +19,12 @@ private:
 	TextureManager* textureManager_;
 	std::unique_ptr<Sprite> clearSprite;
 	WorldTransform clear;
-	
+	Model* skydome_ = nullptr;
+
+
+	std::unique_ptr<Sprite> stressBar;
+	float nowStress = 0;
+	std::unique_ptr<Sprite> maxStressBar;
+	std::unique_ptr<Sprite> stressMeter;
+	float MaxStress = 500;
 };
