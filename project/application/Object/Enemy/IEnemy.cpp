@@ -103,39 +103,10 @@ void IEnemy::OnCollision(const ICollider& ICollider)
 {
 	if (ICollider.GetcollitionAttribute() == Collider::Tag::Floor) {
 
-		// 敵キャラとブロックの差分を取得
-		Vector3 diff = world_.transform.translate - ICollider.GetCenter();
-		// 敵キャラとブロックの衝突方向を取得
-		Vector3 direction = Vector3::Normalize(diff);
-		// 敵キャラがブロックの上にいるかどうかを判定
-		bool isAbove = direction.y > 0.5f;
-		// 敵キャラがブロックの下にいるかどうかを判定
-		bool isBelow = direction.y < -0.5f;
-		// 敵キャラがブロックの左にいるかどうかを判定
-		bool isLeft = direction.x < -0.5f;
-		// 敵キャラがブロックの右にいるかどうかを判定
-		bool isRight = direction.x > 0.5f;
-		// 下方向への押し出し
-		if (isBelow) {
-			world_.transform.translate.y = -(colliders_[ColliderType::eCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f);
-		}
-		// 上方向への押し出し
-		if (isAbove) {
-			world_.transform.translate.y = colliders_[ColliderType::eCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f;
-		}
-		// 左方向への押し出し
-		if (isLeft) {
-			world_.transform.translate.x -= colliders_[ColliderType::eCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f;
-		}
-		// 右方向への押し出し
-		if (isRight) {
-			world_.transform.translate.x += colliders_[ColliderType::eCollider].GetSize().y / 2.0f + ICollider.GetSize().y / 2.0f;
-		}
-
+		FixTranslate(ICollider.GetCenter(), ICollider.GetSize());
 
 		world_.Update();
-		gravity_ = kGravity;
-		isOnFloorFlag_ = true;
+		
 	}
 	return;
 }
@@ -237,4 +208,60 @@ void IEnemy::SetAction(Action::Name actionName)
 	default:
 		break;
 	}
+}
+
+
+void IEnemy::FixTranslate(Vector3 colliderPos, Vector3 HitcolliderSize)
+{
+#pragma region
+	if (tlanslatePre.x - colliderSize.x + colliderOffset.x < colliderPos.x + HitcolliderSize.x && tlanslatePre.x + colliderSize.x + colliderOffset.x > colliderPos.x - HitcolliderSize.x) {
+
+		if (tlanslatePre.y >= colliderPos.y + HitcolliderSize.y) {
+			//上から下
+			if (world_.transform.translate.y - colliderSize.y < colliderPos.y + HitcolliderSize.y) {
+				world_.transform.translate.y = colliderPos.y + HitcolliderSize.y;
+
+			}
+		}
+
+		if (tlanslatePre.y < colliderPos.y - HitcolliderSize.y) {
+			//下から上
+			if (world_.transform.translate.y + colliderSize.y > colliderPos.y - HitcolliderSize.y) {
+				float hogehoge = (colliderPos.y - HitcolliderSize.y) - (world_.transform.translate.y - colliderSize.y);
+
+				//if (saveTrans.x > world_.transform.translate.y) {
+				//	//yの位置を保存
+				//	saveTrans.x = world_.transform.translate.y;
+				//	//引いた値を元に戻す
+				//	world_.transform.translate.y += saveTrans.y;
+				//	saveTrans.y = hogehoge;
+				//}
+				//world_.transform.translate.y -= colliderPos.y - HitcolliderSize.y;
+				world_.transform.translate.y -= hogehoge;
+
+
+				gravity_ = kMaxGravity;
+
+				return;
+			}
+		}
+	}
+
+	if (tlanslatePre.y - colliderSize.y + colliderOffset.y < colliderPos.y + HitcolliderSize.y && tlanslatePre.y + colliderSize.y + colliderOffset.y > colliderPos.y - HitcolliderSize.y) {
+		if (tlanslatePre.x > colliderPos.x + colliderSize.x) {
+			//左から右
+			if (world_.transform.translate.x - colliderSize.x < colliderPos.x + HitcolliderSize.x) {
+				world_.transform.translate.x = colliderPos.x + HitcolliderSize.x + colliderSize.x;
+			}
+		}
+		if (tlanslatePre.x < colliderPos.x - HitcolliderSize.x) {
+			//右から左
+			if (world_.transform.translate.x + colliderSize.x > colliderPos.x - HitcolliderSize.x) {
+				world_.transform.translate.x = colliderPos.x - HitcolliderSize.x - colliderSize.x;
+			}
+		}
+	}
+
+
+#pragma endregion 移動制御
 }

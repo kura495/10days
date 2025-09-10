@@ -65,6 +65,8 @@ public:
 	virtual void AttackColliderInit();
 	virtual void AttackOnCollision(const ICollider& collider);
 
+	void FixTranslate(Vector3 colliderPos, Vector3 HitcolliderSize);
+
 	// -- 行動制御(共通の制御関数) -- //
 
 	// 外部(主Behavior)から行動を指定する
@@ -134,6 +136,8 @@ protected:
 	Vector3 attackColliderOffset = { 0.0f,0.5f,1.0f };
 	float hitStopValue = 0.2f;
 	float vibValue = 0.2f;
+
+	Vector3 tlanslatePre;
 
 	// -- 行動制御 -- //
 	std::unique_ptr<EnemyAI> enemyAI_;

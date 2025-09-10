@@ -28,7 +28,9 @@ public:
 	IEnemyState::State GetCurrentState() { return currentState_->GetState(); }
 	
 	// 現在の状態のポインタを取得
-	IEnemyState* GetCurrentStatePtr() { return currentState_.get(); }
+	IEnemyState* GetCurrentStatePtr() { 
+		return currentState_.get(); 
+	}
 	// 現在のビヘイビアツリーの状態を取得
 	IBehavior::State GetBehaviorState()const { return this->behaviorState_; }
 	// 経路探索クラスのポインタを取得
