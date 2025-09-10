@@ -31,6 +31,8 @@ void HumanEnemy::Init(std::vector<Model*> models, Player* player, FloorManager* 
 
 void HumanEnemy::Update()
 {
+	tlanslatePre = world_.transform.translate;
+
 	// 行動制御
 	enemyAI_->Update();
 

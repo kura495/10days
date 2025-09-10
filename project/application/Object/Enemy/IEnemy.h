@@ -32,6 +32,10 @@ public:
 
 	// 更新
 	virtual void Update() {
+
+		// 以前の座標を保存
+		tlanslatePre = world_.transform.translate;
+
 		// アニメーション 更新
 		animation_->PlayAnimation();
 		// 座標更新
