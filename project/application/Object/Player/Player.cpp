@@ -185,21 +185,14 @@ void Player::FixTranslate(Vector3 colliderPos, Vector3 HitcolliderSize)
 			//上から下
 			if (world_.transform.translate.y - colliderSize.y < colliderPos.y + HitcolliderSize.y) {
 				world_.transform.translate.y = colliderPos.y + HitcolliderSize.y;
-
 			}
 		}
 
 		if (tlanslatePre.y <= colliderPos.y - HitcolliderSize.y) {
 			//下から上
-			if (world_.transform.translate.y + colliderSize.y > colliderPos.y - HitcolliderSize.y) {
-				float hogehoge = (colliderPos.y - HitcolliderSize.y) - ((colliderSize.y) + (colliderOffset.y / 2))/*- (world_.transform.translate.y - colliderSize.y) + (colliderOffset.y)*/;
+			if (world_.transform.translate.y + colliderSize.y + colliderOffset.y > colliderPos.y - HitcolliderSize.y) {
 
-				world_.transform.translate.y = hogehoge;
-
-
-				gravity_ = kMaxGravity;
-
-				return;
+				world_.transform.translate.y = colliderPos.y - HitcolliderSize.y - (colliderOffset.y * 2);
 			}
 		}
 	}
@@ -218,7 +211,5 @@ void Player::FixTranslate(Vector3 colliderPos, Vector3 HitcolliderSize)
 			}
 		}
 	}
-
-
 #pragma endregion 移動制御
 }
