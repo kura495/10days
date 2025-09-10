@@ -61,10 +61,24 @@ void Player::Update() {
 		gravity_ += 0.7f - (0.05f * jumpLimit);
 		jumpLimit += 1;
 	}
-
-	if (Input::GetInstance()->pushPad(XINPUT_GAMEPAD_A)) {
+#pragma region 
+	if (Input::GetInstance()->pushPad(XINPUT_GAMEPAD_A) && coolTime_ > kMaxCoolTime_) {
 		//攻撃処理を挟む
+		colliders_[ColliderType::Attack].IsUsing = true;
+		isAttackFlag_ = true;
+		//コライダーの大きさ設定
+		colliders_[ColliderType::Attack].SetSize({ 2.0f + (3.0f * stressMater),2.0f + (3.0f * stressMater),1.0f});
+		coolTime_ = 0;
 	}
+	//攻撃後かつクールタイムが半分以上で攻撃をリセット
+	if (isAttackFlag_ && coolTime_ > 0.5f) {
+		colliders_[ColliderType::Attack].IsUsing = false;
+		isAttackFlag_ = false;
+	}
+
+	//クールタイムの回復
+	coolTime_ += kDeltaTime;
+#pragma endregion 攻撃
 
 	//落下している処理
 	gravity_ = (std::max)(gravity_ - kGravity, kMaxGravity);
@@ -95,6 +109,7 @@ void Player::Draw() {
 
 	// コライダーの描画
 	colliders_[ColliderType::pCollider].CollisionDraw();
+	colliders_[ColliderType::Attack].CollisionDraw();
 
 }
 
@@ -135,7 +150,7 @@ void Player::AttackColliderInit()
 {
 	attackColliderWorld_.SetParent(&world_);
 	colliders_[ColliderType::Attack].Init(&attackColliderWorld_);
-	colliders_[ColliderType::Attack].SetSize({ 1.0f,1.0f,1.0f });
+	colliders_[ColliderType::Attack].SetSize({ 2.0f,2.0f,2.0f });
 	colliders_[ColliderType::Attack].SetOffset(attackColliderOffset);
 	colliders_[ColliderType::Attack].OnCollision = [this](ICollider& collider) { AttackOnCollision(collider); };
 	colliders_[ColliderType::Attack].SetcollitionAttribute(Collider::Tag::Weapon);
@@ -145,40 +160,7 @@ void Player::AttackColliderInit()
 }
 void Player::AttackOnCollision(const ICollider& collider)
 {
-	if (collider.GetcollitionAttribute() == Collider::Tag::EnemyCore) {
-		colliders_[ColliderType::Attack].IsUsing = false;
-		////パーティクル用のベクトル
-		//attackVector = TransformNormal({ 0.0f,0.0f,1.0f }, Matrix4x4(MakeRotateMatrix(world_.transform.quaternion)));
-		//attackVector.Normalize();
-		//attackVector *= -1;
-		////パーティクル生成
-		//AttackHitParticleEmitter.world_.transform.translate = attackColliderWorld_.transform.translate + world_.transform.translate;
-		//AttackHitParticleEmitter.world_.transform.translate.y += 1.0f;
-		//attackHitParticle_->SpawnParticle(AttackHitParticleEmitter);
-		////音関連
-		//Audio::Stop(SEattack, true, false);
-		//Audio::Play(SEHitattack, 1.0f);
-		////ヒットストップ
-		//PlayPhase::HitStop(hitStopValue);
-		//コントローラー振動
-		Input::VibrateController(VIBRATION_MAX, VIBRATION_MIN, vibValue);
-	}
-	if (collider.GetcollitionAttribute() == Collider::Tag::EnemyBall) {
-		colliders_[ColliderType::Attack].IsUsing = false;
-		//パーティクル用のベクトル
-		//attackVector = TransformNormal({ 0.0f,0.0f,1.0f }, Matrix4x4(MakeRotateMatrix(world_.transform.quaternion)));
-		//attackVector.Normalize();
-		//attackVector *= -1;
-		////パーティクル生成
-		//AttackHitBombParticleEmitter.color = { 0.5f,0.5f,1.0f };
-		//AttackHitBombParticleEmitter.world_.transform.translate = attackColliderWorld_.transform.translate + world_.transform.translate;
-		//AttackHitBombParticleEmitter.world_.transform.translate.y += 1.0f;
-		//attackHitBombParticle_->SpawnParticle(AttackHitBombParticleEmitter);
-		////ヒットストップ
-		//PlayPhase::HitStop(hitStopValue);
-		//コントローラー振動
-		Input::VibrateController(VIBRATION_MAX, VIBRATION_MIN, vibValue);
-	}
+	collider;
 }
 
 void Player::FixTranslate(Vector3 colliderPos, Vector3 HitcolliderSize)

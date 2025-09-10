@@ -102,9 +102,14 @@ protected:
 
 	// -- システム -- //
 
+	bool isAttackFlag_ = false;
+	float coolTime_ = 0.0f;
+	float kMaxCoolTime_ = 1.0f;
 
 	// ストレスメーター
 
+	float stressMater = 0.0f;
+	float kMaxStressMater = 1.0f;
 
 	// スペース範囲
 	Model* spaceRangeModel_ = nullptr;
