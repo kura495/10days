@@ -11,6 +11,9 @@ void PlayState::Init()
 	collisionManager = std::make_unique<CollisionManager>();
 	collisionManager->Init();
 
+	// 床 初期化
+	floorManager_ = std::make_unique<FloorManager>();
+	floorManager_->Init();
 
 	// プレイヤー 初期化
 	playerModel_.push_back(Model::CreateModelFromObj("project/resources/Player", "player.gltf"));
@@ -18,21 +21,15 @@ void PlayState::Init()
 	player = std::make_unique<Player>();
 	player->Init(playerModel_);
 
-	enemyModel_.push_back(Model::CreateModelFromObj("project/resources/Player", "player.gltf"));
-	enemyModel_.push_back(Model::CreateModelFromObj("project/resources/Weapon", "Weapon.obj"));
-	enemy_ = std::make_unique<HumanEnemy>();
-	enemy_->Init(playerModel_,player.get());
+	
+	enemyManager_ = std::make_unique<EnemyManager>();
+	enemyManager_->Init(player.get(), floorManager_.get());
 
 	// フォローカメラ 初期化
 	followCamera = std::make_unique<FollowCamera>();
 	followCamera->Initialize();
 	followCamera->SetTarget(&player->GetWorld());
 	followCamera->SetOffset(Vector3(0.0f,0.0f,-30.0f));
-
-
-	// 床 初期化
-	floorManager_ = std::make_unique<FloorManager>();
-	floorManager_->Init();
 
 	// 背景(仮) 初期化
 	skydome_ = Model::CreateModelFromObj("project/resources/SkyDome", "SkyDome.obj");
@@ -53,8 +50,12 @@ void PlayState::Update()
 
 	backgroundWorld_.Update();
 	player->Update();
-	enemy_->Update();
+	enemyManager_->Update();
 	floorManager_->Update();
+
+	// 撃破カウント
+	int32_t count = enemyManager_->GetDefeatCount();
+	count;
 
 	// コリジョンマネージャー 更新
 	collisionManager->Update();
@@ -71,7 +72,7 @@ void PlayState::Draw()
 	player->Draw();
 	
 	// 敵キャラ 描画
-	enemy_->Draw();
+	enemyManager_->Draw();
 
 
 	// 床 描画

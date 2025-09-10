@@ -5,7 +5,7 @@
 #include "Editer/Editer.h"
 #include "Object/Camera/FollowCamera.h"
 #include "ParticleSystem/ParticleSystem.h"
-#include "Enemy/Human/HumanEnemy.h"
+#include "Enemy/EnemyManager.h"
 #include "Player/Player.h"
 #include "Object/MapObject/Floor/Floor.h"
 #include "Collider/Manager/CollisionManager.h"
@@ -42,8 +42,7 @@ private:
 	WorldTransform backgroundWorld_;
 
 	// 敵キャラ
-	std::vector<Model*> enemyModel_;
-	std::unique_ptr<HumanEnemy>enemy_;
+	std::unique_ptr<EnemyManager>enemyManager_;
 
 };
 

@@ -22,8 +22,8 @@ IBehavior::State Action::Tick()
 		// 行動を実行
 		enemy_->SetAction(actionName_);
 		
-		// 状態を実行中にする 
-		state_ = State::RUNNING;
+		// 状態を成功にする 
+		state_ = State::SUCCESS;
 
 		return state_;
 		break;

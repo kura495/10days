@@ -1,6 +1,7 @@
 #include "HumanEnemy.h"
+#include "MapObject/FloorManager.h"
 
-void HumanEnemy::Init(std::vector<Model*> models, Player* player)
+void HumanEnemy::Init(Vector3 pos, std::vector<Model*> models, Player* player, FloorManager* floorManager)
 {
 	// モデル配列を取得
 	models_ = models;
@@ -9,7 +10,7 @@ void HumanEnemy::Init(std::vector<Model*> models, Player* player)
 
 	// ワールド座標
 	world_.Init();
-	world_.transform.translate = Vector3(20.0f, 5.0f, 0.0f);
+	world_.transform.translate =pos;
 	world_.Update();// 一度更新しておく
 
 	// アニメーション
@@ -24,12 +25,14 @@ void HumanEnemy::Init(std::vector<Model*> models, Player* player)
 
 	// 行動制御
 	enemyAI_ = std::make_unique<EnemyAI>();
-	enemyAI_->Init(this);
+	enemyAI_->Init(this, floorManager);
 
 }
 
 void HumanEnemy::Update()
 {
+	tlanslatePre = world_.transform.translate;
+
 	// 行動制御
 	enemyAI_->Update();
 

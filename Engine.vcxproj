@@ -179,6 +179,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatFormVersion)\x64\dxil.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="project\application\Object\Enemy\EnemyManager.cpp" />
+    <ClCompile Include="project\application\Object\Enemy\AI\PathFinding\PathFinding.cpp" />
     <ClCompile Include="project\application\Object\Enemy\AI\Behavior\Behavior.cpp" />
     <ClCompile Include="project\application\Object\Enemy\AI\State\Attack\AttackState.cpp" />
     <ClCompile Include="project\application\Object\Enemy\AI\State\Dead\DeadState.cpp" />
@@ -268,6 +270,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatFormVersion)\x64\dxil.dll"</Command>
     <ClCompile Include="project\Engine\Utility\random\random.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="project\application\Object\Enemy\EnemyManager.h" />
+    <ClInclude Include="project\application\Object\Enemy\AI\PathFinding\PathFinding.h" />
     <ClInclude Include="project\application\Object\Enemy\AI\Behavior\Behavior.h" />
     <ClInclude Include="project\application\Object\Enemy\AI\State\Attack\AttackState.h" />
     <ClInclude Include="project\application\Object\Enemy\AI\State\Dead\DeadState.h" />

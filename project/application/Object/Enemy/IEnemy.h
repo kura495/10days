@@ -12,6 +12,9 @@
 #include "Enemy/AI/EnemyAI.h"
 
 class Player;
+class FloorManager;
+
+using namespace Math;
 
 // -- 敵キャラ 基底クラス -- //
 class IEnemy {
@@ -25,11 +28,15 @@ public:
 
 
 	// 初期化
-	virtual void Init(std::vector<Model*> models,Player* player);
+	virtual void Init(Vector3 pos,std::vector<Model*> models,Player* player,FloorManager* floorManager);
 	
 
 	// 更新
 	virtual void Update() {
+
+		// 以前の座標を保存
+		tlanslatePre = world_.transform.translate;
+
 		// アニメーション 更新
 		animation_->PlayAnimation();
 		// 座標更新
@@ -49,6 +56,8 @@ public:
 	// -- 座標関係 -- // 
 
 	WorldTransform& GetWorld() { return world_; };
+	Vector3 GetPos() { return this->GetWorld().transform.translate; };
+	Vector3 GetPlayerPos();
 
 	// コライダー 初期化
 	virtual void ColliderInit();
@@ -61,20 +70,12 @@ public:
 	virtual void AttackColliderInit();
 	virtual void AttackOnCollision(const ICollider& collider);
 
+	void FixTranslate(Vector3 colliderPos, Vector3 HitcolliderSize);
+
 	// -- 行動制御(共通の制御関数) -- //
 
 	// 外部(主Behavior)から行動を指定する
-	void SetAction(Action::Name actionName) {
-		switch (actionName)
-		{
-		case Action::MOVE:
-			break;
-		case Action::JUMP:
-			break;
-		default:
-			break;
-		}
-	}
+	void SetAction(Action::Name actionName);
 
 	// Behaviorの実行状況を返す
 	IBehavior::State GetBehaviorState() { return enemyAI_->GetBehaviorState(); }
@@ -92,6 +93,13 @@ public:
 	bool IsPlayerInRange(float range);
 	// プレイヤーから指定値の範囲外にいるか
 	bool IsPlayerOutOfRange(float range);
+
+
+	// -- 生存関係 -- //
+	// 生存フラグの取得
+	bool IsAlive() { return isAlive_; }
+	// 生存フラグの設定
+	void SetAlive(bool isAlive) { isAlive_ = isAlive; }
 
 
 protected:
@@ -141,7 +149,12 @@ protected:
 	float hitStopValue = 0.2f;
 	float vibValue = 0.2f;
 
+	Vector3 tlanslatePre;
+
 	// -- 行動制御 -- //
 	std::unique_ptr<EnemyAI> enemyAI_;
+
+	// 生存フラグ
+	bool isAlive_ = true;
 
 };
