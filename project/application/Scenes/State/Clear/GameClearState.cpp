@@ -7,10 +7,6 @@ void GameClearState::Init()
 	clearSprite->TextureHandle = TextureManager::GetInstance()->LoadTexture("project/resources/Clear.png");
 	clear.Init();
 
-	texture = std::make_unique<Sprite>();
-	texture->TextureHandle = TextureManager::GetInstance()->LoadTexture("project/resources/ATuto.png");
-	texture->Init({ 0.0f,0.0f }, { 0.0f,720.0f }, { 1280.0f,0.0f }, { 1280.0f,720.0f });
-
 	skydome_ = Model::CreateModelFromObj("project/resources/TitleSkyDome", "TitleSkyDome.obj");
 
 	stressBar = std::make_unique<Sprite>();
@@ -24,8 +20,6 @@ void GameClearState::Init()
 	stressMeter = std::make_unique<Sprite>();
 	stressMeter->Init({ 0.0f,0.0f }, { 0.0f,108.0f }, { 445.0f,0.0f }, { 445.0f,108.0f });
 	stressMeter->TextureHandle = TextureManager::GetInstance()->LoadTexture("project/resources/StressMeter.png");
-
-
 
 }
 
@@ -58,7 +52,6 @@ void GameClearState::Update()
 void GameClearState::Draw()
 {
 	clearSprite->RendererDraw(clear);
-	texture->RendererDraw(clear);
 	skydome_->RendererDraw(clear);
 #ifndef NDEBUG
 	maxStressBar->RendererDraw(clear);

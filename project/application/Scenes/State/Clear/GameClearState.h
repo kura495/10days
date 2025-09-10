@@ -20,7 +20,6 @@ private:
 	std::unique_ptr<Sprite> clearSprite;
 	WorldTransform clear;
 	Model* skydome_ = nullptr;
-	std::unique_ptr<Sprite>texture;
 
 
 	std::unique_ptr<Sprite> stressBar;
