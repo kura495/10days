@@ -108,7 +108,7 @@ protected:
 
 	// ストレスメーター
 
-	float stressMater = 0.0f;
+	float stressMater = 1.0f;
 	float kMaxStressMater = 1.0f;
 
 	// スペース範囲
