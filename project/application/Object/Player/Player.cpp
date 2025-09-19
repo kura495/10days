@@ -49,20 +49,27 @@ void Player::Update() {
 		(float)joyState.Gamepad.sThumbLX / SHRT_MAX,
 		0,
 		};
-
+		
 		// 移動量を正規化
 		move_ = Vector3::Normalize(move_);
 		// 移動量に移動速度を掛ける
 		move_.x *= moveSpeed_;
 	}
+	// キーボード入力
+	else if (Input::GetInstance()->TriggerKey(DIK_D) || Input::GetInstance()->TriggerKey(DIK_RIGHT)) {
+		move_.x += moveSpeed_;
+	}
+	else if (Input::GetInstance()->TriggerKey(DIK_A) || Input::GetInstance()->TriggerKey(DIK_LEFT)) {
+		move_.x -= moveSpeed_;
+	}
 
 	//ジャンプする処理
-	if (Input::GetInstance()->pushPad(XINPUT_GAMEPAD_B) && jumpLimit < 3) {
+	if ((Input::GetInstance()->pushPad(XINPUT_GAMEPAD_B) || Input::GetInstance()->TriggerKey(DIK_W)) && jumpLimit < 3) {
 		gravity_ += 0.7f - (0.05f * jumpLimit);
 		jumpLimit += 1;
 	}
 #pragma region 
-	if (Input::GetInstance()->pushPad(XINPUT_GAMEPAD_A) && coolTime_ > kMaxCoolTime_) {
+	if ((Input::GetInstance()->pushPad(XINPUT_GAMEPAD_A) || Input::GetInstance()->TriggerKey(DIK_SPACE)) && coolTime_ > kMaxCoolTime_) {
 		//攻撃処理を挟む
 		colliders_[ColliderType::Attack].IsUsing = true;
 		isAttackFlag_ = true;

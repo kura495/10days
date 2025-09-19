@@ -31,7 +31,7 @@ void GameClearState::Init()
 
 void GameClearState::Update()
 {
-	if (Input::GetPadPrecede(XINPUT_GAMEPAD_A, 10)) {
+	if (Input::GetPadPrecede(XINPUT_GAMEPAD_A, 10) || Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 		//ifの条件は後で変える
 		 if(StateNo != GameStateNo::TITLE){
 			StateNo = GameStateNo::TITLE;

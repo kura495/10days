@@ -36,7 +36,7 @@ void TitleState::Update()
 
 
 #ifndef NDEBUG
-	if (Input::GetPadPrecede(XINPUT_GAMEPAD_A, 10)) {
+	if (Input::GetPadPrecede(XINPUT_GAMEPAD_A, 10)|| Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 		//ifの条件は後で変える
 		if (StateNo != GameStateNo::PLAY && instructionsScene) {
 			StateNo = GameStateNo::PLAY;
@@ -70,7 +70,7 @@ void TitleState::Update()
 
 #else
 
-	if (Input::GetPadPrecede(XINPUT_GAMEPAD_A, 10)) {
+	if (Input::GetPadPrecede(XINPUT_GAMEPAD_A, 10) || Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 		//ifの条件は後で変える
 		if (StateNo != GameStateNo::PLAY&& instructionsScene) {
 			StateNo = GameStateNo::PLAY;
